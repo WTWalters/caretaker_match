@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareTaker Match - Matching Algorithm Diagrams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%); }
+        .card { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+        .flow-arrow { 
+            width: 0; height: 0; 
+            border-left: 12px solid transparent; 
+            border-right: 12px solid transparent; 
+            border-top: 16px solid #f59e0b; 
+        }
+        .flow-arrow-right {
+            width: 0; height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 16px solid #f59e0b;
+        }
+        .score-bar { transition: width 0.5s ease-out; }
+        @media print {
+            .page-break { page-break-before: always; }
+            body { background: white !important; }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen p-8">
+    <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- Header -->
+        <div class="text-center text-white mb-12">
+            <h1 class="text-4xl font-bold mb-2">CareTaker Match</h1>
+            <p class="text-xl text-blue-200">Matching Algorithm Visual Guide</p>
+            <p class="text-sm text-blue-300 mt-2">Version 1.0 | February 2026</p>
+        </div>
+
+        <!-- Diagram 1: High-Level Flow -->
+        <div class="card rounded-2xl p-8 shadow-2xl">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">1</span>
+                High-Level Matching Flow
+            </h2>
+            
+            <div class="flex flex-col items-center space-y-4">
+                <!-- Row 1: Input Pools -->
+                <div class="flex items-center justify-center space-x-8 w-full">
+                    <div class="bg-emerald-100 border-2 border-emerald-500 rounded-xl p-6 text-center w-56">
+                        <div class="text-3xl mb-2">🏥</div>
+                        <div class="font-semibold text-emerald-800">Care Givers</div>
+                        <div class="text-sm text-emerald-600 mt-1">Patients willing to help others</div>
+                        <div class="text-xs text-emerald-500 mt-2 bg-emerald-50 rounded px-2 py-1">Role: GIVER or BOTH</div>
+                    </div>
+                    
+                    <div class="text-4xl text-gray-300">+</div>
+                    
+                    <div class="bg-blue-100 border-2 border-blue-500 rounded-xl p-6 text-center w-56">
+                        <div class="text-3xl mb-2">🏠</div>
+                        <div class="font-semibold text-blue-800">Care Receivers</div>
+                        <div class="text-sm text-blue-600 mt-1">Patients needing home support</div>
+                        <div class="text-xs text-blue-500 mt-2 bg-blue-50 rounded px-2 py-1">Role: RECEIVER or BOTH</div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow"></div>
+                
+                <!-- Row 2: Hard Filters -->
+                <div class="bg-red-50 border-2 border-red-300 rounded-xl p-6 w-full max-w-2xl">
+                    <div class="font-semibold text-red-800 mb-3 flex items-center">
+                        <span class="text-xl mr-2">🚫</span>
+                        Hard Filters (Must Pass All)
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-white rounded-lg p-3 border border-red-200">
+                            <span class="font-medium">Role Compatible?</span>
+                            <div class="text-gray-500 text-xs mt-1">GIVER ↔ RECEIVER pairing</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 border border-red-200">
+                            <span class="font-medium">Within 10 Miles?</span>
+                            <div class="text-gray-500 text-xs mt-1">Geographic proximity check</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 border border-red-200">
+                            <span class="font-medium">Triage Eligible?</span>
+                            <div class="text-gray-500 text-xs mt-1">Not BLOCKED status</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 border border-red-200">
+                            <span class="font-medium">Timeline Works?</span>
+                            <div class="text-gray-500 text-xs mt-1">Surgery dates don't conflict</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-red-600 italic">Any failure = pair rejected, no exceptions</div>
+                </div>
+                
+                <div class="flow-arrow"></div>
+                
+                <!-- Row 3: Soft Scoring -->
+                <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-6 w-full max-w-2xl">
+                    <div class="font-semibold text-amber-800 mb-3 flex items-center">
+                        <span class="text-xl mr-2">⚖️</span>
+                        Soft Scoring (Weighted Compatibility)
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <span class="w-32 text-sm">Proximity</span>
+                            <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                                <div class="bg-amber-500 h-full score-bar" style="width: 50%"></div>
+                            </div>
+                            <span class="w-20 text-right text-sm font-medium">+10 max</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-32 text-sm">Age Match</span>
+                            <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                                <div class="bg-amber-500 h-full score-bar" style="width: 25%"></div>
+                            </div>
+                            <span class="w-20 text-right text-sm font-medium">+5 max</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-32 text-sm">Sex Match</span>
+                            <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                                <div class="bg-amber-500 h-full score-bar" style="width: 15%"></div>
+                            </div>
+                            <span class="w-20 text-right text-sm font-medium">+3 max</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-32 text-sm">Lifestyle Align</span>
+                            <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                                <div class="bg-amber-500 h-full score-bar" style="width: 20%"></div>
+                            </div>
+                            <span class="w-20 text-right text-sm font-medium">+4 max</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-32 text-sm text-red-600">Smoking Clash</span>
+                            <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                                <div class="bg-red-500 h-full score-bar" style="width: 40%"></div>
+                            </div>
+                            <span class="w-20 text-right text-sm font-medium text-red-600">-8 penalty</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow"></div>
+                
+                <!-- Row 4: Output -->
+                <div class="flex items-center justify-center space-x-6 w-full">
+                    <div class="bg-purple-100 border-2 border-purple-500 rounded-xl p-6 text-center w-64">
+                        <div class="text-3xl mb-2">📋</div>
+                        <div class="font-semibold text-purple-800">Ranked Match List</div>
+                        <div class="text-sm text-purple-600 mt-1">Sorted by compatibility score</div>
+                        <div class="text-xs text-purple-500 mt-2">Minimum threshold: 5.0 points</div>
+                    </div>
+                    
+                    <div class="flow-arrow-right"></div>
+                    
+                    <div class="bg-indigo-100 border-2 border-indigo-500 rounded-xl p-6 text-center w-64">
+                        <div class="text-3xl mb-2">👨‍⚕️</div>
+                        <div class="font-semibold text-indigo-800">Provider Review</div>
+                        <div class="text-sm text-indigo-600 mt-1">Final approval or override</div>
+                        <div class="text-xs text-indigo-500 mt-2">Human-in-the-loop always</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagram 2: Scoring Example -->
+        <div class="card rounded-2xl p-8 shadow-2xl page-break">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">2</span>
+                Match Scoring Example
+            </h2>
+            
+            <div class="grid grid-cols-3 gap-6">
+                <!-- Giver Profile -->
+                <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-200">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-2">👩</div>
+                        <div class="font-bold text-emerald-800">Sarah (Giver)</div>
+                        <div class="text-xs text-emerald-600 bg-emerald-100 rounded-full px-3 py-1 inline-block mt-1">Role: BOTH</div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between"><span class="text-gray-600">Age:</span><span class="font-medium">68 (65-75)</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Sex:</span><span class="font-medium">Female</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Location:</span><span class="font-medium">Denver 80202</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Smoker:</span><span class="font-medium text-green-600">No</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Alcohol:</span><span class="font-medium">Low</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Surgery:</span><span class="font-medium">Jan 15</span></div>
+                    </div>
+                </div>
+                
+                <!-- Scoring Breakdown -->
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-200">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-2">🔢</div>
+                        <div class="font-bold text-gray-800">Score Breakdown</div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Proximity (3.2 mi)</span>
+                            <span class="font-bold text-emerald-600">+8.2</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Age Match ✓</span>
+                            <span class="font-bold text-emerald-600">+5.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Sex Match ✓</span>
+                            <span class="font-bold text-emerald-600">+3.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Lifestyle Align</span>
+                            <span class="font-bold text-emerald-600">+3.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-400">Smoking Clash</span>
+                            <span class="font-bold text-gray-400">0</span>
+                        </div>
+                        <hr class="border-gray-300">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">TOTAL SCORE</span>
+                            <span class="font-bold text-2xl text-amber-600">19.2</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="bg-emerald-500 text-white text-xs px-3 py-1 rounded-full">EXCELLENT MATCH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Receiver Profile -->
+                <div class="bg-blue-50 rounded-xl p-5 border border-blue-200">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-2">👩‍🦳</div>
+                        <div class="font-bold text-blue-800">Martha (Receiver)</div>
+                        <div class="text-xs text-blue-600 bg-blue-100 rounded-full px-3 py-1 inline-block mt-1">Role: RECEIVER</div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between"><span class="text-gray-600">Age:</span><span class="font-medium">71 (65-75)</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Sex:</span><span class="font-medium">Female</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Location:</span><span class="font-medium">Denver 80206</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Smoker:</span><span class="font-medium text-green-600">No</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Alcohol:</span><span class="font-medium">None</span></div>
+                        <div class="flex justify-between"><span class="text-gray-600">Surgery:</span><span class="font-medium">Feb 10</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Score Scale -->
+            <div class="mt-8 bg-gray-100 rounded-xl p-4">
+                <div class="text-sm font-medium text-gray-700 mb-3">Score Interpretation Scale</div>
+                <div class="flex items-center space-x-2">
+                    <div class="flex-1 h-8 bg-red-400 rounded-l-lg flex items-center justify-center text-white text-xs font-medium">&lt;5 No Match</div>
+                    <div class="flex-1 h-8 bg-orange-400 flex items-center justify-center text-white text-xs font-medium">5-10 Marginal</div>
+                    <div class="flex-1 h-8 bg-yellow-400 flex items-center justify-center text-white text-xs font-medium">10-15 Acceptable</div>
+                    <div class="flex-1 h-8 bg-lime-400 flex items-center justify-center text-white text-xs font-medium">15-20 Good</div>
+                    <div class="flex-1 h-8 bg-emerald-500 rounded-r-lg flex items-center justify-center text-white text-xs font-medium">20+ Excellent</div>
+                </div>
+                <div class="flex justify-between mt-1 text-xs text-gray-500 px-2">
+                    <span>0</span>
+                    <span>5</span>
+                    <span>10</span>
+                    <span>15</span>
+                    <span>20</span>
+                    <span>22+</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagram 3: Lifestyle Compatibility Questions -->
+        <div class="card rounded-2xl p-8 shadow-2xl page-break">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">3</span>
+                Lifestyle Compatibility Questions (Phase 2)
+            </h2>
+            
+            <p class="text-gray-600 mb-6">
+                These questions capture lifestyle compatibility without explicit political identification. 
+                Similar answers = better match potential.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5 border border-purple-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">🏠</span>
+                        <span class="font-semibold text-purple-800">Environment Preference</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"What type of recovery environment do you prefer?"</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded-lg px-3 py-2 border border-purple-100">☐ Quiet and structured routine</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-purple-100">☐ Flexible and social</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-purple-100">☐ Somewhere in between</div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">📺</span>
+                        <span class="font-semibold text-blue-800">Media Comfort</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"Are you comfortable with TV/radio news playing during recovery?"</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded-lg px-3 py-2 border border-blue-100">☐ Yes, I enjoy staying informed</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-blue-100">☐ Prefer entertainment only</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-blue-100">☐ Prefer quiet / no TV</div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">🥗</span>
+                        <span class="font-semibold text-green-800">Dietary Preferences</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"Do you have dietary preferences your caregiver should know?"</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded-lg px-3 py-2 border border-green-100">☐ No special requirements</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-green-100">☐ Vegetarian / Vegan</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-green-100">☐ Organic / health-focused</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-green-100">☐ Religious dietary laws</div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">🐕</span>
+                        <span class="font-semibold text-amber-800">Pet Comfort</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"How do you feel about pets in the home?"</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded-lg px-3 py-2 border border-amber-100">☐ Love them, have my own</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-amber-100">☐ Comfortable around pets</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-amber-100">☐ Prefer no pets (allergies, etc.)</div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-5 border border-pink-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">💬</span>
+                        <span class="font-semibold text-pink-800">Communication Style</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"How often would you like check-ins from your care partner?"</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded-lg px-3 py-2 border border-pink-100">☐ Frequent (every few hours)</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-pink-100">☐ Regular (2-3x daily)</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-pink-100">☐ As-needed only</div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-5 border border-teal-200">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">⏰</span>
+                        <span class="font-semibold text-teal-800">Schedule Preference</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">"What's your typical daily schedule like?"</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded-lg px-3 py-2 border border-teal-100">☐ Early riser (up by 6am)</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-teal-100">☐ Standard (7-8am wake)</div>
+                        <div class="bg-white rounded-lg px-3 py-2 border border-teal-100">☐ Night owl (late mornings)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <div class="flex items-start">
+                    <span class="text-xl mr-3">💡</span>
+                    <div>
+                        <div class="font-semibold text-amber-800">Why This Approach?</div>
+                        <p class="text-sm text-amber-700 mt-1">
+                            These questions capture genuine lifestyle compatibility that affects day-to-day caregiving success.
+                            A morning person paired with a night owl, or someone who needs quiet paired with someone who keeps the TV on all day,
+                            can create friction regardless of other factors. This gives us matching signal without asking about sensitive topics directly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagram 4: Technical Pipeline -->
+        <div class="card rounded-2xl p-8 shadow-2xl page-break">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">4</span>
+                Technical Matching Pipeline
+            </h2>
+            
+            <div class="flex items-start space-x-4">
+                <!-- Step 1 -->
+                <div class="flex-1">
+                    <div class="bg-blue-500 text-white rounded-t-xl p-3 text-center font-semibold">
+                        Step 1: Collect
+                    </div>
+                    <div class="bg-blue-50 border-2 border-t-0 border-blue-200 rounded-b-xl p-4 min-h-[200px]">
+                        <div class="space-y-2 text-sm">
+                            <div class="bg-white rounded p-2 border">📱 iPad Intake</div>
+                            <div class="bg-white rounded p-2 border">✅ Provider Triage</div>
+                            <div class="bg-white rounded p-2 border">🗄️ Store in DB</div>
+                            <div class="text-xs text-blue-600 mt-3">
+                                PII encrypted separately from clinical data
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center pt-20">
+                    <div class="flow-arrow-right"></div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="flex-1">
+                    <div class="bg-purple-500 text-white rounded-t-xl p-3 text-center font-semibold">
+                        Step 2: Filter
+                    </div>
+                    <div class="bg-purple-50 border-2 border-t-0 border-purple-200 rounded-b-xl p-4 min-h-[200px]">
+                        <div class="space-y-2 text-sm">
+                            <div class="bg-white rounded p-2 border">🎯 Role Pairing</div>
+                            <div class="bg-white rounded p-2 border">📍 Geo Filter</div>
+                            <div class="bg-white rounded p-2 border">📅 Timeline Check</div>
+                            <div class="text-xs text-purple-600 mt-3">
+                                Hard constraints eliminate impossible pairs
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center pt-20">
+                    <div class="flow-arrow-right"></div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="flex-1">
+                    <div class="bg-amber-500 text-white rounded-t-xl p-3 text-center font-semibold">
+                        Step 3: Score
+                    </div>
+                    <div class="bg-amber-50 border-2 border-t-0 border-amber-200 rounded-b-xl p-4 min-h-[200px]">
+                        <div class="space-y-2 text-sm">
+                            <div class="bg-white rounded p-2 border">⚖️ Weighted Factors</div>
+                            <div class="bg-white rounded p-2 border">➕ Sum Positives</div>
+                            <div class="bg-white rounded p-2 border">➖ Apply Penalties</div>
+                            <div class="text-xs text-amber-600 mt-3">
+                                Each pair gets a compatibility score
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center pt-20">
+                    <div class="flow-arrow-right"></div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="flex-1">
+                    <div class="bg-emerald-500 text-white rounded-t-xl p-3 text-center font-semibold">
+                        Step 4: Optimize
+                    </div>
+                    <div class="bg-emerald-50 border-2 border-t-0 border-emerald-200 rounded-b-xl p-4 min-h-[200px]">
+                        <div class="space-y-2 text-sm">
+                            <div class="bg-white rounded p-2 border">🧮 Hungarian Algo</div>
+                            <div class="bg-white rounded p-2 border">🏆 Global Optimum</div>
+                            <div class="bg-white rounded p-2 border">📋 Ranked List</div>
+                            <div class="text-xs text-emerald-600 mt-3">
+                                Best overall assignment, not greedy
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center pt-20">
+                    <div class="flow-arrow-right"></div>
+                </div>
+                
+                <!-- Step 5 -->
+                <div class="flex-1">
+                    <div class="bg-indigo-500 text-white rounded-t-xl p-3 text-center font-semibold">
+                        Step 5: Review
+                    </div>
+                    <div class="bg-indigo-50 border-2 border-t-0 border-indigo-200 rounded-b-xl p-4 min-h-[200px]">
+                        <div class="space-y-2 text-sm">
+                            <div class="bg-white rounded p-2 border">👨‍⚕️ Provider Sees</div>
+                            <div class="bg-white rounded p-2 border">✅ Approve/Reject</div>
+                            <div class="bg-white rounded p-2 border">📧 Notify Patients</div>
+                            <div class="text-xs text-indigo-600 mt-3">
+                                Human always makes final call
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Batch Processing Note -->
+            <div class="mt-6 bg-gray-100 rounded-xl p-4 flex items-center">
+                <span class="text-2xl mr-4">⏱️</span>
+                <div>
+                    <span class="font-semibold">Batch Processing:</span>
+                    <span class="text-gray-600 ml-2">Matching runs every 4 hours (configurable). Patients enter pool → wait for batch → get matched or remain in pool for next batch.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagram 5: Decision Points for Tom -->
+        <div class="card rounded-2xl p-8 shadow-2xl page-break">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">5</span>
+                Open Questions for Clinical Input
+            </h2>
+            
+            <p class="text-gray-600 mb-6">These decisions need clinical expertise to finalize. Current defaults shown - adjust based on experience.</p>
+            
+            <div class="space-y-4">
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-5 border-l-4 border-blue-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-blue-800">1. Maximum Distance</div>
+                            <p class="text-sm text-gray-600 mt-1">How far apart can giver and receiver live?</p>
+                        </div>
+                        <div class="bg-white rounded-lg px-4 py-2 border border-blue-200">
+                            <span class="text-sm text-gray-500">Default:</span>
+                            <span class="font-bold text-blue-600 ml-2">10 miles</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-blue-600">💭 Consider: Denver metro traffic, patient mobility, caregiver availability</div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-5 border-l-4 border-purple-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-purple-800">2. Sex Matching Preference</div>
+                            <p class="text-sm text-gray-600 mt-1">Should same-sex matches be strongly preferred, slightly preferred, or neutral?</p>
+                        </div>
+                        <div class="bg-white rounded-lg px-4 py-2 border border-purple-200">
+                            <span class="text-sm text-gray-500">Default:</span>
+                            <span class="font-bold text-purple-600 ml-2">+3 bonus</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-purple-600">💭 Consider: Patient comfort with intimate care tasks, cultural factors</div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-5 border-l-4 border-green-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-green-800">3. Age Bracket Definition</div>
+                            <p class="text-sm text-gray-600 mt-1">Are current brackets (&lt;65, 65-75, &gt;75) clinically meaningful?</p>
+                        </div>
+                        <div class="bg-white rounded-lg px-4 py-2 border border-green-200">
+                            <span class="text-sm text-gray-500">Default:</span>
+                            <span class="font-bold text-green-600 ml-2">3 brackets</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-green-600">💭 Consider: Recovery rates, generational compatibility, physical capability</div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-amber-50 to-amber-100 rounded-xl p-5 border-l-4 border-amber-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-amber-800">4. Surgery Type Impact</div>
+                            <p class="text-sm text-gray-600 mt-1">Does hip vs knee vs shoulder affect matching? Different recovery needs?</p>
+                        </div>
+                        <div class="bg-white rounded-lg px-4 py-2 border border-amber-200">
+                            <span class="text-sm text-gray-500">Default:</span>
+                            <span class="font-bold text-amber-600 ml-2">No factor</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-amber-600">💭 Consider: Could same-surgery patients share tips? Or is variety better?</div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-red-50 to-red-100 rounded-xl p-5 border-l-4 border-red-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-red-800">5. Smoking Mismatch Severity</div>
+                            <p class="text-sm text-gray-600 mt-1">Is -8 penalty appropriate? Should this be a hard blocker instead?</p>
+                        </div>
+                        <div class="bg-white rounded-lg px-4 py-2 border border-red-200">
+                            <span class="text-sm text-gray-500">Default:</span>
+                            <span class="font-bold text-red-600 ml-2">-8 penalty</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-red-600">💭 Consider: Patient complaints about smoke exposure during recovery</div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-xl p-5 border-l-4 border-indigo-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-indigo-800">6. Giver Capacity</div>
+                            <p class="text-sm text-gray-600 mt-1">Can one giver support multiple receivers (sequentially)?</p>
+                        </div>
+                        <div class="bg-white rounded-lg px-4 py-2 border border-indigo-200">
+                            <span class="text-sm text-gray-500">Default:</span>
+                            <span class="font-bold text-indigo-600 ml-2">1 at a time</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-indigo-600">💭 Consider: Giver burnout, commitment level, scheduling complexity</div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-teal-50 to-teal-100 rounded-xl p-5 border-l-4 border-teal-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold text-teal-800">7. Recovery Timeline</div>
+                            <p class="text-sm text-gray-600 mt-1">How many days between giver's surgery and when they can help someone else?</p>
+                        </div>
+                        <div class="bg-white rounded-lg px-4 py-2 border border-teal-200">
+                            <span class="text-sm text-gray-500">Default:</span>
+                            <span class="font-bold text-teal-600 ml-2">14 days</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-teal-600">💭 Consider: Varies by surgery type? Patient's own recovery assessment?</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-blue-200 text-sm py-8">
+            <p>CareTaker Match | Matching Algorithm v1.0</p>
+            <p class="text-blue-300 mt-1">Prepared for stakeholder discussion | February 2026</p>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+.section {
+  margin-bottom: var(--space-8);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-4);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.optionsRow {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.optionsRow > * {
+  flex: 1;
+}
