@@ -62,6 +62,9 @@
       --tw-backdrop-sepia: initial;
       --tw-duration: initial;
       --tw-ease: initial;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
     }
   }
 }
@@ -136,6 +139,7 @@
     --color-purple-200: #e9d5ff;
     --color-purple-500: #ac4bff;
     --color-purple-600: #9810fa;
+    --color-purple-700: #8200da;
     --color-purple-800: #6e11b0;
     --color-pink-50: #fdf2f8;
     --color-pink-100: #fce7f3;
@@ -160,6 +164,7 @@
     --container-4xl: 56rem;
     --container-5xl: 64rem;
     --container-6xl: 72rem;
+    --container-7xl: 80rem;
     --text-xs: .75rem;
     --text-xs--line-height: calc(1 / .75);
     --text-sm: .875rem;
@@ -268,6 +273,7 @@
       --color-purple-200: lab(87.8405% 13.4282 -18.7159);
       --color-purple-500: lab(52.0183% 66.11 -78.2316);
       --color-purple-600: lab(43.0295% 75.21 -86.5669);
+      --color-purple-700: lab(36.1758% 69.8525 -80.0381);
       --color-purple-800: lab(30.6017% 56.7637 -64.4751);
       --color-pink-50: lab(96.4459% 4.53997 -1.49434);
       --color-pink-100: lab(93.5864% 9.01193 -3.15079);
@@ -759,6 +765,10 @@
     height: calc(var(--spacing) * 32);
   }
 
+  .h-auto {
+    height: auto;
+  }
+
   .h-full {
     height: 100%;
   }
@@ -843,6 +853,10 @@
     max-width: var(--container-6xl);
   }
 
+  .max-w-7xl {
+    max-width: var(--container-7xl);
+  }
+
   .max-w-md {
     max-width: var(--container-md);
   }
@@ -885,6 +899,10 @@
 
   .flex-col {
     flex-direction: column;
+  }
+
+  .flex-wrap {
+    flex-wrap: wrap;
   }
 
   .items-center {
@@ -1023,6 +1041,10 @@
 
   .rounded-lg {
     border-radius: .75rem;
+  }
+
+  .rounded-md {
+    border-radius: var(--radius-md);
   }
 
   .rounded-xl {
@@ -1261,6 +1283,10 @@
     background-color: #e8634a;
   }
 
+  .bg-coral-50 {
+    background-color: #fef2f2;
+  }
+
   .bg-emerald-50 {
     background-color: var(--color-emerald-50);
   }
@@ -1464,6 +1490,11 @@
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
+  .from-teal {
+    --tw-gradient-from: #0b8a7e;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
   .from-teal-50 {
     --tw-gradient-from: #f0fdfa;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -1501,6 +1532,11 @@
 
   .to-indigo-100 {
     --tw-gradient-to: var(--color-indigo-100);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
+  .to-navy {
+    --tw-gradient-to: #1a3550;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
@@ -1751,6 +1787,10 @@
     color: var(--color-blue-900);
   }
 
+  .text-coral {
+    color: #e8634a;
+  }
+
   .text-emerald-500 {
     color: var(--color-emerald-500);
   }
@@ -1853,6 +1893,10 @@
 
   .text-purple-600 {
     color: var(--color-purple-600);
+  }
+
+  .text-purple-700 {
+    color: var(--color-purple-700);
   }
 
   .text-purple-800 {
@@ -1971,6 +2015,11 @@
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, #0000001a), 0 2px 4px -2px var(--tw-shadow-color, #0000001a);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
   .ring {
     --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -2041,6 +2090,15 @@
   }
 
   @media (hover: hover) {
+    .hover\:scale-105:hover {
+      --tw-scale-x: 105%;
+      --tw-scale-y: 105%;
+      --tw-scale-z: 105%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:bg-coral-600:hover {
       background-color: #dc2626;
     }
@@ -2091,6 +2149,20 @@
   @media (hover: hover) {
     .hover\:bg-yellow-700:hover {
       background-color: var(--color-yellow-700);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:from-teal-700:hover {
+      --tw-gradient-from: #0f766e;
+      --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:to-navy-700:hover {
+      --tw-gradient-to: #334155;
+      --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
     }
   }
 
@@ -2173,6 +2245,12 @@
     opacity: .5;
   }
 
+  @media (min-width: 40rem) {
+    .sm\:px-6 {
+      padding-inline: calc(var(--spacing) * 6);
+    }
+  }
+
   @media (min-width: 48rem) {
     .md\:col-span-2 {
       grid-column: span 2 / span 2;
@@ -2240,6 +2318,12 @@
   @media (min-width: 64rem) {
     .lg\:gap-12 {
       gap: calc(var(--spacing) * 12);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .lg\:px-8 {
+      padding-inline: calc(var(--spacing) * 8);
     }
   }
 }
@@ -2603,6 +2687,24 @@ h1, h2, h3, h4, h5, h6 {
 @property --tw-ease {
   syntax: "*";
   inherits: false
+}
+
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
 }
 
 /*# sourceMappingURL=AIProgramming_caretaker_match_src_app_globals_3c07c07c.css.map*/

@@ -357,6 +357,74 @@ function DemoHub() {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "mb-16",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "bg-white rounded-lg shadow-lg p-8 border border-gray-100 text-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "w-16 h-16 bg-gradient-to-br from-teal to-navy rounded-full flex items-center justify-center mx-auto mb-6",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "w-8 h-8 text-white",
+                                            fill: "none",
+                                            stroke: "currentColor",
+                                            viewBox: "0 0 24 24",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                strokeLinecap: "round",
+                                                strokeLinejoin: "round",
+                                                strokeWidth: 2,
+                                                d: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                            }, void 0, false, {
+                                                fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                                                lineNumber: 133,
+                                                columnNumber: 19
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                                            lineNumber: 132,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                                        lineNumber: 131,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                        className: "text-xl font-serif font-semibold text-navy mb-4",
+                                        children: "System Architecture"
+                                    }, void 0, false, {
+                                        fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                                        lineNumber: 136,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-gray-600 mb-6 leading-relaxed max-w-2xl mx-auto",
+                                        children: "Explore the complete technical architecture powering CareTaker Match, from frontend interfaces to backend services and HIPAA-compliant infrastructure."
+                                    }, void 0, false, {
+                                        fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                                        lineNumber: 139,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        href: "/demo/architecture",
+                                        className: "inline-block bg-gradient-to-r from-teal to-navy hover:from-teal-700 hover:to-navy-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 transform hover:scale-105",
+                                        children: "View Architecture Diagram"
+                                    }, void 0, false, {
+                                        fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                                        lineNumber: 142,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                                lineNumber: 130,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
+                            lineNumber: 129,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "bg-gray-50 rounded-lg p-8 text-center",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -366,14 +434,14 @@ function DemoHub() {
                                             children: "Demo Environment:"
                                         }, void 0, false, {
                                             fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                                            lineNumber: 131,
+                                            lineNumber: 154,
                                             columnNumber: 15
                                         }, this),
                                         " These are demonstration environments with sample data. No real patient information is used."
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                                    lineNumber: 130,
+                                    lineNumber: 153,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -381,13 +449,13 @@ function DemoHub() {
                                     children: "Demo v1.0 — March 2026"
                                 }, void 0, false, {
                                     fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                                    lineNumber: 134,
+                                    lineNumber: 157,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                            lineNumber: 129,
+                            lineNumber: 152,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$AIProgramming$2f$caretaker_match$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -408,24 +476,24 @@ function DemoHub() {
                                             d: "M10 19l-7-7m0 0l7-7m-7 7h18"
                                         }, void 0, false, {
                                             fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                                            lineNumber: 144,
+                                            lineNumber: 167,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 166,
                                         columnNumber: 15
                                     }, this),
                                     "Back to CareTaker Match"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                                lineNumber: 139,
+                                lineNumber: 162,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/AIProgramming/caretaker_match/src/app/demo/page.tsx",
-                            lineNumber: 138,
+                            lineNumber: 161,
                             columnNumber: 11
                         }, this)
                     ]

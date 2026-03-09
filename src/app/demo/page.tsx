@@ -125,6 +125,29 @@ export default function DemoHub() {
 
           </div>
 
+          {/* Architecture Diagram Section */}
+          <div className="mb-16">
+            <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-100 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-teal to-navy rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-serif font-semibold text-navy mb-4">
+                System Architecture
+              </h3>
+              <p className="text-gray-600 mb-6 leading-relaxed max-w-2xl mx-auto">
+                Explore the complete technical architecture powering CareTaker Match, from frontend interfaces to backend services and HIPAA-compliant infrastructure.
+              </p>
+              <Link
+                href="/demo/architecture"
+                className="inline-block bg-gradient-to-r from-teal to-navy hover:from-teal-700 hover:to-navy-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 transform hover:scale-105"
+              >
+                View Architecture Diagram
+              </Link>
+            </div>
+          </div>
+
           {/* Demo Info */}
           <div className="bg-gray-50 rounded-lg p-8 text-center">
             <p className="text-gray-600 mb-4">
