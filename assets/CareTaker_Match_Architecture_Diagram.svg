@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <!-- Subtle background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F7F5F0"/>
+      <stop offset="100%" style="stop-color:#EBE8E1"/>
+    </linearGradient>
+    <!-- Card shadow filter -->
+    <filter id="cardShadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1A3550" flood-opacity="0.12"/>
+    </filter>
+    <!-- Heavier shadow for devices -->
+    <filter id="deviceShadow" x="-6%" y="-6%" width="112%" height="118%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1A3550" flood-opacity="0.18"/>
+    </filter>
+    <!-- Glow for the GCP box -->
+    <filter id="gcpGlow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#0B8A7E" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bgGrad)" rx="0"/>
+
+  <!-- Title -->
+  <text x="600" y="42" text-anchor="middle" font-size="22" font-weight="700" fill="#1A3550" letter-spacing="0.5">CareTaker Match — System Architecture</text>
+  <text x="600" y="64" text-anchor="middle" font-size="12" fill="#5A6B7C" font-style="italic">Client Applications · Google Cloud Platform · EMR Integrations</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CLIENT DEVICES (top row)               -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <!-- Volunteer iPhone -->
+  <g transform="translate(120, 100)" filter="url(#deviceShadow)">
+    <!-- Phone body -->
+    <rect x="0" y="0" width="90" height="170" rx="14" fill="#2A2A2A"/>
+    <rect x="4" y="18" width="82" height="134" rx="2" fill="#0B8A7E"/>
+    <!-- Screen content hint -->
+    <rect x="10" y="26" width="70" height="8" rx="2" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="10" y="40" width="50" height="5" rx="1.5" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="10" y="50" width="60" height="5" rx="1.5" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="10" y="65" width="70" height="45" rx="4" fill="#FFFFFF" opacity="0.2"/>
+    <rect x="10" y="116" width="32" height="28" rx="3" fill="#FFFFFF" opacity="0.15"/>
+    <rect x="46" y="116" width="34" height="28" rx="3" fill="#FFFFFF" opacity="0.15"/>
+    <!-- Notch -->
+    <rect x="28" y="4" width="34" height="8" rx="4" fill="#1A1A1A"/>
+    <!-- Home bar -->
+    <rect x="28" y="158" width="34" height="4" rx="2" fill="#555"/>
+    <!-- Shield icon -->
+    <circle cx="45" cy="92" r="10" fill="#FFFFFF" opacity="0.3"/>
+    <text x="45" y="96" text-anchor="middle" font-size="12" fill="#FFFFFF">🛡</text>
+  </g>
+  <text x="165" y="290" text-anchor="middle" font-size="13" font-weight="600" fill="#0B8A7E">Volunteer</text>
+  <text x="165" y="305" text-anchor="middle" font-size="10" fill="#5A6B7C">iPhone / Android</text>
+
+  <!-- Patient iPhone -->
+  <g transform="translate(310, 100)" filter="url(#deviceShadow)">
+    <rect x="0" y="0" width="90" height="170" rx="14" fill="#2A2A2A"/>
+    <rect x="4" y="18" width="82" height="134" rx="2" fill="#E8634A"/>
+    <rect x="10" y="26" width="70" height="8" rx="2" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="10" y="40" width="50" height="5" rx="1.5" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="10" y="50" width="60" height="5" rx="1.5" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="10" y="65" width="70" height="45" rx="4" fill="#FFFFFF" opacity="0.2"/>
+    <rect x="10" y="116" width="32" height="28" rx="3" fill="#FFFFFF" opacity="0.15"/>
+    <rect x="46" y="116" width="34" height="28" rx="3" fill="#FFFFFF" opacity="0.15"/>
+    <rect x="28" y="4" width="34" height="8" rx="4" fill="#1A1A1A"/>
+    <rect x="28" y="158" width="34" height="4" rx="2" fill="#555"/>
+    <circle cx="45" cy="92" r="10" fill="#FFFFFF" opacity="0.3"/>
+    <text x="45" y="96" text-anchor="middle" font-size="12" fill="#FFFFFF">❤</text>
+  </g>
+  <text x="355" y="290" text-anchor="middle" font-size="13" font-weight="600" fill="#E8634A">Patient</text>
+  <text x="355" y="305" text-anchor="middle" font-size="10" fill="#5A6B7C">iPhone / Android</text>
+
+  <!-- Clinician iPad -->
+  <g transform="translate(480, 100)" filter="url(#deviceShadow)">
+    <!-- iPad body (landscape) -->
+    <rect x="0" y="15" width="200" height="145" rx="12" fill="#2A2A2A"/>
+    <rect x="6" y="21" width="188" height="133" rx="4" fill="#1A3550"/>
+    <!-- Screen content hints -->
+    <!-- Sidebar -->
+    <rect x="10" y="27" width="40" height="121" rx="3" fill="#0F2740"/>
+    <rect x="14" y="33" width="32" height="5" rx="1.5" fill="#FFFFFF" opacity="0.4"/>
+    <rect x="14" y="43" width="28" height="4" rx="1" fill="#FFFFFF" opacity="0.2"/>
+    <rect x="14" y="51" width="30" height="4" rx="1" fill="#FFFFFF" opacity="0.2"/>
+    <rect x="14" y="59" width="26" height="4" rx="1" fill="#FFFFFF" opacity="0.2"/>
+    <rect x="14" y="67" width="32" height="4" rx="1" fill="#FFFFFF" opacity="0.2"/>
+    <!-- Main content area -->
+    <rect x="55" y="27" width="135" height="20" rx="3" fill="#FFFFFF" opacity="0.15"/>
+    <rect x="55" y="52" width="65" height="45" rx="4" fill="#FFFFFF" opacity="0.1"/>
+    <rect x="124" y="52" width="66" height="45" rx="4" fill="#FFFFFF" opacity="0.1"/>
+    <!-- Score gauge hint -->
+    <circle cx="87" cy="75" r="14" fill="none" stroke="#0B8A7E" stroke-width="3" opacity="0.7"/>
+    <text x="87" y="79" text-anchor="middle" font-size="10" font-weight="700" fill="#0B8A7E" opacity="0.9">7/9</text>
+    <!-- Table rows -->
+    <rect x="55" y="102" width="135" height="5" rx="1" fill="#FFFFFF" opacity="0.12"/>
+    <rect x="55" y="111" width="135" height="5" rx="1" fill="#FFFFFF" opacity="0.08"/>
+    <rect x="55" y="120" width="135" height="5" rx="1" fill="#FFFFFF" opacity="0.12"/>
+    <rect x="55" y="129" width="135" height="5" rx="1" fill="#FFFFFF" opacity="0.08"/>
+    <rect x="55" y="138" width="135" height="5" rx="1" fill="#FFFFFF" opacity="0.12"/>
+    <!-- Camera dot -->
+    <circle cx="100" cy="18" r="2" fill="#444"/>
+  </g>
+  <text x="580" y="290" text-anchor="middle" font-size="13" font-weight="600" fill="#1A3550">Clinician</text>
+  <text x="580" y="305" text-anchor="middle" font-size="10" fill="#5A6B7C">iPad</text>
+
+  <!-- Admin Web Portal (laptop) -->
+  <g transform="translate(730, 120)" filter="url(#deviceShadow)">
+    <!-- Screen -->
+    <rect x="0" y="0" width="160" height="100" rx="6" fill="#2A2A2A"/>
+    <rect x="4" y="4" width="152" height="88" rx="2" fill="#F7F5F0"/>
+    <!-- Content hints -->
+    <rect x="8" y="8" width="30" height="80" rx="2" fill="#1A3550"/>
+    <rect x="42" y="12" width="60" height="8" rx="2" fill="#0B8A7E" opacity="0.3"/>
+    <rect x="42" y="24" width="50" height="5" rx="1" fill="#CCC"/>
+    <rect x="42" y="33" width="108" height="25" rx="3" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.5"/>
+    <rect x="42" y="62" width="52" height="22" rx="3" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.5"/>
+    <rect x="98" y="62" width="52" height="22" rx="3" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.5"/>
+    <!-- Keyboard base -->
+    <path d="M -10,100 L 170,100 L 160,110 L 0,110 Z" fill="#D0D0D0" rx="2"/>
+    <rect x="0" y="110" width="160" height="4" rx="2" fill="#BFBFBF"/>
+  </g>
+  <text x="810" y="256" text-anchor="middle" font-size="13" font-weight="600" fill="#1A3550">Admin Portal</text>
+  <text x="810" y="271" text-anchor="middle" font-size="10" fill="#5A6B7C">Web · Hospitals · Payers</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CONNECTION LINES: Devices → GCP        -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <!-- Vertical lines from devices down to the API layer -->
+  <line x1="165" y1="312" x2="165" y2="360" stroke="#0B8A7E" stroke-width="2" stroke-dasharray="6,3" opacity="0.5"/>
+  <line x1="355" y1="312" x2="355" y2="360" stroke="#E8634A" stroke-width="2" stroke-dasharray="6,3" opacity="0.5"/>
+  <line x1="580" y1="312" x2="580" y2="360" stroke="#1A3550" stroke-width="2" stroke-dasharray="6,3" opacity="0.5"/>
+  <line x1="810" y1="278" x2="810" y2="360" stroke="#1A3550" stroke-width="2" stroke-dasharray="6,3" opacity="0.5"/>
+
+  <!-- Arrows at bottom of lines -->
+  <polygon points="165,360 161,352 169,352" fill="#0B8A7E" opacity="0.6"/>
+  <polygon points="355,360 351,352 359,352" fill="#E8634A" opacity="0.6"/>
+  <polygon points="580,360 576,352 584,352" fill="#1A3550" opacity="0.6"/>
+  <polygon points="810,360 806,352 814,352" fill="#1A3550" opacity="0.6"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- GCP ENVIRONMENT (center box)           -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <g filter="url(#gcpGlow)">
+    <rect x="60" y="365" width="840" height="290" rx="12" fill="#FFFFFF" stroke="#0B8A7E" stroke-width="1.5"/>
+  </g>
+
+  <!-- GCP header bar -->
+  <rect x="60" y="365" width="840" height="36" rx="12" fill="#1A3550"/>
+  <rect x="60" y="385" width="840" height="16" fill="#1A3550"/>
+  <text x="480" y="388" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="1">GOOGLE CLOUD PLATFORM — HIPAA ASSURED WORKLOADS</text>
+
+  <!-- Row 1: API & Compute -->
+  <text x="85" y="424" font-size="10" font-weight="600" fill="#5A6B7C" letter-spacing="1">API &amp; COMPUTE</text>
+
+  <!-- Cloud Load Balancing -->
+  <rect x="85" y="432" width="130" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="150" y="453" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Cloud Load Balancing</text>
+  <text x="150" y="468" text-anchor="middle" font-size="8" fill="#5A6B7C">+ Cloud Armor (WAF)</text>
+
+  <!-- Apigee -->
+  <rect x="230" y="432" width="120" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="290" y="453" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Apigee</text>
+  <text x="290" y="468" text-anchor="middle" font-size="8" fill="#5A6B7C">API Gateway / OAuth</text>
+
+  <!-- Cloud Run -->
+  <rect x="365" y="432" width="120" height="48" rx="6" fill="#E6F5F3" stroke="#0B8A7E" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="425" y="453" text-anchor="middle" font-size="10" font-weight="600" fill="#0B8A7E">Cloud Run</text>
+  <text x="425" y="468" text-anchor="middle" font-size="8" fill="#5A6B7C">FastAPI Backend</text>
+
+  <!-- Cloud Functions -->
+  <rect x="500" y="432" width="120" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="560" y="453" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Cloud Functions</text>
+  <text x="560" y="468" text-anchor="middle" font-size="8" fill="#5A6B7C">Match Engine / Webhooks</text>
+
+  <!-- Row 1 right: AI -->
+  <text x="660" y="424" font-size="10" font-weight="600" fill="#5A6B7C" letter-spacing="1">AI &amp; SAFETY</text>
+
+  <!-- Vertex AI -->
+  <rect x="660" y="432" width="110" height="48" rx="6" fill="#FDF0ED" stroke="#E8634A" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="715" y="453" text-anchor="middle" font-size="10" font-weight="600" fill="#E8634A">Vertex AI</text>
+  <text x="715" y="468" text-anchor="middle" font-size="8" fill="#5A6B7C">Toxicity / Safety LLM</text>
+
+  <!-- Twilio -->
+  <rect x="780" y="432" width="100" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="830" y="453" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Twilio SDKs</text>
+  <text x="830" y="468" text-anchor="middle" font-size="8" fill="#5A6B7C">In-App Voice / Chat</text>
+
+  <!-- Row 2: Data Layer -->
+  <text x="85" y="508" font-size="10" font-weight="600" fill="#5A6B7C" letter-spacing="1">DATA &amp; CLINICAL</text>
+
+  <!-- Cloud SQL -->
+  <rect x="85" y="516" width="150" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="160" y="537" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Cloud SQL (Postgres)</text>
+  <text x="160" y="552" text-anchor="middle" font-size="8" fill="#5A6B7C">Encounters · Ratings · State</text>
+
+  <!-- Healthcare API -->
+  <rect x="250" y="516" width="180" height="48" rx="6" fill="#E6F5F3" stroke="#0B8A7E" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="340" y="537" text-anchor="middle" font-size="10" font-weight="700" fill="#0B8A7E">Cloud Healthcare API</text>
+  <text x="340" y="552" text-anchor="middle" font-size="8" fill="#5A6B7C">FHIR R4 · HL7v2 Bridge</text>
+
+  <!-- BigQuery -->
+  <rect x="445" y="516" width="130" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="510" y="537" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">BigQuery</text>
+  <text x="510" y="552" text-anchor="middle" font-size="8" fill="#5A6B7C">TEAM / CMS Reporting</text>
+
+  <!-- Row 2 right: Security -->
+  <text x="620" y="508" font-size="10" font-weight="600" fill="#5A6B7C" letter-spacing="1">SECURITY &amp; IDENTITY</text>
+
+  <!-- Identity Platform -->
+  <rect x="620" y="516" width="130" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="685" y="537" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Identity Platform</text>
+  <text x="685" y="552" text-anchor="middle" font-size="8" fill="#5A6B7C">MFA / Auth</text>
+
+  <!-- Secret Manager -->
+  <rect x="760" y="516" width="120" height="48" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="820" y="537" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Secret Manager</text>
+  <text x="820" y="552" text-anchor="middle" font-size="8" fill="#5A6B7C">API Keys / Tokens</text>
+
+  <!-- Row 3: Storage & Events -->
+  <text x="85" y="590" font-size="10" font-weight="600" fill="#5A6B7C" letter-spacing="1">EVENTS &amp; STORAGE</text>
+
+  <!-- Pub/Sub -->
+  <rect x="85" y="598" width="120" height="42" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="145" y="617" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Pub/Sub</text>
+  <text x="145" y="630" text-anchor="middle" font-size="8" fill="#5A6B7C">Event Bus</text>
+
+  <!-- Cloud Storage -->
+  <rect x="220" y="598" width="130" height="42" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="285" y="617" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Cloud Storage</text>
+  <text x="285" y="630" text-anchor="middle" font-size="8" fill="#5A6B7C">Waivers / Archive</text>
+
+  <!-- Cloud Scheduler -->
+  <rect x="365" y="598" width="130" height="42" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="430" y="617" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Cloud Scheduler</text>
+  <text x="430" y="630" text-anchor="middle" font-size="8" fill="#5A6B7C">Day 31 Shutdown</text>
+
+  <!-- Maps Platform -->
+  <rect x="510" y="598" width="130" height="42" rx="6" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="575" y="617" text-anchor="middle" font-size="10" font-weight="600" fill="#1A3550">Maps Platform</text>
+  <text x="575" y="630" text-anchor="middle" font-size="8" fill="#5A6B7C">Distance Matrix</text>
+
+  <!-- VPC Service Controls badge -->
+  <rect x="670" y="598" width="210" height="42" rx="6" fill="#1A3550" filter="url(#cardShadow)"/>
+  <text x="775" y="616" text-anchor="middle" font-size="9" font-weight="600" fill="#FFFFFF">🔒 VPC Service Controls</text>
+  <text x="775" y="630" text-anchor="middle" font-size="8" fill="#8BBFB9">Data exfiltration prevention</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- EXTERNAL INTEGRATIONS (right side)     -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <!-- EMR box -->
+  <rect x="960" y="380" width="210" height="275" rx="10" fill="#FFFFFF" stroke="#1A3550" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <rect x="960" y="380" width="210" height="32" rx="10" fill="#1A3550"/>
+  <rect x="960" y="400" width="210" height="12" fill="#1A3550"/>
+  <text x="1065" y="401" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">EMR &amp; PAYER INTEGRATIONS</text>
+
+  <!-- Epic -->
+  <rect x="978" y="422" width="175" height="44" rx="6" fill="#F0F4FF" stroke="#3B5998" stroke-width="1"/>
+  <text x="1065" y="442" text-anchor="middle" font-size="11" font-weight="700" fill="#3B5998">Epic</text>
+  <text x="1065" y="456" text-anchor="middle" font-size="8" fill="#5A6B7C">SMART on FHIR · App Market</text>
+
+  <!-- United Healthcare -->
+  <rect x="978" y="476" width="175" height="44" rx="6" fill="#F0F8FF" stroke="#0066CC" stroke-width="1"/>
+  <text x="1065" y="496" text-anchor="middle" font-size="11" font-weight="700" fill="#0066CC">United Healthcare</text>
+  <text x="1065" y="510" text-anchor="middle" font-size="8" fill="#5A6B7C">FHIR R4 · Payer API</text>
+
+  <!-- Kaiser -->
+  <rect x="978" y="530" width="175" height="44" rx="6" fill="#F5F0FF" stroke="#663399" stroke-width="1"/>
+  <text x="1065" y="550" text-anchor="middle" font-size="11" font-weight="700" fill="#663399">Kaiser Permanente</text>
+  <text x="1065" y="564" text-anchor="middle" font-size="8" fill="#5A6B7C">FHIR R4 · Payer API</text>
+
+  <!-- CMS / Medicare -->
+  <rect x="978" y="584" width="175" height="44" rx="6" fill="#FFF8F0" stroke="#CC6600" stroke-width="1"/>
+  <text x="1065" y="604" text-anchor="middle" font-size="11" font-weight="700" fill="#CC6600">CMS / Medicare</text>
+  <text x="1065" y="618" text-anchor="middle" font-size="8" fill="#5A6B7C">TEAM Model Reporting</text>
+
+  <!-- Connection lines: GCP → EMR -->
+  <!-- Healthcare API → Epic -->
+  <line x1="430" y1="540" x2="900" y2="540" stroke="#0B8A7E" stroke-width="0" opacity="0"/>
+  <line x1="900" y1="444" x2="978" y2="444" stroke="#3B5998" stroke-width="1.5" opacity="0.6"/>
+  <line x1="900" y1="498" x2="978" y2="498" stroke="#0066CC" stroke-width="1.5" opacity="0.6"/>
+  <line x1="900" y1="552" x2="978" y2="552" stroke="#663399" stroke-width="1.5" opacity="0.6"/>
+  <line x1="900" y1="606" x2="978" y2="606" stroke="#CC6600" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Main trunk line from GCP to EMR -->
+  <line x1="900" y1="420" x2="900" y2="630" stroke="#1A3550" stroke-width="2" opacity="0.3"/>
+
+  <!-- Connector from Healthcare API to trunk -->
+  <line x1="430" y1="540" x2="900" y2="540" stroke="#0B8A7E" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.4"/>
+  <!-- Connector from BigQuery to trunk -->
+  <line x1="575" y1="540" x2="900" y2="540" stroke="#0B8A7E" stroke-width="0" opacity="0"/>
+
+  <!-- Arrows on EMR lines -->
+  <!-- Bidirectional arrows -->
+  <polygon points="978,441 970,437 970,445" fill="#3B5998" opacity="0.6"/>
+  <polygon points="910,441 918,437 918,445" fill="#3B5998" opacity="0.6"/>
+  <polygon points="978,495 970,491 970,499" fill="#0066CC" opacity="0.6"/>
+  <polygon points="910,495 918,491 918,499" fill="#0066CC" opacity="0.6"/>
+  <polygon points="978,549 970,545 970,553" fill="#663399" opacity="0.6"/>
+  <polygon points="978,603 970,599 970,607" fill="#CC6600" opacity="0.6"/>
+
+  <!-- "FHIR R4" label on the trunk line -->
+  <rect x="885" y="467" width="44" height="18" rx="4" fill="#E6F5F3" stroke="#0B8A7E" stroke-width="0.5"/>
+  <text x="907" y="480" text-anchor="middle" font-size="7" font-weight="600" fill="#0B8A7E">FHIR R4</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- LEGEND (bottom)                        -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <rect x="60" y="672" width="840" height="48" rx="8" fill="#F7F5F0" stroke="#D0D0D0" stroke-width="0.5"/>
+
+  <!-- Legend items -->
+  <rect x="80" y="685" width="12" height="12" rx="2" fill="#0B8A7E"/>
+  <text x="98" y="695" font-size="9" fill="#5A6B7C">Core Services</text>
+
+  <rect x="190" y="685" width="12" height="12" rx="2" fill="#FDF0ED" stroke="#E8634A" stroke-width="1"/>
+  <text x="208" y="695" font-size="9" fill="#5A6B7C">AI Safety Layer</text>
+
+  <rect x="310" y="685" width="12" height="12" rx="2" fill="#1A3550"/>
+  <text x="328" y="695" font-size="9" fill="#5A6B7C">Security Perimeter</text>
+
+  <line x1="440" y1="691" x2="470" y2="691" stroke="#1A3550" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="478" y="695" font-size="9" fill="#5A6B7C">Data Flow</text>
+
+  <text x="570" y="695" font-size="9" fill="#5A6B7C">◀▶ Bidirectional Integration</text>
+
+  <text x="750" y="695" font-size="9" font-style="italic" fill="#5A6B7C">All services within HIPAA Assured Workloads boundary</text>
+
+  <!-- Subtle branding -->
+  <text x="600" y="780" text-anchor="middle" font-size="9" fill="#AABBC8">CareTaker Match · System Architecture · Confidential · March 2026</text>
+
+</svg>
