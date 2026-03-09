@@ -297,8 +297,8 @@ self.__SERVER_FILES_MANIFEST={
     },
     "distDirRoot": ".next"
   },
-  "appDir": "/Users/whitneywalters/AIProgramming/caretaker_match/website/website",
-  "relativeAppDir": "AIProgramming/caretaker_match/website/website",
+  "appDir": "/Users/whitneywalters/AIProgramming/caretaker_match",
+  "relativeAppDir": "AIProgramming/caretaker_match",
   "files": [
     ".next/routes-manifest.json",
     ".next/server/pages-manifest.json",

@@ -1,6 +1,12 @@
 {
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
+  "/demo/clinician/page": "app/demo/clinician/page.js",
+  "/demo/original/page": "app/demo/original/page.js",
+  "/demo/page": "app/demo/page.js",
+  "/demo/patient/page": "app/demo/patient/page.js",
+  "/demo/volunteer/page": "app/demo/volunteer/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/team/page": "app/team/page.js"
 }

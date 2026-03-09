@@ -41,10 +41,46 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
+      "page": "/demo",
+      "regex": "^/demo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/demo(?:/)?$"
+    },
+    {
+      "page": "/demo/clinician",
+      "regex": "^/demo/clinician(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/demo/clinician(?:/)?$"
+    },
+    {
+      "page": "/demo/original",
+      "regex": "^/demo/original(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/demo/original(?:/)?$"
+    },
+    {
+      "page": "/demo/patient",
+      "regex": "^/demo/patient(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/demo/patient(?:/)?$"
+    },
+    {
+      "page": "/demo/volunteer",
+      "regex": "^/demo/volunteer(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/demo/volunteer(?:/)?$"
+    },
+    {
       "page": "/favicon.ico",
       "regex": "^/favicon\\.ico(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/team",
+      "regex": "^/team(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/team(?:/)?$"
     }
   ],
   "dataRoutes": [],
