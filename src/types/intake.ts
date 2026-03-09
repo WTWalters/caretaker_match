@@ -22,36 +22,36 @@ export interface Address {
 export interface IntakeData {
   // Screening
   hasFamilySupport: boolean | null;
-  
+
   // Mobility
   walkingDistance: WalkingDistance | null;
   assistiveDevice: AssistiveDevice | null;
-  
+
   // Demographics
   name: string;
   ageRange: AgeRange | null;
   gender: Gender | null;
-  
+
   // Health
   smoker: boolean | null;
   alcoholPerDay: AlcoholConsumption | null;
   recreationalDrugs: boolean | null;
-  
+
   // Capability
   canDrive: DrivingAbility | null;
   willingToGiveCare: boolean | null;
   interestLevel: InterestLevel | null;
-  
+
   // Contact
   address: Address;
   phone: string;
   email: string;
-  
+
   // Consent
   consentGiven: boolean;
   signatureData: string | null;
   consentTimestamp: Date | null;
-  
+
   // Provider Review
   providerAssessment: ProviderAssessment | null;
   providerReviewedAt: Date | null;

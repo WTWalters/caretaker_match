@@ -1,60 +1,36 @@
-# CareTaker Match
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A peer-to-peer matching platform connecting surgical patients who need post-operative care with patients willing to provide it.
+## Getting Started
 
-## Project Status
-
-**Current Phase:** MVP Prototype (iPad intake flow)
-
-## Quick Start
+First, run the development server:
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
 npm run dev
-
-# Run tests
-npm test
-
-# Build for production
-npm run build
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Project Structure
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```
-patient_match/
-├── .claude/
-│   └── skills/           # Claude Code skill files
-├── docs/                  # Project documentation
-├── src/
-│   ├── components/        # Reusable UI components
-│   ├── screens/           # Screen-level components
-│   ├── hooks/             # Custom React hooks
-│   ├── services/          # API and business logic
-│   ├── types/             # TypeScript interfaces
-│   └── utils/             # Helper functions
-├── public/                # Static assets
-└── tests/                 # Test files
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Documentation
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- [Project Context](./CLAUDE.md) - Full project overview
-- [Patient Intake Flow](./.claude/skills/patient-intake-flow.md) - User journey and data model
-- [Design System](./.claude/skills/design-system.md) - Colors, typography, components
-- [iPad UI Guidelines](./.claude/skills/ipad-ui.md) - Accessibility and touch targets
-- [HIPAA Compliance](./.claude/skills/hipaa-compliance.md) - Security requirements
+## Learn More
 
-## Team
+To learn more about Next.js, take a look at the following resources:
 
-- Tom Eichmann, MD – Domain Expert
-- Vivek Mohan, MD – Clinical Advisor  
-- Hamid Sabet – Healthcare Business
-- Whitney Walters – Technology Lead
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## License
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Proprietary - All rights reserved
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

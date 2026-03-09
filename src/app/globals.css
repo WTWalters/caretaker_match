@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* CareTaker Match Brand Colors */
+  --color-teal: #0B8A7E;
+  --color-navy: #1A3550;
+  --color-coral: #E8634A;
+  --color-off-white: #F7F5F0;
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Semantic Colors */
+  --background: var(--color-off-white);
+  --foreground: var(--color-gray-900);
+}
+
+@theme inline {
+  /* Color System */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-teal);
+  --color-secondary: var(--color-navy);
+  --color-accent: var(--color-coral);
+  --color-muted: var(--color-gray-100);
+  --color-muted-foreground: var(--color-gray-600);
+  --color-border: var(--color-gray-200);
+
+  /* Brand Colors */
+  --color-teal: #0B8A7E;
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #0B8A7E;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+
+  --color-navy: #1A3550;
+  --color-navy-50: #f8fafc;
+  --color-navy-100: #f1f5f9;
+  --color-navy-200: #e2e8f0;
+  --color-navy-300: #cbd5e1;
+  --color-navy-400: #94a3b8;
+  --color-navy-500: #64748b;
+  --color-navy-600: #475569;
+  --color-navy-700: #334155;
+  --color-navy-800: #1A3550;
+  --color-navy-900: #0f172a;
+
+  --color-coral: #E8634A;
+  --color-coral-50: #fef2f2;
+  --color-coral-100: #fee2e2;
+  --color-coral-200: #fecaca;
+  --color-coral-300: #fca5a5;
+  --color-coral-400: #f87171;
+  --color-coral-500: #E8634A;
+  --color-coral-600: #dc2626;
+  --color-coral-700: #b91c1c;
+  --color-coral-800: #991b1b;
+  --color-coral-900: #7f1d1d;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Georgia', ui-serif, serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Spacing & Sizing */
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings use serif font for warmth */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-navy);
+}
