@@ -123,6 +123,27 @@ export default function DemoHub() {
               </div>
             </div>
 
+            {/* Overseer Demo */}
+            <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow border border-gray-100">
+              <div className="w-16 h-16 bg-[#1e3a2f] rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl">😇</span>
+              </div>
+              <h3 className="text-xl font-serif font-semibold text-navy text-center mb-4">
+                Overseer Dashboard
+              </h3>
+              <p className="text-gray-600 text-center mb-6 leading-relaxed">
+                Monitor all active encounters in real time. AI flags toxicity in caretaker-patient communications so the Overseer can intervene when needed.
+              </p>
+              <div className="text-center">
+                <Link
+                  href="/demo/overseer"
+                  className="inline-block bg-[#1e3a2f] hover:bg-[#2d5040] text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200"
+                >
+                  Launch Overseer Demo
+                </Link>
+              </div>
+            </div>
+
           </div>
 
           {/* Architecture Diagram Section */}

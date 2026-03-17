@@ -106,7 +106,7 @@ const mockVolunteers: Volunteer[] = [
 ];
 
 export default function ClinicianDemo() {
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'patients' | 'volunteers' | 'matching'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'patients' | 'volunteers' | 'matching' | 'encounters'>('dashboard');
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [selectedVolunteer, setSelectedVolunteer] = useState<Volunteer | null>(null);
   const [showMatchingModal, setShowMatchingModal] = useState(false);
@@ -372,6 +372,102 @@ export default function ClinicianDemo() {
     </div>
   );
 
+  const renderEncounters = () => (
+    <div className="space-y-6">
+      <div className="bg-white rounded-lg shadow border border-gray-200">
+        <div className="p-6 border-b border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900">Active Encounter Monitor</h3>
+          <p className="text-sm text-gray-500 mt-1">Status overview — full communication details available to Overseer only</p>
+        </div>
+        <div className="divide-y divide-gray-100">
+          {[
+            {
+              patient: "Margaret Chen",
+              caretaker: "Patricia Okafor",
+              surgery: "Total Knee Replacement",
+              daysSinceSurgery: null,
+              status: "pending_meetup" as const,
+              statusLabel: "Coffee Meet Pending",
+              step: 5,
+            },
+            {
+              patient: "Robert Johnson",
+              caretaker: "Sarah Thompson",
+              surgery: "Hip Replacement",
+              daysSinceSurgery: 2,
+              status: "active_green" as const,
+              statusLabel: "Active — On Track",
+              step: 6,
+            },
+            {
+              patient: "Dorothy Williams",
+              caretaker: "James Patterson",
+              surgery: "Total Knee Replacement",
+              daysSinceSurgery: 7,
+              status: "active_red" as const,
+              statusLabel: "Flag Raised — Contact Overseer",
+              step: 7,
+            },
+          ].map((enc) => {
+            const dotColor =
+              enc.status === "active_green"
+                ? "bg-green-500"
+                : enc.status === "active_red"
+                ? "bg-red-500 animate-pulse"
+                : "bg-yellow-400";
+            const badgeColor =
+              enc.status === "active_green"
+                ? "bg-green-100 text-green-800"
+                : enc.status === "active_red"
+                ? "bg-red-100 text-red-800"
+                : "bg-yellow-100 text-yellow-800";
+
+            return (
+              <div key={enc.patient} className="p-6 flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <span className={`w-3 h-3 rounded-full flex-shrink-0 ${dotColor}`} />
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {enc.patient} ↔ {enc.caretaker}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-0.5">{enc.surgery}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-6 text-sm">
+                  <div className="text-center">
+                    <p className="text-xs text-gray-400">Days Post-Op</p>
+                    <p className="font-medium text-gray-900">
+                      {enc.daysSinceSurgery !== null ? `Day ${enc.daysSinceSurgery}` : "Pre-surgery"}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs text-gray-400">Encounter Step</p>
+                    <p className="font-medium text-gray-900">{enc.step} / 8</p>
+                  </div>
+                  <span className={`text-xs font-semibold px-3 py-1 rounded-full ${badgeColor}`}>
+                    {enc.statusLabel}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start space-x-3">
+        <svg className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <p className="text-sm font-medium text-amber-800">Communication details are Overseer-only</p>
+          <p className="text-xs text-amber-700 mt-1">
+            All patient-caretaker messages route through Twilio anonymous proxy. The Overseer monitors for AI-flagged toxicity. If a flag is raised, contact the Overseer to review.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   const renderMatching = () => (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow border border-gray-200">
@@ -486,7 +582,8 @@ export default function ClinicianDemo() {
               {[
                 { id: 'dashboard', label: 'Dashboard', icon: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z' },
                 { id: 'patients', label: 'Patients', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
-                { id: 'matching', label: 'Matching', icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z' }
+                { id: 'matching', label: 'Matching', icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z' },
+                { id: 'encounters', label: 'Encounters', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z' }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -511,6 +608,7 @@ export default function ClinicianDemo() {
             {activeTab === 'dashboard' && renderDashboard()}
             {activeTab === 'patients' && renderPatients()}
             {activeTab === 'matching' && renderMatching()}
+            {activeTab === 'encounters' && renderEncounters()}
           </div>
 
           {/* iPad Bottom Bar */}
