@@ -52,8 +52,8 @@ export default function ArchitecturePage() {
           <div className="p-6">
             <div className="relative bg-gray-50 rounded-lg p-4">
               <Image
-                src="/architecture-diagram.png"
-                alt="CareTaker Match System Architecture Diagram"
+                src="/caretaker_match_pilot_architecture_v2.svg"
+                alt="CareTaker Match Pilot System Architecture Diagram v2"
                 width={1200}
                 height={800}
                 className="w-full h-auto rounded-lg shadow-md"
@@ -149,16 +149,9 @@ export default function ArchitecturePage() {
               </h3>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="/architecture-diagram.png"
-                  download="CareTaker_Match_Architecture.png"
+                  href="/caretaker_match_pilot_architecture_v2.svg"
+                  download="CareTaker_Match_Pilot_Architecture_v2.svg"
                   className="inline-flex items-center px-4 py-2 bg-teal text-white rounded-md hover:bg-teal-dark transition-colors"
-                >
-                  Download PNG
-                </a>
-                <a
-                  href="/architecture-diagram.svg"
-                  download="CareTaker_Match_Architecture.svg"
-                  className="inline-flex items-center px-4 py-2 bg-navy text-white rounded-md hover:bg-navy-dark transition-colors"
                 >
                   Download SVG
                 </a>
