@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 const stages = [
@@ -168,6 +169,21 @@ export default function GraduatedPrivacyModelPage() {
                 {role}
               </span>
             ))}
+          </div>
+        </div>
+
+        {/* Security Model Image */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mb-10">
+          <h3 className="text-lg font-serif font-semibold text-navy mb-4">Security Model Overview</h3>
+          <div className="relative bg-gray-50 rounded-lg p-4">
+            <Image
+              src="/security-model.png"
+              alt="CareTaker Match Security Model"
+              width={1200}
+              height={800}
+              className="w-full h-auto rounded-lg shadow-sm"
+              priority
+            />
           </div>
         </div>
 
