@@ -146,6 +146,30 @@ export default function DemoHub() {
 
           </div>
 
+          {/* Hospital ROI Calculator Section */}
+          <div className="mb-8">
+            <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-100 text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: "#1e3a2f" }}>
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-serif font-semibold text-navy mb-4">
+                Hospital ROI Calculator
+              </h3>
+              <p className="text-gray-600 mb-6 leading-relaxed max-w-2xl mx-auto">
+                Enter your hospital's TJR case volume and see your estimated annual savings, CMS TEAM downside risk reduction, and return on investment — with every number editable.
+              </p>
+              <Link
+                href="/demo/hospital-roi"
+                className="inline-block text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 hover:opacity-90"
+                style={{ backgroundColor: "#1e3a2f" }}
+              >
+                Calculate Your Hospital's ROI
+              </Link>
+            </div>
+          </div>
+
           {/* Graduated Privacy Model Section */}
           <div className="mb-8">
             <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-100 text-center">
