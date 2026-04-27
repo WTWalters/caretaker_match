@@ -141,16 +141,16 @@ Warm cream background. Three stats, then credibility line.
 Credibility line: *Piloting with a leading community health system · Founded by orthopedic surgeons · HIPAA-compliant platform*
 
 ### 8. Team
-White background. Four team members in a grid.
+White background. Four founding team members in a grid.
 
 | Name | Title |
 |---|---|
-| Tom Eichmann, MD | Co-founder · Orthopedic Surgeon |
-| Vivek Mohan, MD | Clinical Advisor · Orthopedic Surgeon |
-| Hamid Sabet | Operations · Healthcare Business |
-| Whit Walters | CTO · Has been there |
+| Tom Eickmann, MD | Chief Medical Officer · Founder |
+| Hamid Sabet | CEO |
+| Vivek Mohan | Founder · Surgeoneer |
+| Whit Walters | CIO/CTO · Has been there |
 
-Full bios live on `/about`.
+Full bios and advisor section live on `/about`.
 
 ### 9. Contact CTA Strip
 Dark navy. Text-centered.
@@ -182,10 +182,35 @@ Deep navy (`#0f2030`). © 2026 CareTaker Match, Inc. · Privacy Policy · Terms 
 - No signup CTA — ends with "Ask your care team" and a soft "Know a clinic that should offer this?" link to `/contact`
 
 ### /about — Team & Founding Story
+
+**Section 1 — Founding Story**
 - Full founding narrative (Tom's observation + Whit's personal experience)
-- Full team bios with photos
-- Future section placeholder: "Hospital Partners" (unlocked when CommonSpirit goes public)
-- Future section placeholder: "Volunteer Organization Partners"
+- Same copy as homepage Origin Story section, expanded
+
+**Section 2 — Founding Team**
+Four members, warm cream cards with photo placeholder and LinkedIn link (URLs to be added):
+
+| Name | Title | Bio (from public deck) |
+|---|---|---|
+| Dr. Tom Eickmann, MD | Chief Medical Officer & Founder | Orthopedic Surgeon and Chief Medical Officer at Orthopedic Centers of Colorado. Healthcare Consultant and Entrepreneur with significant experience in post-acute care economics. |
+| Hamid Sabet | CEO | Senior healthcare executive with leadership roles at Kaiser Permanente, Johnson & Johnson, and Boston Scientific. Deep expertise across clinical operations, innovation leadership, and the total joint replacement ecosystem — with a track record of improving outcomes, cutting costs, and driving growth. |
+| Vivek Mohan | Founder | Mechanical Engineer with a 25-year history in process re-engineering who has successfully constructed care delivery pathways and created surgical Centers of Excellence. As a surgeoneer, he blends engineering and surgical philosophy to improve the value of care. His absolute passion remains the practice of Total Joint Replacement surgery. |
+| Whit Walters | CIO/CTO | 2x CTO and former Chief Architect in healthcare with 30+ years building clinical data platforms and EMR integrations. Led enterprise cloud and AI/ML practices managing $15M+ portfolios, with five Google Cloud certifications including ML Engineer. Industry analyst covering cloud, data, and AI infrastructure at GigaOm. |
+
+**Section 3 — Advisors**
+Three advisors, same card style as Founding Team. Bios are placeholders — to be filled in when content is available. LinkedIn URLs to be added.
+
+| Name | Role placeholder |
+|---|---|
+| Jay Swartz | [Bio TBD] |
+| Todd Johnson | [Bio TBD] |
+| Stephanie (McCray) Scoggins | [Bio TBD] |
+
+**Section 4 — Future Placeholders** (not built now, reserved in layout)
+- "Hospital Partners" — unlocked when CommonSpirit goes public
+- "Volunteer Organization Partners"
+
+**Technical note:** Migrate and deprecate existing `/team` route once `/about` is live.
 
 ### /contact — Contact Page
 Three clearly routed paths, not a generic form:
