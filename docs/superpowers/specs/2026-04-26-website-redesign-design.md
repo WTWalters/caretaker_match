@@ -1,0 +1,233 @@
+# CareTaker Match — Website Redesign Design Spec
+
+**Date:** 2026-04-26  
+**Author:** Whit Walters  
+**Status:** Approved — ready for implementation planning
+
+---
+
+## Overview
+
+Replace the current placeholder homepage with a world-class consumer-facing website that converts individual volunteers, inspires patients, and projects mission credibility to community-focused hospitals and orthopedic clinics. The `/demo` hub remains separate and unlisted.
+
+---
+
+## Audience & Goals
+
+| Audience | Goal | Primary Action |
+|---|---|---|
+| Individual volunteers | Get excited, feel called to act | Sign up on Volunteer Signup page |
+| Surgical patients | Feel inspired and safe; understand the program | Ask their care team about CareTaker Match |
+| Volunteer organizations | Understand partnership opportunity | Contact via Contact page |
+| Hospitals & orthopedic clinics | See mission credibility and professionalism | Contact via Contact page |
+
+The website is **community-first, consumer-facing**. The hospital and clinic audience sees professionalism and mission alignment as a secondary signal — not the lead pitch.
+
+---
+
+## Visual Direction
+
+**Direction:** Warm & Human  
+**Palette:** Warm cream/parchment (`#faf6f0`, `#f0e8dc`) · Navy (`#1a3a4a`) · Teal (`#2d8c7b`) · Coral accent (`#c87d5a`) · Earth neutrals  
+**Typography:** Georgia serif for all headlines; clean sans-serif body (existing stack)  
+**Photography:** Existing `hero-image.webp` (older woman in chair, younger woman in warm embrace) for hero. Real volunteer/patient photography throughout as available.  
+**Tone:** Warm, editorial, evidence-based. Trust shown through real voices, not claims. Agency language for patients — they *choose* a resource, they are not receiving charity.  
+
+**Forbidden patterns:**
+- Cold blues or sterile whites
+- Sympathy/pity framing for patients
+- "Alone" directed at patients in product-facing copy (okay in mission statements)
+- Dark navy overlays on hero photography (use warm amber/cream tints instead)
+
+---
+
+## Tagline
+
+> **No one heals alone.**
+
+Used as the primary homepage headline. Applies to both audiences simultaneously: volunteers hear *"your experience matters to someone else's healing"*; patients hear *"you don't have to do this by yourself."*
+
+---
+
+## Site Architecture
+
+```
+/ (Homepage)
+/volunteer          — Volunteer signup page
+/for-patients       — Patient information page
+/about              — Team & founding story
+/contact            — Contact page (3 audiences)
+/download           — App download stub (placeholder until launch)
+/demo/*             — Unlisted, separate, unchanged
+```
+
+Nav items: **About · For Patients · Contact · [Volunteer →]** (Volunteer CTA is always highlighted in teal)
+
+---
+
+## Homepage — Section Flow
+
+### 1. Sticky Navigation
+- Logo (CareTaker Match, serif) left
+- About · For Patients · Contact links center/right
+- "Volunteer →" button in teal, right-aligned, always visible on scroll
+
+### 2. Hero
+**Desktop (B — Split):** Warm cream/parchment left half with copy; real photography right half (hero-image.webp).  
+**Mobile (C — Warm Amber Tint):** Full-bleed photography with warm amber/peach overlay (not dark navy); copy stacks over it.
+
+**Copy structure:**
+```
+[Teal left border quote]
+"I had my knee replaced three years ago. I had my daughter, so I was 
+okay. A lot of people don't have that."
+— Linda, volunteer · Denver, CO
+
+No one heals alone.
+
+We connect recovering surgical patients with trained peer volunteers —
+people who've been through it and want to give back.
+
+[Become a Volunteer]  [I'm a Patient →]
+```
+
+### 3. Origin Story — "Why We Built This"
+Dark navy background (`#1a3a4a`). White text. This is the emotional anchor of the site.
+
+**Copy structure:**
+- Eyebrow: "Why We Built This"
+- Headline: "An orthopedic surgeon noticed something troubling."
+- Body: Tom Eichmann saw highly successful, accomplished patients — executives, educators, retired professionals — who had no one to call when surgery came. Not because they'd failed at life. Because modern life doesn't build those networks the way it used to. The result: a $23,000 nursing facility stay for patients who were perfectly capable of recovering at home.
+- Tom pull quote: *"What if patients who'd already been through it could be the ones to help? People who understood — because they'd been there."*
+- Whit's personal connection: As CareTaker Match's CTO, Whit Walters knows this feeling firsthand. After his own shoulder replacement, his teenager was the only support available — before school, after school, and hoping nothing happened in between.
+
+**Design note:** This section reframes the target patient from "vulnerable person needing charity" to "accomplished person facing a modern-life gap." Critical for the Margaret archetype.
+
+### 4. How It Works
+White background. Three numbered steps.
+
+1. **Your care team connects you** — Your surgeon or clinic identifies you as a match candidate and introduces the program.
+2. **Meet over coffee first** — Before surgery, you meet your matched volunteer. No commitment. Just a conversation.
+3. **Recover with community** — 30 days of check-ins, rides, and real companionship — on your schedule, your terms.
+
+### 5. For Volunteers
+Warm cream background. Photo left, copy right (desktop). Stacked on mobile.
+
+- Eyebrow: "For Volunteers"
+- Headline: "You've been there. Now go back for someone else."
+- Body: If you've had joint replacement surgery, you know what those first 30 days feel like. Your experience — and your presence — is exactly what another patient needs.
+- Pill tags: Vetted & trained · You set the schedule · 30-day commitment
+- CTA: "Sign Up to Volunteer" → `/volunteer`
+
+### 6. For Patients
+White background. Copy left, photo right (desktop). Stacked on mobile.
+
+- Eyebrow: "For Patients"  
+- Headline: "Your recovery. Your choice. Your terms."
+- Body: CareTaker Match isn't a service you sign up for — it's a resource your care team connects you with. You meet your volunteer before surgery. If it feels right, you proceed. If not, that's okay too.
+- Note (no CTA button): *Ask your surgeon or clinic if CareTaker Match is available at your facility.*
+
+**Design note:** No direct signup CTA here — patients onboard through the clinical workflow, not the website. The copy preserves agency throughout.
+
+### 7. Stats + Credibility Strip
+Warm cream background. Three stats, then credibility line.
+
+| Stat | Label |
+|---|---|
+| 1 in 5 | surgical patients lack home support |
+| $23K+ | average SNF stay that could be avoided |
+| 30 days | of recovery support under CMS TEAM |
+
+Credibility line: *Piloting with a leading community health system · Founded by orthopedic surgeons · HIPAA-compliant platform*
+
+### 8. Team
+White background. Four team members in a grid.
+
+| Name | Title |
+|---|---|
+| Tom Eichmann, MD | Co-founder · Orthopedic Surgeon |
+| Vivek Mohan, MD | Clinical Advisor · Orthopedic Surgeon |
+| Hamid Sabet | Operations · Healthcare Business |
+| Whit Walters | CTO · Has been there |
+
+Full bios live on `/about`.
+
+### 9. Contact CTA Strip
+Dark navy. Text-centered.
+
+- Headline: "Organizations & Clinics"
+- Body: Volunteer groups, hospitals, and orthopedic practices — we'd love to talk about how CareTaker Match can serve your community.
+- CTA: "Get in Touch" → `/contact`
+
+### 10. Footer
+Deep navy (`#0f2030`). © 2026 CareTaker Match, Inc. · Privacy Policy · Terms · Download App · Contact
+
+---
+
+## Page Specs
+
+### /volunteer — Volunteer Signup
+- Warm header with "No one heals alone." tagline
+- What to expect: the 30-day commitment, training, vetting process
+- Eligibility: prior joint replacement surgery required
+- Signup form: name, email, phone, surgery type, zip code, availability
+- Submit → confirmation email + follow-up from Hamid / ops team
+- No backend required for MVP: form submits to email or simple form service (Formspree / Resend)
+
+### /for-patients — For Patients
+- Full page version of the patient section
+- Emphasizes agency throughout — patient controls every step
+- Explains the Coffee Meet, the 30-day encounter, the graduated privacy model (no personal info shared until Day 30 mutual opt-in)
+- FAQ section: "Is this charity?" / "What if I don't like my volunteer?" / "Is my health information safe?"
+- No signup CTA — ends with "Ask your care team" and a soft "Know a clinic that should offer this?" link to `/contact`
+
+### /about — Team & Founding Story
+- Full founding narrative (Tom's observation + Whit's personal experience)
+- Full team bios with photos
+- Future section placeholder: "Hospital Partners" (unlocked when CommonSpirit goes public)
+- Future section placeholder: "Volunteer Organization Partners"
+
+### /contact — Contact Page
+Three clearly routed paths, not a generic form:
+
+1. **I want to volunteer as an individual** → redirect to `/volunteer`
+2. **I represent a volunteer organization** → contact form (org name, contact, message)
+3. **I represent a hospital or orthopedic clinic** → contact form (institution, role, contact, message)
+
+Forms submit to ops team. No backend required for MVP.
+
+### /download — App Download Stub
+- Simple page: "The app is coming soon."
+- Email capture for launch notification
+- App Store and Google Play badge placeholders (greyed out / "coming soon")
+
+---
+
+## Future Placeholders (not built now, accounted for in nav/footer)
+
+- Hospital partner logos section (on /about) — unlocked when partnerships go public
+- Volunteer organization partner logos — same
+- Patient/volunteer testimonials — real quotes as pilot produces them
+- Blog / Press section — when media coverage begins
+
+---
+
+## Technical Notes
+
+- Remains Next.js App Router (no framework change)
+- All new pages follow existing `src/app/` structure
+- Existing color tokens (navy, teal, coral) extended with warm cream palette
+- Volunteer and contact forms: Formspree or similar for MVP (no backend)
+- `/demo/*` routes untouched
+- `/team` page (existing) merged into `/about`
+- `hero-image.webp` used in hero; additional photography sourced or used as placeholder gradients
+- `.superpowers/` added to `.gitignore` ✓
+
+---
+
+## What Success Looks Like
+
+- A volunteer who lands on the homepage understands what to do and signs up
+- A patient who Googles CareTaker Match feels inspired and safe, asks their doctor
+- A community-focused hospital administrator who visits sees a credible, mission-driven organization
+- The site is ready to add real pilot stories, partner logos, and app download links without structural changes
