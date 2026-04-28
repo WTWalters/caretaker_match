@@ -195,14 +195,14 @@ Four members, warm cream cards with photo placeholder and LinkedIn link:
 | Dr. Tom Eickmann, MD | Co-founder & Chief Medical Officer | https://www.linkedin.com/in/tom-eickmann-007303349/ | Orthopedic Surgeon and Chief Medical Officer at Orthopedic Centers of Colorado. Healthcare Consultant and Entrepreneur with significant experience in post-acute care economics. |
 | Hamid Sabet | Co-founder & CEO | https://www.linkedin.com/in/hasabet/ | Senior healthcare executive with leadership roles at Kaiser Permanente, Johnson & Johnson, and Boston Scientific. Deep expertise across clinical operations, innovation leadership, and the total joint replacement ecosystem — with a track record of improving outcomes, cutting costs, and driving growth. |
 | Vivek Mohan | Co-founder | https://www.linkedin.com/in/vivek-mohan-02a5008/ | Mechanical Engineer with a 25-year history in process re-engineering who has successfully constructed care delivery pathways and created surgical Centers of Excellence. As a surgeoneer, he blends engineering and surgical philosophy to improve the value of care. His absolute passion remains the practice of Total Joint Replacement surgery. |
-| Whit Walters | Co-founder & CIO/CTO | [LinkedIn URL TBD] | 2x CTO and former Chief Architect in healthcare with 30+ years building clinical data platforms and EMR integrations. Led enterprise cloud and AI/ML practices managing $15M+ portfolios, with five Google Cloud certifications including ML Engineer. Industry analyst covering cloud, data, and AI infrastructure at GigaOm. |
+| Whit Walters | Co-founder & CIO/CTO | https://www.linkedin.com/in/whitwalters/ | 2x CTO and former Chief Architect in healthcare with 30+ years building clinical data platforms and EMR integrations. Led enterprise cloud and AI/ML practices managing $15M+ portfolios, with five Google Cloud certifications including ML Engineer. Industry analyst covering cloud, data, and AI infrastructure at GigaOm. |
 
 **Section 3 — Advisors**
 Three advisors, same card style as Founding Team. Bios are placeholders — to be filled in when content is available.
 
 | Name | LinkedIn | Bio |
 |---|---|---|
-| Jay Swartz | https://www.linkedin.com/in/jaywswartz/ | [Bio TBD] |
+| Jay Swartz | https://www.linkedin.com/in/jaywswartz/ | **Data Science & AI Advisor.** AI and machine learning pioneer with deep expertise spanning decades, from early contributions as a committer on IBM Watson to leading Neural Nexus Strategies' research lab at the frontier of AI. Specializes in sovereign AI systems and healthcare AI governance. Advises CareTaker Match on AI architecture, clinical AI best practices, and responsible deployment in healthcare environments. |
 | Todd Johnson | https://www.linkedin.com/in/toddjohnson10/ | [Bio TBD] |
 | Stephanie (McCray) Scoggins | https://www.linkedin.com/in/stephanie-mccray/ | [Bio TBD] |
 
