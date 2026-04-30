@@ -59,9 +59,13 @@ Used as the primary homepage headline. Applies to both audiences simultaneously:
 /contact            — Contact page (3 audiences)
 /download           — App download stub (placeholder until launch)
 /demo/*             — Unlisted, separate, unchanged
+
+blog.caretakermatch.com  — Ghost-powered blog (separate subdomain, not built for MVP)
 ```
 
 Nav items: **About · For Patients · Contact · [Volunteer →]** (Volunteer CTA is always highlighted in teal)
+
+Footer includes **Blog** link to `blog.caretakermatch.com` — greyed out / hidden until go-live.
 
 ---
 
@@ -160,7 +164,9 @@ Dark navy. Text-centered.
 - CTA: "Get in Touch" → `/contact`
 
 ### 10. Footer
-Deep navy (`#0f2030`). © 2026 CareTaker Match, Inc. · Privacy Policy · Terms · Download App · Contact
+Deep navy (`#0f2030`). © 2026 CareTaker Match, Inc. · Privacy Policy · Terms · Download App · Blog · Contact
+
+**Blog link** points to `blog.caretakermatch.com`. Rendered greyed-out or omitted until the blog goes live.
 
 ---
 
@@ -233,7 +239,7 @@ Forms submit to ops team. No backend required for MVP.
 - Hospital partner logos section (on /about) — unlocked when partnerships go public
 - Volunteer organization partner logos — same
 - Patient/volunteer testimonials — real quotes as pilot produces them
-- Blog / Press section — when media coverage begins
+- Blog — Ghost hosted at `blog.caretakermatch.com`. Non-technical team members publish independently. Content triggers: funding announcements, volunteer milestone stories, hospital pilot news, leadership speaking events. Footer link is greyed-out until go-live. No Next.js integration required for MVP — subdomain handles its own rendering. Ghost Content API available later if native blog feed is desired on the main site.
 
 ---
 
