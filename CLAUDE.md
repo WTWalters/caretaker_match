@@ -65,7 +65,18 @@ patient_match/
 **MVP Prototype** - iPad patient intake flow only (no backend)
 
 ## Team
-- Tom Eichmann, MD – Orthopedic surgeon, domain expert
-- Vivek Mohan, MD – Orthopedic surgeon, clinical advisor
-- Hamid Sabet – Medical device/healthcare business
-- Whitney Walters – Technology lead
+- Tom Eickmann, MD – Co-founder & Chief Medical Officer, Orthopedic Surgeon
+- Vivek Mohan – Co-founder, Orthopedic Surgeon & Mechanical Engineer
+- Hamid Sabet – Co-founder & CEO, Healthcare Executive
+- Whit Walters – Co-founder & CIO/CTO, Technology Lead
+
+## Agent skills
+
+### Issue tracker
+Issues live as local markdown files under `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+Default mattpocock/skills label vocabulary (needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+Single-context repo — one `CONTEXT.md` at root + `docs/adr/`. See `docs/agents/domain.md`.
