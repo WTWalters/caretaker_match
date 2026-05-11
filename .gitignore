@@ -28,3 +28,4 @@ coverage/
 
 # PWA generated files
 dev-dist/
+.superpowers/
