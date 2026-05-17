@@ -10,7 +10,7 @@ interface FormData {
   procedureType: string; surgeryDate: string; surgeon: string;
   homeSupport: string;
   walkingDistance: string; assistiveDevice: string; ageRange: string; ctmScore: number;
-  genderPreference: string; smoking: string; foodAllergies: string[]; dietaryNeeds: string; pets: string;
+  smoking: string; foodAllergies: string[]; dietaryNeeds: string; pets: string;
   housingType: string; entryStairs: string; interiorLayout: string; homeAddress: string;
   emergencyName: string; emergencyRelationship: string; emergencyPhone: string;
   reciprocity: string;
@@ -23,7 +23,7 @@ const EMPTY: FormData = {
   procedureType: "", surgeryDate: "", surgeon: "",
   homeSupport: "",
   walkingDistance: "", assistiveDevice: "", ageRange: "", ctmScore: 0,
-  genderPreference: "", smoking: "", foodAllergies: [], dietaryNeeds: "", pets: "",
+  smoking: "", foodAllergies: [], dietaryNeeds: "", pets: "",
   housingType: "", entryStairs: "", interiorLayout: "", homeAddress: "",
   emergencyName: "", emergencyRelationship: "", emergencyPhone: "",
   reciprocity: "",
@@ -216,16 +216,106 @@ export default function PatientOnboarding() {
       );
 
       case 1: return (
-        <div className="px-6 pt-6 pb-4 flex flex-col h-full">
-          <Back onClick={back} />
-          <h2 className="text-xl font-bold text-gray-900 mb-1">About You</h2>
-          <p className="text-sm text-gray-500 mb-5">Let's start with the basics.</p>
-          <div className="flex-1 flex flex-col gap-4">
-            <Field label="First name" value={data.firstName} onChange={v => set("firstName", v)} placeholder="Jane" />
-            <Field label="Last name" value={data.lastName} onChange={v => set("lastName", v)} placeholder="Smith" />
-            <Field label="Phone number" type="tel" value={data.phone} onChange={v => set("phone", v)} placeholder="(555) 000-0000" />
+        <div className="flex flex-col h-full" style={{ background: "#faf8f4" }}>
+          {/* Safety-first app header */}
+          <div className="px-5 pt-3 pb-2.5 flex items-center justify-between flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "#e8f5f0" }}>
+                <svg className="w-4 h-4" style={{ color: TEAL }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[13px] font-bold leading-tight" style={{ color: "#1a2e28" }}>Caretaker Match</p>
+                <p className="text-[9px] text-gray-400 leading-tight">Safe care. Trusted connections.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-semibold border" style={{ background: "#e8f5f0", color: TEAL, borderColor: "#c8e8e0" }}>
+              <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              Your safety comes first
+            </div>
           </div>
-          <Btn label="Continue" onClick={next} disabled={!data.firstName || !data.lastName || !data.phone} />
+
+          <div className="flex-1 overflow-y-auto px-5 pb-2">
+            <div className="flex items-start gap-2 mb-1">
+              <h2 className="text-2xl font-bold leading-tight flex-1" style={{ color: "#1a2e28", fontFamily: "Georgia, serif" }}>
+                Let&apos;s get to know you
+              </h2>
+              <svg className="w-9 h-9 flex-shrink-0" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="18" r="17" fill="#e8f5f0" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} stroke={TEAL}
+                  d="M18 8 L22 14 L29 15.5 L24 21 L25.5 28 L18 24.5 L10.5 28 L12 21 L7 15.5 L14 14 Z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} stroke={TEAL}
+                  d="M13.5 18.5 L16.5 21.5 L22.5 15.5" />
+              </svg>
+            </div>
+            <p className="text-sm text-gray-500 mb-4 leading-relaxed">This helps us find safe, verified companions who are right for you.</p>
+
+            {/* Security banner */}
+            <div className="rounded-xl p-3 mb-4 flex items-start gap-2.5" style={{ background: "#edf7f3" }}>
+              <svg className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: TEAL }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <div>
+                <p className="text-sm font-semibold leading-tight" style={{ color: TEAL }}>We protect your information</p>
+                <p className="text-xs text-gray-600 mt-0.5 leading-relaxed">Your information is encrypted and never shared without your permission.</p>
+              </div>
+            </div>
+
+            {/* Fields */}
+            <div className="flex flex-col gap-3">
+              <Field label="First name" value={data.firstName} onChange={v => set("firstName", v)} placeholder="Jane" />
+              <Field label="Last name" value={data.lastName} onChange={v => set("lastName", v)} placeholder="Smith" />
+              <div>
+                <Field label="Phone number" type="tel" value={data.phone} onChange={v => set("phone", v)} placeholder="(555) 000-0000" />
+                <div className="flex items-center gap-1 mt-1.5">
+                  <svg className="w-3 h-3" style={{ color: "#9ca3af" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <p className="text-[11px] text-gray-400">We&apos;ll never share your number.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Safety commitment */}
+            <div className="mt-4 rounded-xl p-4 flex items-start gap-3" style={{ background: "#edf7f3" }}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: TEAL }}>
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold leading-tight" style={{ color: TEAL }}>Safety is at the heart of everything we do</p>
+                <div className="mt-2 flex flex-col gap-1.5">
+                  {["Caregivers are background checked", "We use bank-level encryption", "You control your information"].map(item => (
+                    <div key={item} className="flex items-center gap-1.5">
+                      <svg className="w-3.5 h-3.5 flex-shrink-0" style={{ color: TEAL }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className="text-xs text-gray-600">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="px-5 pb-3 flex-shrink-0">
+            <button
+              onClick={next}
+              disabled={!data.firstName || !data.lastName || !data.phone}
+              className="w-full py-4 rounded-2xl text-white font-semibold text-base flex items-center justify-center gap-2 transition-opacity"
+              style={{ background: !data.firstName || !data.lastName || !data.phone ? "#9ca3af" : TEAL }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              Continue securely →
+            </button>
+            <p className="text-[11px] text-center text-gray-400 mt-2">Secure · Private · Trusted</p>
+          </div>
         </div>
       );
 
@@ -327,14 +417,6 @@ export default function PatientOnboarding() {
           <p className="text-sm text-gray-500 mb-4">Help us find the right companion for you.</p>
           <div className="flex-1 overflow-y-auto flex flex-col gap-5">
             <div>
-              <p className="text-sm font-medium text-gray-700 mb-2">Do you have a gender preference for your volunteer companion?</p>
-              <div className="flex flex-col gap-2">
-                {[{ v: "no-pref", l: "No preference" }, { v: "same", l: "I prefer a volunteer of the same gender as me" }, { v: "other", l: "I have a different preference" }].map(o => (
-                  <Opt key={o.v} label={o.l} selected={data.genderPreference === o.v} onClick={() => set("genderPreference", o.v)} />
-                ))}
-              </div>
-            </div>
-            <div>
               <p className="text-sm font-medium text-gray-700 mb-2">Do you smoke or use tobacco?</p>
               <div className="flex flex-col gap-2">
                 {["No", "Yes, tobacco", "Yes, marijuana or other"].map(o => (
@@ -372,7 +454,7 @@ export default function PatientOnboarding() {
             </div>
           </div>
           <div className="mt-4">
-            <Btn label="Continue" onClick={next} disabled={!data.genderPreference || !data.smoking || !data.dietaryNeeds || !data.pets} />
+            <Btn label="Continue" onClick={next} disabled={!data.smoking || !data.dietaryNeeds || !data.pets} />
           </div>
         </div>
       );

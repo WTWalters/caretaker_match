@@ -85,44 +85,37 @@ function IphoneMockup({ step }: { step: Step }) {
 const steps: Step[] = [
   {
     number: "01",
-    label: "Assessment",
+    label: "Patient Enrollment",
     href: "/demo/onboarding/patient",
     isLive: true,
     icon: <StepSvg d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />,
   },
   {
     number: "02",
-    label: "Approval",
-    href: "/demo/onboarding/approval",
-    isLive: true,
-    icon: <StepSvg d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />,
-  },
-  {
-    number: "03",
     label: "Volunteer Enrollment",
     href: "/demo/onboarding/volunteer",
     isLive: true,
     icon: <StepSvg d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />,
   },
   {
+    number: "03",
+    label: "Approval",
+    href: "/demo/onboarding/approval",
+    isLive: true,
+    icon: <StepSvg d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />,
+  },
+  {
     number: "04",
-    label: "Matching",
+    label: "Volunteer Selection",
     href: "/demo/onboarding/matching",
-    isLive: false,
+    isLive: true,
     icon: <StepSvg d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />,
   },
   {
     number: "05",
-    label: "Coffee Meet",
-    href: "/demo/onboarding/coffee-meet",
-    isLive: false,
-    icon: <StepSvg d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1 1 .23 2.698-1.15 2.698H3.948c-1.379 0-2.15-1.698-1.15-2.698L4 15.3" />,
-  },
-  {
-    number: "06",
-    label: "Monitoring",
-    href: "/demo/onboarding/monitoring",
-    isLive: false,
+    label: "Recovery & Monitoring",
+    href: "/demo/overseer",
+    isLive: true,
     icon: <StepSvg d="M3 12h4l2.5-7 4 14 2.5-7H20" />,
   },
 ];
@@ -196,8 +189,8 @@ export default function CommonSpiritDemo() {
             A clinically-driven, privacy-protected lifecycle for every patient-volunteer match
           </p>
 
-          {/* Safety bar + iPhones + gold banner container — height matches video */}
-          <div className="rounded-xl overflow-hidden shadow-xl flex flex-col" style={{ height: "455px" }}>
+          {/* Safety bar + iPhones + gold banner container */}
+          <div className="rounded-xl overflow-hidden shadow-xl flex flex-col" style={{ height: "520px" }}>
 
             {/* Safety monitoring bar */}
             <div className="px-5 py-3" style={{ background: CTM_GREEN }}>
@@ -224,15 +217,37 @@ export default function CommonSpiritDemo() {
             </div>
 
             {/* iPhone mockups row — flex-1 fills space between safety bar and gold banner */}
-            <div className="bg-white/40 backdrop-blur-sm px-6 py-5 flex items-center justify-around gap-2 flex-1">
-              {steps.map((step, i) => (
-                <div key={step.number} className="flex items-center gap-2">
-                  <IphoneMockup step={step} />
-                  {i < steps.length - 1 && (
-                    <span className="text-gray-400 text-lg flex-shrink-0">→</span>
-                  )}
+            <div className="bg-white/40 backdrop-blur-sm px-6 py-5 flex items-center justify-around gap-3 flex-1">
+
+              {/* Enrollment column: Patient + Volunteer stacked, each with an arrow from their center */}
+              <div className="flex flex-col" style={{ gap: 0 }}>
+                {/* Patient row */}
+                <div className="flex items-start gap-2" style={{ marginBottom: -45 }}>
+                  <div style={{ transform: "scale(0.72)", transformOrigin: "top center" }}>
+                    <IphoneMockup step={steps[0]} />
+                  </div>
+                  <span className="text-gray-400 text-base flex-shrink-0" style={{ marginTop: 60 }}>→</span>
                 </div>
-              ))}
+                {/* Volunteer row */}
+                <div className="flex items-start gap-2">
+                  <div style={{ transform: "scale(0.72)", transformOrigin: "top center" }}>
+                    <IphoneMockup step={steps[1]} />
+                  </div>
+                  <span className="text-gray-400 text-base flex-shrink-0" style={{ marginTop: 60 }}>→</span>
+                </div>
+              </div>
+
+              {/* Approval — centered between the two arrows */}
+              <IphoneMockup step={steps[2]} />
+
+              {/* → Volunteer Selection */}
+              <span className="text-gray-400 text-lg flex-shrink-0">→</span>
+              <IphoneMockup step={steps[3]} />
+
+              {/* → Recovery & Monitoring */}
+              <span className="text-gray-400 text-lg flex-shrink-0">→</span>
+              <IphoneMockup step={steps[4]} />
+
             </div>
 
             {/* Volunteer network banner */}

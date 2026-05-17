@@ -6,70 +6,53 @@ import Link from "next/link";
 const CTM_GREEN = "#1e3a2f";
 const CTM_GOLD = "#c4922a";
 
+type QueueTab = "patients" | "volunteers";
 type DemoPhase = "idle" | "checking" | "passed" | "sent";
 type CheckState = "waiting" | "running" | "done";
-type PatientStatus = "pending" | "approved" | "failed";
+type RecordStatus = "pending" | "approved" | "failed";
 
-interface Check {
-  label: string;
-  result: string;
-  state: CheckState;
-}
+interface Check { label: string; result: string; state: CheckState; }
 
 interface Patient {
-  id: number;
-  name: string;
-  procedure: string;
-  surgeryDate: string;
-  submitted: string;
-  status: PatientStatus;
-  ctmScore: number;
-  isDemo?: boolean;
-  failedCheck?: string;
+  id: number; name: string; procedure: string; surgeryDate: string;
+  submitted: string; status: RecordStatus; ctmScore: number; isDemo?: boolean; failedCheck?: string;
 }
 
-const DEMO_ID = 1;
+interface VolunteerRecord {
+  id: number; name: string; surgeryHistory: string; submitted: string;
+  status: RecordStatus; readinessScore: number; isDemo?: boolean; failedCheck?: string;
+}
+
+const DEMO_PATIENT_ID = 1;
+const DEMO_VOL_ID = 1;
 
 const PATIENTS: Patient[] = [
-  {
-    id: 1,
-    name: "Jennifer W.",
-    procedure: "Total Knee Replacement",
-    surgeryDate: "Jun 18, 2026",
-    submitted: "Today, 9:41 AM",
-    status: "pending",
-    ctmScore: 7,
-    isDemo: true,
-  },
-  {
-    id: 2,
-    name: "Margaret H.",
-    procedure: "Hip Replacement",
-    surgeryDate: "May 28, 2026",
-    submitted: "May 7, 2026",
-    status: "approved",
-    ctmScore: 8,
-  },
-  {
-    id: 3,
-    name: "James R.",
-    procedure: "Total Knee Replacement",
-    surgeryDate: "Jun 3, 2026",
-    submitted: "May 6, 2026",
-    status: "failed",
-    ctmScore: 3,
-    failedCheck: "Criminal history",
-  },
+  { id: 1, name: "Jennifer W.", procedure: "Total Knee Replacement", surgeryDate: "Jun 18, 2026", submitted: "Today, 9:41 AM", status: "pending", ctmScore: 7, isDemo: true },
+  { id: 2, name: "Margaret H.", procedure: "Hip Replacement", surgeryDate: "May 28, 2026", submitted: "May 7, 2026", status: "approved", ctmScore: 8 },
+  { id: 3, name: "James R.", procedure: "Total Knee Replacement", surgeryDate: "Jun 3, 2026", submitted: "May 6, 2026", status: "failed", ctmScore: 3, failedCheck: "Criminal history" },
 ];
 
-const CHECK_DEFS = [
+const VOLUNTEERS: VolunteerRecord[] = [
+  { id: 1, name: "Robert M.", surgeryHistory: "Knee Replacement — 2 yrs ago", submitted: "Today, 10:15 AM", status: "pending", readinessScore: 8, isDemo: true },
+  { id: 2, name: "Linda K.", surgeryHistory: "Hip Replacement — 3 yrs ago", submitted: "May 8, 2026", status: "approved", readinessScore: 9 },
+  { id: 3, name: "David P.", surgeryHistory: "Shoulder Replacement — 1 yr ago", submitted: "May 7, 2026", status: "failed", readinessScore: 2, failedCheck: "Criminal history" },
+];
+
+const PATIENT_CHECK_DEFS = [
   { label: "Criminal history", result: "Clear" },
   { label: "Identity verification", result: "Verified" },
   { label: "Sex offender registry", result: "Clear" },
 ];
 
-function StatusBadge({ status }: { status: PatientStatus }) {
-  const map: Record<PatientStatus, { bg: string; color: string; label: string }> = {
+const VOL_CHECK_DEFS = [
+  { label: "Criminal history", result: "Clear" },
+  { label: "Identity verification", result: "Verified" },
+  { label: "Sex offender registry", result: "Clear" },
+  { label: "Volunteer training", result: "Complete" },
+];
+
+function StatusBadge({ status }: { status: RecordStatus }) {
+  const map: Record<RecordStatus, { bg: string; color: string; label: string }> = {
     pending: { bg: "#fef3c7", color: "#92400e", label: "Pending" },
     approved: { bg: "#d1fae5", color: "#065f46", label: "Approved" },
     failed: { bg: "#fee2e2", color: "#991b1b", label: "Failed" },
@@ -104,17 +87,16 @@ function ScoreBar({ score, max = 9 }: { score: number; max?: number }) {
   return (
     <div className="flex items-center gap-4 mt-2">
       <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "#e5e1d8" }}>
-        <div
-          className="h-full rounded-full"
-          style={{ width: `${(score / max) * 100}%`, background: CTM_GREEN, transition: "width 1s ease" }}
-        />
+        <div className="h-full rounded-full" style={{ width: `${(score / max) * 100}%`, background: CTM_GREEN, transition: "width 1s ease" }} />
       </div>
       <span className="font-sans font-bold text-lg" style={{ color: CTM_GREEN }}>{score} / {max}</span>
     </div>
   );
 }
 
-function IphoneNotification({ visible, onDismiss }: { visible: boolean; onDismiss: () => void }) {
+function IphoneNotification({ visible, onDismiss, recipientName, message }: {
+  visible: boolean; onDismiss: () => void; recipientName: string; message: string;
+}) {
   return (
     <div
       className="fixed inset-0 flex items-center justify-center z-50"
@@ -133,14 +115,11 @@ function IphoneNotification({ visible, onDismiss }: { visible: boolean; onDismis
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* iPhone shell */}
         <div
           className="relative flex flex-col overflow-hidden shadow-2xl"
           style={{ width: 300, height: 620, borderRadius: 44, background: "#111", border: "8px solid #222" }}
         >
           <div className="flex-1 flex flex-col" style={{ background: "linear-gradient(160deg, #1a3028 0%, #0c1c15 100%)" }}>
-
-            {/* Status bar */}
             <div className="flex justify-between items-center px-6 pt-4 pb-1">
               <span className="font-sans text-white text-xs font-semibold">9:41</span>
               <div className="w-24 h-5 rounded-full" style={{ background: "#000" }} />
@@ -155,8 +134,6 @@ function IphoneNotification({ visible, onDismiss }: { visible: boolean; onDismis
                 </div>
               </div>
             </div>
-
-            {/* Notification banner slides in */}
             <div
               className="mx-3 mt-2 rounded-2xl p-3 shadow-xl"
               style={{
@@ -177,25 +154,18 @@ function IphoneNotification({ visible, onDismiss }: { visible: boolean; onDismis
                     <p className="font-sans text-xs font-bold text-gray-900">CaretakerMatch</p>
                     <p className="font-sans text-[10px] text-gray-400">now</p>
                   </div>
-                  <p className="font-sans text-xs text-gray-700 mt-0.5 leading-snug">
-                    Great news, Jennifer! You&apos;ve been approved. We&apos;re now finding your perfect volunteer match.
-                  </p>
+                  <p className="font-sans text-xs text-gray-700 mt-0.5 leading-snug">{message}</p>
                 </div>
               </div>
             </div>
-
-            {/* Lock screen body */}
-            <div className="flex-1 flex flex-col items-center justify-center gap-1">
-              <p className="font-sans text-white/10 text-[10px] tracking-widest uppercase">Jennifer&apos;s iPhone</p>
+            <div className="flex-1 flex flex-col items-center justify-center">
+              <p className="font-sans text-white/10 text-[10px] tracking-widest uppercase">{recipientName}&apos;s iPhone</p>
             </div>
-
-            {/* Home indicator */}
             <div className="flex justify-center pb-3">
               <div className="w-28 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.25)" }} />
             </div>
           </div>
         </div>
-
         <p className="font-sans text-center text-white/50 text-xs mt-4">Tap anywhere to dismiss</p>
       </div>
     </div>
@@ -203,61 +173,89 @@ function IphoneNotification({ visible, onDismiss }: { visible: boolean; onDismis
 }
 
 export default function ApprovalDashboard() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [demoPhase, setDemoPhase] = useState<DemoPhase>("idle");
-  const [checks, setChecks] = useState<Check[]>(CHECK_DEFS.map((c) => ({ ...c, state: "waiting" })));
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationVisible, setNotificationVisible] = useState(false);
+  const [tab, setTab] = useState<QueueTab>("patients");
+  const [selectedPatientId, setSelectedPatientId] = useState<number | null>(null);
+  const [selectedVolId, setSelectedVolId] = useState<number | null>(null);
 
-  const runBackgroundCheck = useCallback(() => {
-    setDemoPhase("checking");
-    setChecks(CHECK_DEFS.map((c, i) => ({ ...c, state: i === 0 ? "running" : "waiting" })));
+  const [patientPhase, setPatientPhase] = useState<DemoPhase>("idle");
+  const [volPhase, setVolPhase] = useState<DemoPhase>("idle");
+  const [patientChecks, setPatientChecks] = useState<Check[]>(
+    PATIENT_CHECK_DEFS.map((c) => ({ ...c, state: "waiting" as CheckState }))
+  );
+  const [volChecks, setVolChecks] = useState<Check[]>(
+    VOL_CHECK_DEFS.map((c) => ({ ...c, state: "waiting" as CheckState }))
+  );
 
-    setTimeout(() => {
-      setChecks(CHECK_DEFS.map((c, i) => ({ ...c, state: i === 0 ? "done" : i === 1 ? "running" : "waiting" })));
-    }, 1500);
+  const [showPatientNotif, setShowPatientNotif] = useState(false);
+  const [patientNotifVisible, setPatientNotifVisible] = useState(false);
+  const [showVolNotif, setShowVolNotif] = useState(false);
+  const [volNotifVisible, setVolNotifVisible] = useState(false);
 
-    setTimeout(() => {
-      setChecks(CHECK_DEFS.map((c, i) => ({ ...c, state: i < 2 ? "done" : "running" })));
-    }, 3000);
-
-    setTimeout(() => {
-      setChecks(CHECK_DEFS.map((c) => ({ ...c, state: "done" })));
-    }, 4500);
-
-    setTimeout(() => setDemoPhase("passed"), 5000);
+  const runPatientChecks = useCallback(() => {
+    setPatientPhase("checking");
+    setPatientChecks(PATIENT_CHECK_DEFS.map((c, i) => ({ ...c, state: (i === 0 ? "running" : "waiting") as CheckState })));
+    setTimeout(() => setPatientChecks(PATIENT_CHECK_DEFS.map((c, i) => ({ ...c, state: (i === 0 ? "done" : i === 1 ? "running" : "waiting") as CheckState }))), 1500);
+    setTimeout(() => setPatientChecks(PATIENT_CHECK_DEFS.map((c, i) => ({ ...c, state: (i < 2 ? "done" : "running") as CheckState }))), 3000);
+    setTimeout(() => setPatientChecks(PATIENT_CHECK_DEFS.map((c) => ({ ...c, state: "done" as CheckState }))), 4500);
+    setTimeout(() => setPatientPhase("passed"), 5000);
   }, []);
 
-  const handleSelect = (id: number) => {
-    setSelectedId(id);
-    if (id === DEMO_ID && demoPhase === "idle") runBackgroundCheck();
+  const runVolChecks = useCallback(() => {
+    setVolPhase("checking");
+    setVolChecks(VOL_CHECK_DEFS.map((c, i) => ({ ...c, state: (i === 0 ? "running" : "waiting") as CheckState })));
+    setTimeout(() => setVolChecks(VOL_CHECK_DEFS.map((c, i) => ({ ...c, state: (i === 0 ? "done" : i === 1 ? "running" : "waiting") as CheckState }))), 1200);
+    setTimeout(() => setVolChecks(VOL_CHECK_DEFS.map((c, i) => ({ ...c, state: (i < 2 ? "done" : i === 2 ? "running" : "waiting") as CheckState }))), 2400);
+    setTimeout(() => setVolChecks(VOL_CHECK_DEFS.map((c, i) => ({ ...c, state: (i < 3 ? "done" : "running") as CheckState }))), 3600);
+    setTimeout(() => setVolChecks(VOL_CHECK_DEFS.map((c) => ({ ...c, state: "done" as CheckState }))), 4800);
+    setTimeout(() => setVolPhase("passed"), 5300);
+  }, []);
+
+  const handleSelectPatient = (id: number) => {
+    setSelectedPatientId(id);
+    if (id === DEMO_PATIENT_ID && patientPhase === "idle") runPatientChecks();
   };
 
-  const handleSendApproval = () => {
-    setDemoPhase("sent");
-    setShowNotification(true);
-    setTimeout(() => setNotificationVisible(true), 80);
+  const handleSelectVol = (id: number) => {
+    setSelectedVolId(id);
+    if (id === DEMO_VOL_ID && volPhase === "idle") runVolChecks();
   };
 
-  const handleDismiss = () => {
-    setNotificationVisible(false);
-    setTimeout(() => setShowNotification(false), 350);
+  const handleSendPatientApproval = () => {
+    setPatientPhase("sent");
+    setShowPatientNotif(true);
+    setTimeout(() => setPatientNotifVisible(true), 80);
   };
 
-  const effectiveStatus = (p: Patient): PatientStatus => {
-    if (p.id === DEMO_ID && (demoPhase === "passed" || demoPhase === "sent")) return "approved";
+  const handleSendVolApproval = () => {
+    setVolPhase("sent");
+    setShowVolNotif(true);
+    setTimeout(() => setVolNotifVisible(true), 80);
+  };
+
+  const effectivePatientStatus = (p: Patient): RecordStatus => {
+    if (p.id === DEMO_PATIENT_ID && (patientPhase === "passed" || patientPhase === "sent")) return "approved";
     return p.status;
   };
 
-  const pendingCount = PATIENTS.filter((p) =>
-    p.id === DEMO_ID ? demoPhase === "idle" || demoPhase === "checking" : p.status === "pending"
-  ).length;
-  const approvedCount = PATIENTS.filter((p) =>
-    p.id === DEMO_ID ? demoPhase === "passed" || demoPhase === "sent" : p.status === "approved"
-  ).length;
-  const failedCount = PATIENTS.filter((p) => p.status === "failed").length;
+  const effectiveVolStatus = (v: VolunteerRecord): RecordStatus => {
+    if (v.id === DEMO_VOL_ID && (volPhase === "passed" || volPhase === "sent")) return "approved";
+    return v.status;
+  };
 
-  const selected = PATIENTS.find((p) => p.id === selectedId) ?? null;
+  const pendingCount = tab === "patients"
+    ? PATIENTS.filter((p) => p.id === DEMO_PATIENT_ID ? patientPhase === "idle" || patientPhase === "checking" : p.status === "pending").length
+    : VOLUNTEERS.filter((v) => v.id === DEMO_VOL_ID ? volPhase === "idle" || volPhase === "checking" : v.status === "pending").length;
+
+  const approvedCount = tab === "patients"
+    ? PATIENTS.filter((p) => p.id === DEMO_PATIENT_ID ? patientPhase === "passed" || patientPhase === "sent" : p.status === "approved").length
+    : VOLUNTEERS.filter((v) => v.id === DEMO_VOL_ID ? volPhase === "passed" || volPhase === "sent" : v.status === "approved").length;
+
+  const failedCount = tab === "patients"
+    ? PATIENTS.filter((p) => p.status === "failed").length
+    : VOLUNTEERS.filter((v) => v.status === "failed").length;
+
+  const selectedPatient = PATIENTS.find((p) => p.id === selectedPatientId) ?? null;
+  const selectedVol = VOLUNTEERS.find((v) => v.id === selectedVolId) ?? null;
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#f0ece0", fontFamily: "system-ui, sans-serif" }}>
@@ -297,67 +295,113 @@ export default function ApprovalDashboard() {
 
         {/* Queue sidebar */}
         <div className="w-64 flex-shrink-0">
+          {/* Tab toggle */}
+          <div className="flex rounded-lg overflow-hidden border mb-3" style={{ borderColor: "#c8c0b0" }}>
+            {(["patients", "volunteers"] as QueueTab[]).map((t) => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className="flex-1 py-2 text-xs font-semibold transition-colors"
+                style={{
+                  background: tab === t ? CTM_GREEN : "white",
+                  color: tab === t ? "white" : CTM_GREEN,
+                }}
+              >
+                {t === "patients" ? "Patients" : "Volunteers"}
+              </button>
+            ))}
+          </div>
+
           <p className="font-sans text-[10px] font-semibold tracking-widest uppercase mb-3" style={{ color: CTM_GREEN }}>
             Approval Queue
           </p>
+
           <div className="flex flex-col gap-2">
-            {PATIENTS.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => handleSelect(p.id)}
-                className="w-full text-left p-4 rounded-xl bg-white shadow-sm border-2 transition-all hover:shadow-md"
-                style={{ borderColor: selectedId === p.id ? CTM_GREEN : "transparent" }}
-              >
-                <div className="flex items-start justify-between gap-2 mb-1">
-                  <span className="font-sans font-semibold text-sm" style={{ color: "#1a1a1a" }}>{p.name}</span>
-                  <StatusBadge status={effectiveStatus(p)} />
-                </div>
-                <p className="font-sans text-xs text-gray-500">{p.procedure}</p>
-                <p className="font-sans text-xs text-gray-400 mt-0.5">Surgery: {p.surgeryDate}</p>
-                {p.isDemo && (
-                  <p className="font-sans text-[10px] font-semibold mt-1.5" style={{ color: CTM_GOLD }}>
-                    Just enrolled ↑
-                  </p>
-                )}
-              </button>
-            ))}
+            {tab === "patients"
+              ? PATIENTS.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => handleSelectPatient(p.id)}
+                    className="w-full text-left p-4 rounded-xl bg-white shadow-sm border-2 transition-all hover:shadow-md"
+                    style={{ borderColor: selectedPatientId === p.id ? CTM_GREEN : "transparent" }}
+                  >
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <span className="font-sans font-semibold text-sm" style={{ color: "#1a1a1a" }}>{p.name}</span>
+                      <StatusBadge status={effectivePatientStatus(p)} />
+                    </div>
+                    <p className="font-sans text-xs text-gray-500">{p.procedure}</p>
+                    <p className="font-sans text-xs text-gray-400 mt-0.5">Surgery: {p.surgeryDate}</p>
+                    {p.isDemo && (
+                      <p className="font-sans text-[10px] font-semibold mt-1.5" style={{ color: CTM_GOLD }}>
+                        Just enrolled ↑
+                      </p>
+                    )}
+                  </button>
+                ))
+              : VOLUNTEERS.map((v) => (
+                  <button
+                    key={v.id}
+                    onClick={() => handleSelectVol(v.id)}
+                    className="w-full text-left p-4 rounded-xl bg-white shadow-sm border-2 transition-all hover:shadow-md"
+                    style={{ borderColor: selectedVolId === v.id ? CTM_GREEN : "transparent" }}
+                  >
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <span className="font-sans font-semibold text-sm" style={{ color: "#1a1a1a" }}>{v.name}</span>
+                      <StatusBadge status={effectiveVolStatus(v)} />
+                    </div>
+                    <p className="font-sans text-xs text-gray-500">{v.surgeryHistory}</p>
+                    <p className="font-sans text-xs text-gray-400 mt-0.5">Submitted: {v.submitted}</p>
+                    {v.isDemo && (
+                      <p className="font-sans text-[10px] font-semibold mt-1.5" style={{ color: CTM_GOLD }}>
+                        Just registered ↑
+                      </p>
+                    )}
+                  </button>
+                ))
+            }
           </div>
         </div>
 
         {/* Detail panel */}
         <div className="flex-1 bg-white rounded-2xl shadow-sm">
-          {!selected ? (
+          {tab === "patients" && !selectedPatient && (
             <div className="h-full flex items-center justify-center">
               <p className="font-sans text-sm text-gray-300">Select a patient from the queue to review</p>
             </div>
-          ) : (
+          )}
+          {tab === "volunteers" && !selectedVol && (
+            <div className="h-full flex items-center justify-center">
+              <p className="font-sans text-sm text-gray-300">Select a volunteer from the queue to review</p>
+            </div>
+          )}
+
+          {/* Patient detail */}
+          {tab === "patients" && selectedPatient && (
             <div className="p-8">
-              {/* Patient header */}
               <div className="flex items-start justify-between mb-7">
                 <div>
                   <h2 className="text-2xl font-bold" style={{ color: "#1a1a1a", fontFamily: "Georgia, serif" }}>
-                    {selected.name}
+                    {selectedPatient.name}
                   </h2>
                   <p className="font-sans text-sm text-gray-500 mt-0.5">
-                    {selected.procedure} · Surgery {selected.surgeryDate}
+                    {selectedPatient.procedure} · Surgery {selectedPatient.surgeryDate}
                   </p>
-                  <p className="font-sans text-xs text-gray-400 mt-0.5">Submitted: {selected.submitted}</p>
+                  <p className="font-sans text-xs text-gray-400 mt-0.5">Submitted: {selectedPatient.submitted}</p>
                 </div>
-                <StatusBadge status={effectiveStatus(selected)} />
+                <StatusBadge status={effectivePatientStatus(selectedPatient)} />
               </div>
 
-              {/* Background check */}
               <div className="rounded-xl p-5 mb-4" style={{ background: "#f8f7f3" }}>
                 <p className="font-sans text-[10px] font-semibold tracking-widest uppercase mb-3" style={{ color: CTM_GREEN }}>
                   Background Check
                 </p>
-                {selected.id === DEMO_ID
-                  ? checks.map((c) => <CheckRow key={c.label} check={c} />)
-                  : CHECK_DEFS.map((c) => (
+                {selectedPatient.id === DEMO_PATIENT_ID
+                  ? patientChecks.map((c) => <CheckRow key={c.label} check={c} />)
+                  : PATIENT_CHECK_DEFS.map((c) => (
                       <div key={c.label} className="flex items-center justify-between py-2.5 border-b last:border-0" style={{ borderColor: "#ece8de" }}>
                         <span className="font-sans text-sm text-gray-700">{c.label}</span>
                         <span className="font-sans text-xs font-semibold">
-                          {selected.failedCheck === c.label
+                          {selectedPatient.failedCheck === c.label
                             ? <span className="text-red-600">⚠ Flag found</span>
                             : <span className="text-emerald-600">✓ {c.result}</span>}
                         </span>
@@ -365,44 +409,111 @@ export default function ApprovalDashboard() {
                     ))}
               </div>
 
-              {/* CTM Score — always show for non-demo, reveal after pass for demo */}
-              {(selected.id !== DEMO_ID || demoPhase === "passed" || demoPhase === "sent") && (
+              {(selectedPatient.id !== DEMO_PATIENT_ID || patientPhase === "passed" || patientPhase === "sent") && (
                 <div className="rounded-xl p-5 mb-5" style={{ background: "#f8f7f3" }}>
                   <p className="font-sans text-[10px] font-semibold tracking-widest uppercase mb-1" style={{ color: CTM_GREEN }}>
                     CTM Score{" "}
                     <span className="normal-case text-gray-400 font-normal tracking-normal">(internal — not shown to patient)</span>
                   </p>
-                  <ScoreBar score={selected.ctmScore} />
+                  <ScoreBar score={selectedPatient.ctmScore} />
                   <p className="font-sans text-xs text-gray-400 mt-2">
-                    {selected.status === "failed"
+                    {selectedPatient.status === "failed"
                       ? "Did not pass background check — score not used for matching."
-                      : selected.ctmScore >= 6
+                      : selectedPatient.ctmScore >= 6
                       ? "Strong candidate for home recovery"
                       : "Borderline — review mobility detail before approving"}
                   </p>
                 </div>
               )}
 
-              {/* Actions */}
-              {selected.id === DEMO_ID && demoPhase === "passed" && (
+              {selectedPatient.id === DEMO_PATIENT_ID && patientPhase === "passed" && (
                 <button
-                  onClick={handleSendApproval}
+                  onClick={handleSendPatientApproval}
                   className="w-full py-3.5 rounded-xl font-sans font-semibold text-white text-sm transition-opacity hover:opacity-90"
                   style={{ background: CTM_GREEN }}
                 >
                   Send Approval to Patient →
                 </button>
               )}
-
-              {selected.id === DEMO_ID && demoPhase === "sent" && (
+              {selectedPatient.id === DEMO_PATIENT_ID && patientPhase === "sent" && (
                 <div className="w-full py-3.5 rounded-xl text-center font-sans text-sm font-semibold text-emerald-700" style={{ background: "#d1fae5" }}>
                   ✓ Approval notification sent to Jennifer
                 </div>
               )}
-
-              {selected.id !== DEMO_ID && selected.status === "failed" && (
+              {selectedPatient.id !== DEMO_PATIENT_ID && selectedPatient.status === "failed" && (
                 <div className="w-full py-3.5 rounded-xl text-center font-sans text-sm font-semibold text-red-700" style={{ background: "#fee2e2" }}>
                   Rejection notice sent to patient
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Volunteer detail */}
+          {tab === "volunteers" && selectedVol && (
+            <div className="p-8">
+              <div className="flex items-start justify-between mb-7">
+                <div>
+                  <h2 className="text-2xl font-bold" style={{ color: "#1a1a1a", fontFamily: "Georgia, serif" }}>
+                    {selectedVol.name}
+                  </h2>
+                  <p className="font-sans text-sm text-gray-500 mt-0.5">Volunteer · {selectedVol.surgeryHistory}</p>
+                  <p className="font-sans text-xs text-gray-400 mt-0.5">Submitted: {selectedVol.submitted}</p>
+                </div>
+                <StatusBadge status={effectiveVolStatus(selectedVol)} />
+              </div>
+
+              <div className="rounded-xl p-5 mb-4" style={{ background: "#f8f7f3" }}>
+                <p className="font-sans text-[10px] font-semibold tracking-widest uppercase mb-3" style={{ color: CTM_GREEN }}>
+                  Background Check &amp; Vetting
+                </p>
+                {selectedVol.id === DEMO_VOL_ID
+                  ? volChecks.map((c) => <CheckRow key={c.label} check={c} />)
+                  : VOL_CHECK_DEFS.map((c) => (
+                      <div key={c.label} className="flex items-center justify-between py-2.5 border-b last:border-0" style={{ borderColor: "#ece8de" }}>
+                        <span className="font-sans text-sm text-gray-700">{c.label}</span>
+                        <span className="font-sans text-xs font-semibold">
+                          {selectedVol.failedCheck === c.label
+                            ? <span className="text-red-600">⚠ Flag found</span>
+                            : <span className="text-emerald-600">✓ {c.result}</span>}
+                        </span>
+                      </div>
+                    ))}
+              </div>
+
+              {(selectedVol.id !== DEMO_VOL_ID || volPhase === "passed" || volPhase === "sent") && (
+                <div className="rounded-xl p-5 mb-5" style={{ background: "#f8f7f3" }}>
+                  <p className="font-sans text-[10px] font-semibold tracking-widest uppercase mb-1" style={{ color: CTM_GREEN }}>
+                    Volunteer Readiness Score{" "}
+                    <span className="normal-case text-gray-400 font-normal tracking-normal">(internal)</span>
+                  </p>
+                  <ScoreBar score={selectedVol.readinessScore} />
+                  <p className="font-sans text-xs text-gray-400 mt-2">
+                    {selectedVol.status === "failed"
+                      ? "Did not pass background check — not eligible for matching."
+                      : selectedVol.readinessScore >= 7
+                      ? "Strong volunteer — mobile, experienced, full commitment available"
+                      : "Review availability and physical readiness before approving"}
+                  </p>
+                </div>
+              )}
+
+              {selectedVol.id === DEMO_VOL_ID && volPhase === "passed" && (
+                <button
+                  onClick={handleSendVolApproval}
+                  className="w-full py-3.5 rounded-xl font-sans font-semibold text-white text-sm transition-opacity hover:opacity-90"
+                  style={{ background: CTM_GREEN }}
+                >
+                  Send Approval to Volunteer →
+                </button>
+              )}
+              {selectedVol.id === DEMO_VOL_ID && volPhase === "sent" && (
+                <div className="w-full py-3.5 rounded-xl text-center font-sans text-sm font-semibold text-emerald-700" style={{ background: "#d1fae5" }}>
+                  ✓ Approval notification sent to Robert
+                </div>
+              )}
+              {selectedVol.id !== DEMO_VOL_ID && selectedVol.status === "failed" && (
+                <div className="w-full py-3.5 rounded-xl text-center font-sans text-sm font-semibold text-red-700" style={{ background: "#fee2e2" }}>
+                  Rejection notice sent to volunteer
                 </div>
               )}
             </div>
@@ -410,8 +521,21 @@ export default function ApprovalDashboard() {
         </div>
       </div>
 
-      {showNotification && (
-        <IphoneNotification visible={notificationVisible} onDismiss={handleDismiss} />
+      {showPatientNotif && (
+        <IphoneNotification
+          visible={patientNotifVisible}
+          onDismiss={() => { setPatientNotifVisible(false); setTimeout(() => setShowPatientNotif(false), 350); }}
+          recipientName="Jennifer"
+          message="Great news, Jennifer! You've been approved. We're now finding your perfect volunteer match."
+        />
+      )}
+      {showVolNotif && (
+        <IphoneNotification
+          visible={volNotifVisible}
+          onDismiss={() => { setVolNotifVisible(false); setTimeout(() => setShowVolNotif(false), 350); }}
+          recipientName="Robert"
+          message="Welcome aboard, Robert! Your background check cleared. You're approved as a CareTaker Match volunteer."
+        />
       )}
     </div>
   );
