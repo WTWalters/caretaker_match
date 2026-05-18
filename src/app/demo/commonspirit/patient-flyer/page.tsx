@@ -5,7 +5,7 @@ import { QRCodeSVG } from "qrcode.react";
 
 const CTM_GREEN = "#1e3a2f";
 const CTM_GOLD = "#c4922a";
-const PATIENT_URL = "https://caretakermatch.com/demo/commonspirit/onboarding/patient";
+const PATIENT_URL = "https://caretakermatch.com/demo/onboarding/patient";
 
 export default function PatientFlyer() {
   return (
