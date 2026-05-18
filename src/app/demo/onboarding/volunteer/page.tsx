@@ -195,11 +195,7 @@ export default function VolunteerOnboarding() {
         <div className="flex flex-col h-full px-6 pt-8 pb-4">
           <div className="flex-1">
             <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: TEAL }}>
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
+              <img src="/ctm-logo.png" alt="CaretakerMatch" className="w-20 h-20 object-contain" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 text-center mb-3" style={{ fontFamily: "Georgia, serif" }}>Become a Companion</h1>
             <p className="text-gray-600 text-center text-sm leading-relaxed mb-4">
@@ -223,11 +219,7 @@ export default function VolunteerOnboarding() {
           {/* Safety-first app header */}
           <div className="px-5 pt-3 pb-2.5 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "#e8f5f0" }}>
-                <svg className="w-4 h-4" style={{ color: TEAL }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
+              <img src="/ctm-logo.png" alt="CaretakerMatch" className="w-7 h-7 object-contain" />
               <div>
                 <p className="text-[13px] font-bold leading-tight" style={{ color: "#1a2e28" }}>Caretaker Match</p>
                 <p className="text-[9px] text-gray-400 leading-tight">Safe care. Trusted connections.</p>
