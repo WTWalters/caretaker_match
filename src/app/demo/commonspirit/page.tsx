@@ -11,12 +11,12 @@ interface Step {
   href: string;
   isLive: boolean;
   isWebPortal?: boolean;
-  icon: React.ReactNode;
+  iconD: string;
 }
 
-function StepSvg({ d }: { d: string }) {
+function StepSvg({ d, size = "w-6 h-6" }: { d: string; size?: string }) {
   return (
-    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className={`${size} text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={d} />
     </svg>
   );
@@ -33,12 +33,12 @@ function SafetySvg({ d }: { d: string }) {
 function IphoneMockup({ step }: { step: Step }) {
   const frame = (
     <div className="relative w-[82px] h-[168px] rounded-[20px] p-[3px] shadow-2xl" style={{ background: "#111", border: "1px solid #2a2a2a" }}>
-      <div className="w-full h-full rounded-[17px] flex flex-col items-center pt-5 pb-3 relative overflow-hidden" style={{ background: CTM_GREEN }}>
+      <div className="w-full h-full rounded-[17px] flex flex-col items-center pt-5 pb-3 relative overflow-hidden" style={{ background: "#3d7060" }}>
         {/* Dynamic island */}
         <div className="absolute top-[7px] left-1/2 -translate-x-1/2 w-7 h-[5px] rounded-full" style={{ background: "#111" }} />
         <div className="text-[9px] font-mono mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{step.number}</div>
         <div className="w-10 h-10 rounded-full border flex items-center justify-center mt-2" style={{ borderColor: "rgba(255,255,255,0.45)" }}>
-          {step.icon}
+          <StepSvg d={step.iconD} />
         </div>
         <div className="text-[8.5px] font-medium text-center mt-2 px-2 leading-tight text-white">{step.label}</div>
         <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-2.5">
@@ -73,7 +73,7 @@ function IphoneMockup({ step }: { step: Step }) {
 
 function WebPortalMockup({ step }: { step: Step }) {
   const frame = (
-    <div className="relative w-[110px] h-[80px] rounded-[8px] shadow-2xl overflow-hidden" style={{ background: "#1a1a1a", border: "1px solid #333" }}>
+    <div className="relative w-[144px] h-[168px] rounded-[8px] shadow-2xl overflow-hidden" style={{ background: "#1a1a1a", border: "1px solid #333" }}>
       {/* Browser chrome bar */}
       <div className="flex items-center gap-1 px-2 py-1.5" style={{ background: "#2a2a2a" }}>
         <div className="w-2 h-2 rounded-full" style={{ background: "#ff5f57" }} />
@@ -84,12 +84,12 @@ function WebPortalMockup({ step }: { step: Step }) {
         </div>
       </div>
       {/* Portal content area */}
-      <div className="flex flex-col items-center justify-center h-[calc(100%-22px)] gap-1" style={{ background: CTM_GREEN }}>
-        <div className="text-[7px] font-mono" style={{ color: "rgba(255,255,255,0.5)" }}>{step.number}</div>
-        <div className="w-8 h-8 rounded-full border flex items-center justify-center" style={{ borderColor: "rgba(255,255,255,0.45)" }}>
-          {step.icon}
+      <div className="flex flex-col items-center justify-center h-[calc(100%-22px)] gap-2" style={{ background: "#3d7060" }}>
+        <div className="text-[9px] font-mono" style={{ color: "rgba(255,255,255,0.5)" }}>{step.number}</div>
+        <div className="w-12 h-12 rounded-full border-2 flex items-center justify-center" style={{ borderColor: "rgba(255,255,255,0.6)" }}>
+          <StepSvg d={step.iconD} size="w-8 h-8" />
         </div>
-        <div className="text-[7px] font-medium text-center px-1 leading-tight text-white">{step.label}</div>
+        <div className="text-[8.5px] font-medium text-center px-2 leading-tight text-white">{step.label}</div>
       </div>
     </div>
   );
@@ -118,14 +118,14 @@ const steps: Step[] = [
     label: "Patient Enrollment",
     href: "/demo/onboarding/patient",
     isLive: true,
-    icon: <StepSvg d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />,
+    iconD: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
   },
   {
     number: "02",
     label: "Volunteer Enrollment",
     href: "/demo/onboarding/volunteer",
     isLive: true,
-    icon: <StepSvg d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />,
+    iconD: "M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z",
   },
   {
     number: "03",
@@ -133,14 +133,15 @@ const steps: Step[] = [
     href: "/demo/onboarding/approval",
     isLive: true,
     isWebPortal: true,
-    icon: <StepSvg d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />,
+    iconD: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   },
   {
     number: "04",
     label: "Volunteer Selection",
     href: "/demo/onboarding/matching",
     isLive: true,
-    icon: <StepSvg d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />,
+    isWebPortal: true,
+    iconD: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
   },
   {
     number: "05",
@@ -148,7 +149,7 @@ const steps: Step[] = [
     href: "/demo/overseer",
     isLive: true,
     isWebPortal: true,
-    icon: <StepSvg d="M3 12h4l2.5-7 4 14 2.5-7H20" />,
+    iconD: "M3 12h4l2.5-7 4 14 2.5-7H20",
   },
 ];
 
@@ -274,7 +275,7 @@ export default function CommonSpiritDemo() {
 
               {/* → Volunteer Selection */}
               <span className="text-gray-400 text-lg flex-shrink-0">→</span>
-              <IphoneMockup step={steps[3]} />
+              <WebPortalMockup step={steps[3]} />
 
               {/* → Recovery & Monitoring — web portal */}
               <span className="text-gray-400 text-lg flex-shrink-0">→</span>
