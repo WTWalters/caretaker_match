@@ -180,12 +180,30 @@ export default function CommonSpiritDemo() {
   return (
     <div className="min-h-screen flex flex-col justify-between p-6 select-none" style={{ background: "#f5f0e3", fontFamily: "Georgia, serif" }}>
 
+      {/* CommonSpirit logo — large and prominent */}
+      <div className="mb-5 pb-4 border-b" style={{ borderColor: "#ddd8cc" }}>
+        <img
+          src="/commonspirit-logo.png"
+          alt="CommonSpirit Health"
+          className="h-28 object-contain object-left"
+          style={{ mixBlendMode: "multiply" }}
+        />
+      </div>
+
       {/* Header */}
       <div className="mb-4">
-        <p className="text-xs font-sans font-semibold tracking-widest uppercase mb-1" style={{ color: CTM_GREEN }}>
+        <p className="text-xs font-sans font-semibold tracking-widest uppercase mb-2" style={{ color: CTM_GREEN }}>
           Use Case Demo
         </p>
-        <h1 className="text-4xl font-bold italic mb-1" style={{ color: "#1a1a1a" }}>CaretakerMatch</h1>
+        <div className="flex items-center gap-3 mb-1">
+          <img
+            src="/ctm-logo.png"
+            alt="CaretakerMatch"
+            className="h-10 w-10 object-contain flex-shrink-0"
+            style={{ mixBlendMode: "multiply" }}
+          />
+          <h1 className="text-4xl font-bold italic" style={{ color: "#1a1a1a" }}>CaretakerMatch</h1>
+        </div>
         <p className="text-lg italic" style={{ color: "#3a3a3a" }}>
           Fewer SNF days. Better outcomes. Lower cost of care. Deeper community engagement.
         </p>
@@ -284,7 +302,7 @@ export default function CommonSpiritDemo() {
             </div>
 
             {/* Volunteer network banner */}
-            <div className="px-6 py-4 text-center" style={{ background: CTM_GOLD }}>
+            <div className="px-6 py-4 flex flex-col items-center justify-center min-h-[64px]" style={{ background: CTM_GOLD }}>
               <p className="font-sans font-bold text-white text-base">CaretakerMatch Volunteer Network</p>
               <p className="font-sans italic text-white/90 text-sm mt-0.5">
                 Strategic Partnership with local and National Volunteer Organizations
