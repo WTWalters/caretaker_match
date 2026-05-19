@@ -310,6 +310,47 @@ export default function CommonSpiritDemo() {
             </div>
 
           </div>
+
+          {/* Volunteer Pipeline portal — below main workflow card */}
+          <div className="mt-4 flex justify-center">
+            <div className="flex flex-col items-center gap-1.5">
+              <p className="font-sans text-xs font-medium mb-1" style={{ color: CTM_GOLD }}>Volunteer Network Dashboard</p>
+              <Link href="/demo/commonspirit/volunteer-pipeline" className="hover:scale-105 transition-transform block">
+                <div className="relative w-[216px] h-[120px] rounded-[8px] shadow-xl overflow-hidden" style={{ background: "#1a1a1a", border: "1px solid #333" }}>
+                  {/* Browser chrome */}
+                  <div className="flex items-center gap-1 px-2 py-1.5" style={{ background: "#2a2a2a" }}>
+                    <div className="w-2 h-2 rounded-full" style={{ background: "#ff5f57" }} />
+                    <div className="w-2 h-2 rounded-full" style={{ background: "#febc2e" }} />
+                    <div className="w-2 h-2 rounded-full" style={{ background: "#28c840" }} />
+                    <div className="flex-1 h-3 rounded-sm mx-1 flex items-center justify-center" style={{ background: "#3a3a3a" }}>
+                      <span className="font-mono text-[5px]" style={{ color: "rgba(255,255,255,0.4)" }}>caretakermatch.com</span>
+                    </div>
+                  </div>
+                  {/* Content area */}
+                  <div className="flex items-center justify-around px-4 h-[calc(100%-22px)]" style={{ background: "#3d7060" }}>
+                    {/* Mini funnel visualization */}
+                    <div className="flex flex-col gap-1">
+                      {[{ w: 40, label: "2,847" }, { w: 32, label: "2,412" }, { w: 26, label: "2,241" }, { w: 18, label: "412" }].map((row, i) => (
+                        <div key={i} className="flex items-center gap-1.5">
+                          <div className="h-2 rounded-sm" style={{ width: row.w, background: i === 3 ? "#c4922a" : "rgba(255,255,255,0.35)" }} />
+                          <span className="font-mono text-[7px]" style={{ color: i === 3 ? "#c4922a" : "rgba(255,255,255,0.6)" }}>{row.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {/* Right side stats */}
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="text-[20px] font-semibold text-white leading-none">412</div>
+                      <div className="text-[7px] text-white/60 text-center">volunteers<br/>available</div>
+                      <div className="mt-1 px-2 py-0.5 rounded-full text-[7px] font-medium" style={{ background: "#c4922a", color: "white" }}>94% match</div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+              <Link href="/demo/commonspirit/volunteer-pipeline" className="text-[10px] flex items-center gap-0.5 hover:underline" style={{ color: CTM_GOLD }}>
+                Open dashboard <span>↗</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
