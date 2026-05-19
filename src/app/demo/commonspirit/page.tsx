@@ -129,7 +129,7 @@ const steps: Step[] = [
   },
   {
     number: "03",
-    label: "Approval",
+    label: "Trust & Safety Screening",
     href: "/demo/onboarding/approval",
     isLive: true,
     isWebPortal: true,
