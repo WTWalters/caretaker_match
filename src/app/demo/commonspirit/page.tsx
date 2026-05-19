@@ -10,6 +10,7 @@ interface Step {
   label: string;
   href: string;
   isLive: boolean;
+  isWebPortal?: boolean;
   icon: React.ReactNode;
 }
 
@@ -35,19 +36,11 @@ function IphoneMockup({ step }: { step: Step }) {
       <div className="w-full h-full rounded-[17px] flex flex-col items-center pt-5 pb-3 relative overflow-hidden" style={{ background: CTM_GREEN }}>
         {/* Dynamic island */}
         <div className="absolute top-[7px] left-1/2 -translate-x-1/2 w-7 h-[5px] rounded-full" style={{ background: "#111" }} />
-
-        {/* Step number */}
         <div className="text-[9px] font-mono mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{step.number}</div>
-
-        {/* Icon ring */}
         <div className="w-10 h-10 rounded-full border flex items-center justify-center mt-2" style={{ borderColor: "rgba(255,255,255,0.45)" }}>
           {step.icon}
         </div>
-
-        {/* Label */}
         <div className="text-[8.5px] font-medium text-center mt-2 px-2 leading-tight text-white">{step.label}</div>
-
-        {/* Bottom nav dots */}
         <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-2.5">
           {[0, 1, 2].map((i) => (
             <div key={i} className="w-[14px] h-[14px] rounded-full flex items-center justify-center" style={{ border: "1px solid rgba(255,255,255,0.2)" }}>
@@ -55,8 +48,6 @@ function IphoneMockup({ step }: { step: Step }) {
             </div>
           ))}
         </div>
-
-        {/* Home indicator */}
         <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-8 h-[3px] rounded-full" style={{ background: "rgba(255,255,255,0.3)" }} />
       </div>
     </div>
@@ -65,9 +56,48 @@ function IphoneMockup({ step }: { step: Step }) {
   return (
     <div className="flex flex-col items-center gap-1.5">
       {step.isLive ? (
-        <Link href={step.href} className="hover:scale-105 transition-transform block">
-          {frame}
-        </Link>
+        <Link href={step.href} className="hover:scale-105 transition-transform block">{frame}</Link>
+      ) : (
+        <div className="opacity-60 cursor-default">{frame}</div>
+      )}
+      <Link
+        href={step.href}
+        className={`text-[10px] flex items-center gap-0.5 transition-colors ${step.isLive ? "hover:underline" : "pointer-events-none text-gray-400"}`}
+        style={step.isLive ? { color: CTM_GREEN } : {}}
+      >
+        Open demo <span>↗</span>
+      </Link>
+    </div>
+  );
+}
+
+function WebPortalMockup({ step }: { step: Step }) {
+  const frame = (
+    <div className="relative w-[110px] h-[80px] rounded-[8px] shadow-2xl overflow-hidden" style={{ background: "#1a1a1a", border: "1px solid #333" }}>
+      {/* Browser chrome bar */}
+      <div className="flex items-center gap-1 px-2 py-1.5" style={{ background: "#2a2a2a" }}>
+        <div className="w-2 h-2 rounded-full" style={{ background: "#ff5f57" }} />
+        <div className="w-2 h-2 rounded-full" style={{ background: "#febc2e" }} />
+        <div className="w-2 h-2 rounded-full" style={{ background: "#28c840" }} />
+        <div className="flex-1 h-3 rounded-sm mx-1 flex items-center justify-center" style={{ background: "#3a3a3a" }}>
+          <span className="font-mono text-[5px]" style={{ color: "rgba(255,255,255,0.4)" }}>caretakermatch.com</span>
+        </div>
+      </div>
+      {/* Portal content area */}
+      <div className="flex flex-col items-center justify-center h-[calc(100%-22px)] gap-1" style={{ background: CTM_GREEN }}>
+        <div className="text-[7px] font-mono" style={{ color: "rgba(255,255,255,0.5)" }}>{step.number}</div>
+        <div className="w-8 h-8 rounded-full border flex items-center justify-center" style={{ borderColor: "rgba(255,255,255,0.45)" }}>
+          {step.icon}
+        </div>
+        <div className="text-[7px] font-medium text-center px-1 leading-tight text-white">{step.label}</div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col items-center gap-1.5">
+      {step.isLive ? (
+        <Link href={step.href} className="hover:scale-105 transition-transform block">{frame}</Link>
       ) : (
         <div className="opacity-60 cursor-default">{frame}</div>
       )}
@@ -102,6 +132,7 @@ const steps: Step[] = [
     label: "Approval",
     href: "/demo/onboarding/approval",
     isLive: true,
+    isWebPortal: true,
     icon: <StepSvg d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />,
   },
   {
@@ -116,6 +147,7 @@ const steps: Step[] = [
     label: "Recovery & Monitoring",
     href: "/demo/overseer",
     isLive: true,
+    isWebPortal: true,
     icon: <StepSvg d="M3 12h4l2.5-7 4 14 2.5-7H20" />,
   },
 ];
@@ -237,16 +269,16 @@ export default function CommonSpiritDemo() {
                 </div>
               </div>
 
-              {/* Approval — centered between the two arrows */}
-              <IphoneMockup step={steps[2]} />
+              {/* Approval — web portal */}
+              <WebPortalMockup step={steps[2]} />
 
               {/* → Volunteer Selection */}
               <span className="text-gray-400 text-lg flex-shrink-0">→</span>
               <IphoneMockup step={steps[3]} />
 
-              {/* → Recovery & Monitoring */}
+              {/* → Recovery & Monitoring — web portal */}
               <span className="text-gray-400 text-lg flex-shrink-0">→</span>
-              <IphoneMockup step={steps[4]} />
+              <WebPortalMockup step={steps[4]} />
 
             </div>
 
