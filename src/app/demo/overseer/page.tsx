@@ -281,9 +281,7 @@ export default function OverseerDemo() {
     <aside className="w-64 bg-[#1e3a2f] text-white flex flex-col min-h-screen flex-shrink-0">
       <div className="px-6 py-5 border-b border-[#2d5040]">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-            <span className="text-[#1e3a2f] font-bold text-sm">CM</span>
-          </div>
+          <img src="/ctm-logo.png" alt="CTM" className="w-9 h-9 object-contain flex-shrink-0 rounded-lg" />
           <div>
             <p className="font-semibold text-sm">CareTaker Match</p>
             <p className="text-xs text-green-300">Overseer Portal</p>

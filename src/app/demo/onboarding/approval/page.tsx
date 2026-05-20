@@ -262,9 +262,12 @@ export default function ApprovalDashboard() {
 
       {/* Header */}
       <div className="px-8 py-4 flex items-center justify-between shadow-sm" style={{ background: CTM_GREEN }}>
-        <div>
-          <p className="font-sans text-xs font-semibold tracking-widest uppercase" style={{ color: CTM_GOLD }}>CaretakerMatch</p>
-          <h1 className="font-sans text-lg font-bold text-white">Overseer Dashboard</h1>
+        <div className="flex items-center gap-3">
+          <img src="/ctm-logo.png" alt="CTM" className="w-9 h-9 object-contain flex-shrink-0" />
+          <div>
+            <p className="font-sans text-xs font-semibold tracking-widest uppercase" style={{ color: CTM_GOLD }}>CaretakerMatch</p>
+            <h1 className="font-sans text-lg font-bold text-white">Overseer Dashboard</h1>
+          </div>
         </div>
         <div className="flex items-center gap-8">
           <div className="flex gap-5">
