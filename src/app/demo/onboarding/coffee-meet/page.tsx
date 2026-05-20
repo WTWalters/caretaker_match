@@ -16,6 +16,7 @@ const LOCATIONS = [
   { id: "l1", name: "Starbucks", address: "1234 Main St", distance: "4.2 mi from you" },
   { id: "l2", name: "Panera Bread", address: "567 Oak Ave", distance: "4.8 mi from you" },
   { id: "l3", name: "Corner Bakery", address: "890 Elm Blvd", distance: "5.1 mi from you" },
+  { id: "l4", name: "Virtual Video Call", address: "", distance: "", virtual: true },
 ];
 
 function IPhone({ children }: { children: React.ReactNode }) {
@@ -114,10 +115,12 @@ export default function CoffeeMeetPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-lg">📍</span>
+                <span className="text-lg">{loc.virtual ? "💻" : "📍"}</span>
                 <div>
                   <div className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: CTM_GREEN }}>Location</div>
-                  <div className="text-sm font-medium" style={{ color: "#1a1a1a" }}>{loc.name} — {loc.address}</div>
+                  <div className="text-sm font-medium" style={{ color: "#1a1a1a" }}>
+                    {loc.virtual ? "Virtual Video Call — link sent to both of you" : `${loc.name} — ${loc.address}`}
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,7 +141,7 @@ export default function CoffeeMeetPage() {
             </div>
 
             <button className="w-full py-3.5 rounded-xl text-white font-semibold text-sm" style={{ background: CTM_GREEN }}>
-              Get Directions
+              {loc.virtual ? "💻 Join Video Call" : "Get Directions"}
             </button>
             <button className="w-full py-3.5 rounded-xl font-semibold text-sm" style={{ border: `1.5px solid ${CTM_GREEN}`, color: CTM_GREEN, background: "white" }}>
               Contact Robert
@@ -215,11 +218,25 @@ export default function CoffeeMeetPage() {
                     >
                       <div>
                         <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-sm mr-0.5">{location.virtual ? "💻" : "☕"}</span>
                           <span className="font-semibold text-sm" style={{ color: active ? "white" : "#1a1a1a" }}>{location.name}</span>
-                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: CTM_GOLD, color: "white" }}>MIDPOINT</span>
+                          {!location.virtual && (
+                            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: CTM_GOLD, color: "white" }}>MIDPOINT</span>
+                          )}
+                          {location.virtual && (
+                            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: "#2563eb", color: "white" }}>VIRTUAL</span>
+                          )}
                         </div>
-                        <div className="text-xs" style={{ color: active ? "rgba(255,255,255,0.75)" : "#73726c" }}>{location.address}</div>
-                        <div className="text-xs" style={{ color: active ? "rgba(255,255,255,0.75)" : "#73726c" }}>📍 {location.distance}</div>
+                        {location.virtual ? (
+                          <div className="text-xs" style={{ color: active ? "rgba(255,255,255,0.75)" : "#73726c" }}>
+                            CTM sets up a secure video link for both of you
+                          </div>
+                        ) : (
+                          <>
+                            <div className="text-xs" style={{ color: active ? "rgba(255,255,255,0.75)" : "#73726c" }}>{location.address}</div>
+                            <div className="text-xs" style={{ color: active ? "rgba(255,255,255,0.75)" : "#73726c" }}>📍 {location.distance}</div>
+                          </>
+                        )}
                       </div>
                       {active && <span className="text-white">✓</span>}
                     </button>
