@@ -458,13 +458,13 @@ export default function VolunteerSelectionPage() {
                       Top 3 Matches for Jennifer W.
                     </p>
                     {selectedMatch !== null && phase !== "confirmed" && (
-                      <button
-                        onClick={confirmMatch}
-                        className="font-sans text-sm font-semibold px-4 py-2 rounded-lg text-white transition-opacity hover:opacity-90 flex-shrink-0"
+                      <Link
+                        href="/demo/onboarding/volunteer-notification"
+                        className="font-sans text-sm font-semibold px-4 py-2 rounded-lg text-white transition-opacity hover:opacity-90 flex-shrink-0 block"
                         style={{ background: CTM_GREEN }}
                       >
                         Confirm Match with Robert M. →
-                      </button>
+                      </Link>
                     )}
                     {phase === "confirmed" && (
                       <span className="font-sans text-xs font-bold px-3 py-1.5 rounded-full flex-shrink-0" style={{ background: "#d1fae5", color: "#065f46" }}>
