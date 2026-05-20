@@ -368,6 +368,27 @@ export default function CommonSpiritDemo() {
         </div>
       </div>
 
+      {/* Gold volunteer network band — restored original style */}
+      <div className="mt-4 rounded-xl px-6 py-4 flex items-center justify-between" style={{ background: CTM_GOLD }}>
+        <div>
+          <p className="font-sans font-bold text-white text-base">CaretakerMatch Volunteer Network</p>
+          <p className="font-sans italic text-white/90 text-sm mt-0.5">
+            Strategic Partnership with local and National Volunteer Organizations
+          </p>
+        </div>
+        <div className="flex items-center gap-6 flex-shrink-0 ml-6">
+          <Link href="/demo/onboarding/patient" className="flex flex-col items-center gap-0.5 hover:opacity-80 transition-opacity">
+            <span className="font-sans font-bold text-white text-sm">Patient Journey</span>
+            <span className="font-sans text-white/75 text-xs">Launch demo ↗</span>
+          </Link>
+          <div className="w-px h-8 bg-white/30" />
+          <Link href="/demo/onboarding/volunteer" className="flex flex-col items-center gap-0.5 hover:opacity-80 transition-opacity">
+            <span className="font-sans font-bold text-white text-sm">Volunteer Workflow</span>
+            <span className="font-sans text-white/75 text-xs">Launch demo ↗</span>
+          </Link>
+        </div>
+      </div>
+
       {/* Footer */}
       <div className="flex justify-between items-center mt-4">
         <p className="font-sans text-xs text-gray-500">CaretakerMatch © 2026</p>
