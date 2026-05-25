@@ -40,14 +40,14 @@ interface Encounter {
 }
 
 const encounterSteps = (currentStep: number): EncounterStep[] => [
-  { number: 1, label: "Assessment & Enrollment", sublabel: "iPad Intake", completed: currentStep > 1, current: currentStep === 1 },
-  { number: 2, label: "Clinician Approval", sublabel: "EMR Trigger", completed: currentStep > 2, current: currentStep === 2 },
-  { number: 3, label: "Matching Algorithm", sublabel: "1–3 Candidates", completed: currentStep > 3, current: currentStep === 3 },
-  { number: 4, label: "Anonymous Introduction", sublabel: "In-App Only", completed: currentStep > 4, current: currentStep === 4 },
-  { number: 5, label: "Coffee Meet & Consent", sublabel: "Barcode Verified", completed: currentStep > 5, current: currentStep === 5 },
-  { number: 6, label: "Active Recovery", sublabel: "Days 0–30", completed: currentStep > 6, current: currentStep === 6 },
-  { number: 7, label: "😇 Monitor Encounter", sublabel: "Overseer Escalation", completed: currentStep > 7, current: currentStep === 7 },
-  { number: 8, label: "Close & Evaluate", sublabel: "Outcomes", completed: currentStep > 8, current: currentStep === 8 },
+  { number: 1, label: "Patient Enrollment", sublabel: "iPad Intake", completed: currentStep > 1, current: currentStep === 1 },
+  { number: 2, label: "Trust & Safety Screening", sublabel: "Clinician Review", completed: currentStep > 2, current: currentStep === 2 },
+  { number: 3, label: "Personalized Match", sublabel: "1–3 Candidates", completed: currentStep > 3, current: currentStep === 3 },
+  { number: 4, label: "Coffee Meet", sublabel: "In-Person or Virtual", completed: currentStep > 4, current: currentStep === 4 },
+  { number: 5, label: "Mutual Consent", sublabel: "Both Parties Agree", completed: currentStep > 5, current: currentStep === 5 },
+  { number: 6, label: "Recovery & Monitoring", sublabel: "Days 0–30", completed: currentStep > 6, current: currentStep === 6 },
+  { number: 7, label: "Overseer Check-in", sublabel: "Escalation Review", completed: currentStep > 7, current: currentStep === 7 },
+  { number: 8, label: "Patient Review", sublabel: "Outcomes & Feedback", completed: currentStep > 8, current: currentStep === 8 },
 ];
 
 const mockEncounters: Encounter[] = [
@@ -96,7 +96,7 @@ const mockEncounters: Encounter[] = [
   },
   {
     id: "E002",
-    patientName: "Robert Johnson",
+    patientName: "David Harris",
     patientAge: 58,
     surgery: "Hip Replacement",
     caretakerName: "Sarah Thompson",
@@ -111,13 +111,13 @@ const mockEncounters: Encounter[] = [
         id: "m1",
         sender: "caretaker",
         senderName: "Sarah",
-        text: "Good morning Robert! How are you feeling today — day 2! That's a big milestone.",
+        text: "Good morning David! How are you feeling today — day 2! That's a big milestone.",
         timestamp: "Mar 13, 8:05 AM",
       },
       {
         id: "m2",
         sender: "patient",
-        senderName: "Robert",
+        senderName: "David",
         text: "Morning Sarah. Better than yesterday honestly. Still sore but I managed to walk to the kitchen on my own.",
         timestamp: "Mar 13, 8:22 AM",
       },
@@ -131,7 +131,7 @@ const mockEncounters: Encounter[] = [
       {
         id: "m4",
         sender: "patient",
-        senderName: "Robert",
+        senderName: "David",
         text: "That would be wonderful. Around 1pm?",
         timestamp: "Mar 13, 9:10 AM",
       },
@@ -488,7 +488,7 @@ export default function OverseerDemo() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-red-800 text-sm">AI Toxicity Flag — Action Required</h3>
+                <h3 className="font-semibold text-red-800 text-sm">Safety Flag — Action Required</h3>
                 <p className="text-sm text-red-700 mt-1">{selectedEncounter.flags[0]}</p>
                 <div className="mt-3 flex space-x-3">
                   <button
@@ -599,7 +599,7 @@ export default function OverseerDemo() {
           <div>
             <h2 className="text-xl font-semibold text-gray-900">Encounter Communication Log</h2>
             <p className="text-sm text-gray-400 mt-0.5">
-              {selectedEncounter.patientName} ↔ {selectedEncounter.caretakerName} • All messages via Twilio anonymous proxy • 1 AI flag
+              {selectedEncounter.patientName} ↔ {selectedEncounter.caretakerName} • All messages via Twilio anonymous proxy • 1 safety flag
             </p>
           </div>
           <span className="text-xs bg-red-100 text-red-700 border border-red-200 px-3 py-1.5 rounded-full font-medium">
@@ -642,14 +642,14 @@ export default function OverseerDemo() {
                       {msg.text}
                       {msg.flagged && (
                         <div className="mt-1 flex items-center space-x-1">
-                          <span className="text-red-500 text-xs font-semibold">⚠ AI Flag</span>
+                          <span className="text-red-500 text-xs font-semibold">⚠ Safety Flag</span>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
 
-                {/* AI Flag Reasoning Panel */}
+                {/* Safety Flag Reasoning Panel */}
                 {msg.flagged && msg.aiFlag && (
                   <div className="mt-3 mx-4 bg-amber-50 border border-amber-200 rounded-xl p-4">
                     <div className="flex items-start space-x-3">
@@ -658,7 +658,7 @@ export default function OverseerDemo() {
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-amber-800 uppercase tracking-wide mb-1">
-                          AI Toxicity Analysis
+                          Communication Safety Analysis
                         </p>
                         <p className="text-sm text-amber-900 leading-relaxed">{msg.aiFlag}</p>
                       </div>
@@ -703,7 +703,7 @@ export default function OverseerDemo() {
                 ? "Communication Log"
                 : view === "encounter" && selectedEncounter
                 ? "Encounter Detail"
-                : "Encounter Monitor"}
+                : "Recovery & Monitoring"}
             </h1>
             <p className="text-xs text-gray-400 mt-0.5">
               {new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
@@ -717,10 +717,10 @@ export default function OverseerDemo() {
               </div>
             )}
             <Link
-              href="/demo"
+              href="/demo/commonspirit"
               className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
             >
-              ← Demo Hub
+              ← Back to demo
             </Link>
           </div>
         </header>

@@ -132,7 +132,7 @@ export default function DemoHub() {
                 Overseer Dashboard
               </h3>
               <p className="text-gray-600 text-center mb-6 leading-relaxed">
-                Monitor all active encounters in real time. AI flags toxicity in caretaker-patient communications so the Overseer can intervene when needed.
+                Monitor all active encounters in real time. Safety monitoring flags concerning language in caretaker-patient communications so the Overseer can intervene when needed.
               </p>
               <div className="text-center">
                 <Link

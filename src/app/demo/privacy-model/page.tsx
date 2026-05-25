@@ -45,7 +45,7 @@ const stages = [
     patientAccess: "Communicates via Twilio proxy — real number never shared",
     volunteerAccess: "Communicates via Twilio proxy — real number never shared",
     clinicianAccess: "Communication status (initiated / no response)",
-    overseerAccess: "Full communication log via Twilio, AI toxicity scan active",
+    overseerAccess: "Full communication log via Twilio, safety monitoring active",
     privacyNote:
       "All messages route through a Twilio anonymous proxy. Neither party sees the other's real phone number. The Overseer can view the full log; the Clinician sees status only.",
   },
@@ -75,7 +75,7 @@ const stages = [
     patientAccess: "In-app messaging, check-in logs visible to self",
     volunteerAccess: "In-app messaging, task completion log",
     clinicianAccess: "Encounter status, escalation alerts only",
-    overseerAccess: "Full real-time communication log, AI toxicity flags, escalation tools",
+    overseerAccess: "Full real-time communication log, safety flags, escalation tools",
     privacyNote:
       "During active recovery the Overseer monitors all in-app communication for toxicity, harassment, or safety concerns. Clinician access is limited to encounter health status — they cannot read chat.",
   },
@@ -90,9 +90,9 @@ const stages = [
     patientAccess: "No change in visible access",
     volunteerAccess: "No change in visible access",
     clinicianAccess: "Escalation notifications if Overseer flags an issue",
-    overseerAccess: "AI-flagged messages highlighted, intervention tools (contact caretaker, escalate to clinician, dismiss)",
+    overseerAccess: "Safety-flagged messages highlighted, intervention tools (contact caretaker, escalate to clinician, dismiss)",
     privacyNote:
-      "AI toxicity analysis runs passively on every message. The Overseer is only paged when a flag is raised — similar to how Uber monitors rides without active human surveillance of every trip.",
+      "Communication safety analysis runs passively on every message. The Overseer is only paged when a flag is raised — similar to how Uber monitors rides without active human surveillance of every trip.",
   },
   {
     step: 7,

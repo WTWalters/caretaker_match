@@ -6,13 +6,13 @@ import Link from "next/link";
 const CTM_GREEN = "#1e3a2f";
 const CTM_GOLD = "#c4922a";
 
-type DemoPhase = "idle" | "scanning" | "matched" | "confirmed";
+type DemoPhase = "idle" | "scanning" | "matched" | "confirmed" | "rematch-scanning" | "rematched";
 
 interface MatchReason { icon: string; text: string; }
 interface VolunteerMatch {
   id: number; name: string; age: number; location: string; distance: string;
   surgeryHistory: string; availability: string; matchScore: number;
-  reasons: MatchReason[]; isTop?: boolean;
+  reasons: MatchReason[]; isTop?: boolean; photo: string;
 }
 
 const PATIENT = {
@@ -34,7 +34,7 @@ const TOP_MATCHES: VolunteerMatch[] = [
   {
     id: 1, name: "Robert M.", age: 71, location: "Oak Park, IL", distance: "8 miles",
     surgeryHistory: "Right Knee Replacement — 2 yrs ago", availability: "Mon – Fri",
-    matchScore: 94, isTop: true,
+    matchScore: 94, isTop: true, photo: "/profiles/robert.jpg",
     reasons: [
       { icon: "🦵", text: "Same joint: right knee" },
       { icon: "📍", text: "8 miles away" },
@@ -44,7 +44,7 @@ const TOP_MATCHES: VolunteerMatch[] = [
   {
     id: 2, name: "Linda K.", age: 58, location: "Evanston, IL", distance: "6 miles",
     surgeryHistory: "Left Hip Replacement — 3 yrs ago", availability: "Flexible",
-    matchScore: 87,
+    matchScore: 87, photo: "/profiles/linda.jpg",
     reasons: [
       { icon: "🏥", text: "Former surgical nurse" },
       { icon: "📍", text: "6 miles away" },
@@ -52,15 +52,41 @@ const TOP_MATCHES: VolunteerMatch[] = [
     ],
   },
   {
-    id: 3, name: "Maria S.", age: 63, location: "Berwyn, IL", distance: "10 miles",
+    id: 3, name: "Thomas R.", age: 63, location: "Berwyn, IL", distance: "10 miles",
     surgeryHistory: "Left Knee Replacement — 18 mo ago", availability: "Wkends + some weekdays",
-    matchScore: 81,
+    matchScore: 81, photo: "/profiles/thomas.jpg",
     reasons: [
       { icon: "🦵", text: "Similar joint: left knee" },
       { icon: "📍", text: "10 miles away" },
-      { icon: "🗣️", text: "Bilingual (Spanish)" },
+      { icon: "🏋️", text: "Physical therapist background" },
     ],
   },
+];
+
+const CAROL_P: VolunteerMatch = {
+  id: 4, name: "Carol P.", age: 55, location: "Naperville, IL", distance: "12 miles",
+  surgeryHistory: "Left Shoulder Replacement — 14 mo ago", availability: "Weekdays",
+  matchScore: 79, photo: "/profiles/carol.jpg",
+  reasons: [
+    { icon: "💪", text: "Joint replacement experience" },
+    { icon: "📍", text: "12 miles away" },
+    { icon: "🩺", text: "Completed caretaker training" },
+  ],
+};
+
+// Round 2: Robert removed, Linda promoted to Top, Carol fills 3rd slot
+const REMATCH_POOL: VolunteerMatch[] = [
+  { ...TOP_MATCHES[1], isTop: true, matchScore: 91 },   // Linda K. → promoted to Top Match
+  { ...TOP_MATCHES[2], matchScore: 84 },                  // Thomas R. → bumped up
+  CAROL_P,                                                 // Carol P. → new #3
+];
+
+const REMATCH_FUNNEL_STEPS = [
+  { count: 246, label: "volunteers in the CaretakerMatch network", delay: 300 },
+  { count: 88,  label: "passed background & identity checks", delay: 900 },
+  { count: 30,  label: "within 15 miles of Chicago, IL", delay: 1500 },
+  { count: 11,  label: "with joint replacement experience", delay: 2100 },
+  { count: 3,   label: "optimal matches identified", delay: 2700, highlight: true },
 ];
 
 function ScoreRing({ score }: { score: number }) {
@@ -120,7 +146,6 @@ function FunnelRow({ step, visible }: { step: typeof FUNNEL_STEPS[0]; visible: b
 function MatchCard({ match, index, visible, onSelect, selected }: {
   match: VolunteerMatch; index: number; visible: boolean; onSelect: () => void; selected: boolean;
 }) {
-  const initials = match.name.split(" ").map((w) => w[0]).join("");
   return (
     <div
       className="rounded-xl p-4 border cursor-pointer transition-all"
@@ -135,12 +160,12 @@ function MatchCard({ match, index, visible, onSelect, selected }: {
       onClick={onSelect}
     >
       <div className="flex items-start gap-3">
-        <div
-          className="w-10 h-10 rounded-full flex items-center justify-center font-sans font-bold text-sm text-white flex-shrink-0"
-          style={{ background: index === 0 ? CTM_GREEN : index === 1 ? CTM_GOLD : "#6b7280" }}
-        >
-          {initials}
-        </div>
+        <img
+          src={match.photo}
+          alt={match.name}
+          className="w-12 h-12 rounded-full object-cover flex-shrink-0 border-2"
+          style={{ borderColor: index === 0 ? CTM_GREEN : index === 1 ? CTM_GOLD : "#d1d5db" }}
+        />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <span className="font-sans font-semibold text-sm" style={{ color: "#1a1a1a" }}>{match.name}</span>
@@ -262,12 +287,18 @@ export default function VolunteerSelectionPage() {
   const [selectedMatch, setSelectedMatch] = useState<number | null>(null);
   const [showNotif, setShowNotif] = useState(false);
   const [notifVisible, setNotifVisible] = useState(false);
+  const [matchRound, setMatchRound] = useState<1 | 2>(1);
+
+  // Which data set to display based on round
+  const activeFunnel = matchRound === 1 ? FUNNEL_STEPS : REMATCH_FUNNEL_STEPS;
+  const activeMatches = matchRound === 1 ? TOP_MATCHES : REMATCH_POOL;
 
   const runMatching = useCallback(() => {
     setPhase("scanning");
     setFunnelVisible(new Array(FUNNEL_STEPS.length).fill(false));
     setCardsVisible(false);
     setSelectedMatch(null);
+    setMatchRound(1);
 
     FUNNEL_STEPS.forEach((step, i) => {
       setTimeout(() => {
@@ -281,6 +312,29 @@ export default function VolunteerSelectionPage() {
 
     setTimeout(() => {
       setPhase("matched");
+      setCardsVisible(true);
+    }, 3400);
+  }, []);
+
+  const runRematch = useCallback(() => {
+    setPhase("rematch-scanning");
+    setMatchRound(2);
+    setFunnelVisible(new Array(REMATCH_FUNNEL_STEPS.length).fill(false));
+    setCardsVisible(false);
+    setSelectedMatch(null);
+
+    REMATCH_FUNNEL_STEPS.forEach((step, i) => {
+      setTimeout(() => {
+        setFunnelVisible((prev) => {
+          const next = [...prev];
+          next[i] = true;
+          return next;
+        });
+      }, step.delay);
+    });
+
+    setTimeout(() => {
+      setPhase("rematched");
       setCardsVisible(true);
     }, 3400);
   }, []);
@@ -299,7 +353,9 @@ export default function VolunteerSelectionPage() {
   // Auto-select top match when cards appear
   useEffect(() => {
     if (phase === "matched") {
-      setTimeout(() => setSelectedMatch(1), 800);
+      setTimeout(() => setSelectedMatch(1), 800);   // Robert (id=1)
+    } else if (phase === "rematched") {
+      setTimeout(() => setSelectedMatch(2), 800);    // Linda (id=2) is now top
     }
   }, [phase]);
 
@@ -311,7 +367,7 @@ export default function VolunteerSelectionPage() {
         <div className="flex items-center gap-3">
           <Link href="/demo/commonspirit" className="font-sans text-white/50 text-xs hover:text-white/80 transition-colors">← Demo</Link>
           <span className="text-white/20">|</span>
-          <span className="font-sans text-white font-semibold text-sm">Volunteer Selection</span>
+          <span className="font-sans text-white font-semibold text-sm">Personalized Match</span>
         </div>
         <div className="flex items-center gap-6">
           {[
@@ -396,22 +452,46 @@ export default function VolunteerSelectionPage() {
                 className="w-full py-2.5 rounded-lg font-sans font-semibold text-sm text-white transition-opacity hover:opacity-90"
                 style={{ background: CTM_GREEN }}
               >
-                Run Matching Algorithm →
+                Run Personalized Match →
               </button>
             )}
-            {phase === "scanning" && (
+            {(phase === "scanning" || phase === "rematch-scanning") && (
               <div className="flex items-center justify-center gap-2 py-2.5">
                 <span className="animate-spin w-4 h-4 border-2 rounded-full" style={{ borderColor: CTM_GREEN, borderTopColor: "transparent" }} />
-                <span className="font-sans text-sm font-semibold" style={{ color: CTM_GREEN }}>Scanning…</span>
+                <span className="font-sans text-sm font-semibold" style={{ color: CTM_GREEN }}>
+                  {phase === "rematch-scanning" ? "Re-matching…" : "Scanning…"}
+                </span>
               </div>
             )}
             {(phase === "matched" || phase === "confirmed") && (
-              <button
-                onClick={runMatching}
-                className="w-full py-2 rounded-lg font-sans text-xs text-gray-500 border border-gray-300 hover:border-gray-400 transition-colors bg-white"
-              >
-                ↺ Re-run matching
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={runRematch}
+                  className="w-full py-2.5 rounded-lg font-sans text-xs font-semibold text-white transition-opacity hover:opacity-90"
+                  style={{ background: CTM_GOLD }}
+                >
+                  ☕ Coffee Meet Unsuccessful — Re-match
+                </button>
+                <button
+                  onClick={runMatching}
+                  className="w-full py-2 rounded-lg font-sans text-xs text-gray-500 border border-gray-300 hover:border-gray-400 transition-colors bg-white"
+                >
+                  ↺ Reset demo
+                </button>
+              </div>
+            )}
+            {phase === "rematched" && (
+              <div className="flex flex-col gap-2">
+                <div className="rounded-lg p-2.5 text-center" style={{ background: "#FEF3C7" }}>
+                  <p className="font-sans text-[10px] font-semibold" style={{ color: "#92400e" }}>Round 2 — Robert M. removed from pool</p>
+                </div>
+                <button
+                  onClick={runMatching}
+                  className="w-full py-2 rounded-lg font-sans text-xs text-gray-500 border border-gray-300 hover:border-gray-400 transition-colors bg-white"
+                >
+                  ↺ Reset demo
+                </button>
+              </div>
             )}
           </div>
         </div>
@@ -429,63 +509,199 @@ export default function VolunteerSelectionPage() {
               <div>
                 <p className="text-xl font-bold italic" style={{ color: "#1a1a1a" }}>Ready to find a match for Jennifer</p>
                 <p className="font-sans text-sm text-gray-500 mt-1 max-w-sm">
-                  The algorithm will scan the full volunteer network and surface the top 3 candidates based on clinical compatibility, proximity, and availability.
+                  Personalized Match will scan the full volunteer network and surface the top 3 candidates based on clinical compatibility, proximity, and availability.
                 </p>
               </div>
             </div>
           )}
 
-          {(phase === "scanning" || phase === "matched" || phase === "confirmed") && (
-            <div className="p-6 flex flex-col gap-6 max-w-2xl">
+          {phase !== "idle" && (
+            <div className="p-6 flex gap-6 h-full">
 
-              {/* Funnel */}
-              <div>
-                <p className="font-sans text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: CTM_GREEN }}>
-                  Volunteer Network Scan
-                </p>
-                <div className="rounded-xl p-5 border" style={{ background: "white", borderColor: "#e5e1d8" }}>
-                  {FUNNEL_STEPS.map((step, i) => (
-                    <FunnelRow key={i} step={step} visible={funnelVisible[i]} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Match cards */}
-              {(phase === "matched" || phase === "confirmed") && (
-                <div>
-                  <div className="flex items-center justify-between mb-3 gap-3">
-                    <p className="font-sans text-xs font-semibold uppercase tracking-widest flex-shrink-0" style={{ color: CTM_GREEN }}>
-                      Top 3 Matches for Jennifer W.
-                    </p>
-                    {selectedMatch !== null && phase !== "confirmed" && (
-                      <Link
-                        href="/demo/onboarding/volunteer-notification"
-                        className="font-sans text-sm font-semibold px-4 py-2 rounded-lg text-white transition-opacity hover:opacity-90 flex-shrink-0 block"
-                        style={{ background: CTM_GREEN }}
-                      >
-                        Confirm Match with Robert M. →
-                      </Link>
-                    )}
-                    {phase === "confirmed" && (
-                      <span className="font-sans text-xs font-bold px-3 py-1.5 rounded-full flex-shrink-0" style={{ background: "#d1fae5", color: "#065f46" }}>
-                        ✓ Match confirmed — notifications sent
-                      </span>
-                    )}
+              {/* Left: Algorithmic processing */}
+              <div className="flex-1 flex flex-col gap-6 min-w-0">
+                {/* Round indicator for re-match */}
+                {matchRound === 2 && (phase === "rematch-scanning" || phase === "rematched") && (
+                  <div className="rounded-xl p-3 flex items-start gap-3" style={{ background: "#FEF3C7", border: "1px solid #F59E0B" }}>
+                    <span className="text-lg flex-shrink-0">🔄</span>
+                    <div>
+                      <p className="font-sans text-xs font-semibold" style={{ color: "#92400e" }}>
+                        Re-matching — Round 2
+                      </p>
+                      <p className="font-sans text-[11px] mt-0.5" style={{ color: "#a16207" }}>
+                        Robert M. removed from pool after unsuccessful coffee meet. Recalculating top matches from remaining volunteers.
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-3">
-                    {TOP_MATCHES.map((match, i) => (
-                      <MatchCard
-                        key={match.id}
-                        match={match}
-                        index={i}
-                        visible={cardsVisible}
-                        onSelect={() => phase !== "confirmed" && setSelectedMatch(match.id)}
-                        selected={selectedMatch === match.id}
-                      />
+                )}
+
+                {/* Funnel */}
+                <div>
+                  <p className="font-sans text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: CTM_GREEN }}>
+                    Volunteer Network Scan
+                  </p>
+                  <div className="rounded-xl p-5 border" style={{ background: "white", borderColor: "#e5e1d8" }}>
+                    {activeFunnel.map((step, i) => (
+                      <FunnelRow key={i} step={step} visible={funnelVisible[i]} />
                     ))}
                   </div>
                 </div>
-              )}
+
+                {/* Match cards (desktop/Overseer view) */}
+                {(phase === "matched" || phase === "confirmed" || phase === "rematched") && (
+                  <div>
+                    <div className="flex items-center justify-between mb-3 gap-3">
+                      <p className="font-sans text-xs font-semibold uppercase tracking-widest flex-shrink-0" style={{ color: CTM_GREEN }}>
+                        Top 3 Matches {matchRound === 2 && "— Round 2"}
+                      </p>
+                      {selectedMatch !== null && phase === "matched" && (
+                        <Link
+                          href="/demo/onboarding/volunteer-notification"
+                          className="font-sans text-xs font-semibold px-3 py-1.5 rounded-lg text-white transition-opacity hover:opacity-90 flex-shrink-0 block"
+                          style={{ background: CTM_GREEN }}
+                        >
+                          Confirm Match →
+                        </Link>
+                      )}
+                      {selectedMatch !== null && phase === "rematched" && (
+                        <button
+                          className="font-sans text-xs font-semibold px-3 py-1.5 rounded-lg text-white transition-opacity hover:opacity-90 flex-shrink-0"
+                          style={{ background: CTM_GREEN }}
+                          onClick={() => alert("In the full app, this would proceed to notify the new volunteer and schedule a coffee meet.")}
+                        >
+                          Confirm New Match →
+                        </button>
+                      )}
+                      {phase === "confirmed" && (
+                        <span className="font-sans text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0" style={{ background: "#d1fae5", color: "#065f46" }}>
+                          ✓ Confirmed
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      {activeMatches.map((match, i) => (
+                        <MatchCard
+                          key={match.id}
+                          match={match}
+                          index={i}
+                          visible={cardsVisible}
+                          onSelect={() => (phase === "matched" || phase === "rematched") && setSelectedMatch(match.id)}
+                          selected={selectedMatch === match.id}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Right: iPhone showing patient's view */}
+              <div className="flex-shrink-0 flex flex-col items-center">
+                <p className="font-sans text-[10px] font-semibold uppercase tracking-widest mb-3 text-center" style={{ color: "#888" }}>
+                  Jennifer&apos;s iPhone
+                </p>
+                <div className="relative" style={{ width: 300 }}>
+                  <div className="rounded-[40px] p-[8px]" style={{ background: "#1a1a1a", boxShadow: "0 0 0 1px #3a3a3a, 0 20px 60px rgba(0,0,0,0.4)" }}>
+                    <div className="bg-white rounded-[34px] overflow-hidden flex flex-col" style={{ height: 620 }}>
+                      {/* Status bar */}
+                      <div className="relative flex items-center justify-between px-6 flex-shrink-0" style={{ paddingTop: 12, paddingBottom: 4 }}>
+                        <span className="text-[11px] font-semibold">9:41</span>
+                        <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-black rounded-full" style={{ width: 90, height: 26 }} />
+                        <div className="flex items-center gap-1">
+                          <div className="flex items-end gap-0.5">
+                            {[2, 3, 4, 5].map((h) => (
+                              <div key={h} className="w-0.5 rounded-sm bg-black" style={{ height: h }} />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      {/* App header */}
+                      <div className="px-4 pt-2 pb-3 flex-shrink-0">
+                        <div className="flex items-center gap-2">
+                          <img src="/ctm-logo.png" alt="CTM" className="w-6 h-6 object-contain" />
+                          <p className="text-[11px] font-bold" style={{ color: CTM_GREEN }}>Your Matches</p>
+                        </div>
+                      </div>
+                      {/* Content */}
+                      <div className="flex-1 overflow-y-auto px-3 pb-3">
+                        {(phase === "scanning" || phase === "rematch-scanning") && (
+                          <div className="flex flex-col items-center justify-center h-full gap-3">
+                            <span className="animate-spin w-6 h-6 border-2 rounded-full" style={{ borderColor: CTM_GREEN, borderTopColor: "transparent" }} />
+                            <p className="font-sans text-xs text-gray-500">
+                              {phase === "rematch-scanning" ? "Finding new matches..." : "Finding your best matches..."}
+                            </p>
+                          </div>
+                        )}
+                        {(phase === "matched" || phase === "confirmed" || phase === "rematched") && (
+                          <div className="flex flex-col gap-2.5">
+                            {matchRound === 2 && (
+                              <div className="rounded-lg p-2 mb-1" style={{ background: "#FEF3C7" }}>
+                                <p className="font-sans text-[10px] font-semibold text-center" style={{ color: "#92400e" }}>
+                                  🔄 Updated matches — Robert M. removed
+                                </p>
+                              </div>
+                            )}
+                            <p className="font-sans text-[10px] text-gray-400 px-1 mb-1">Based on your profile, location & schedule</p>
+                            {activeMatches.map((match, i) => (
+                              <div
+                                key={match.id}
+                                className="rounded-xl p-3 border"
+                                style={{
+                                  opacity: cardsVisible ? 1 : 0,
+                                  transform: cardsVisible ? "translateY(0)" : "translateY(12px)",
+                                  transition: `all 0.4s ease ${i * 200}ms`,
+                                  borderColor: match.isTop ? "#c4e8d8" : "#e5e7eb",
+                                  background: match.isTop ? "#f0fdf9" : "white",
+                                }}
+                              >
+                                <div className="flex items-center gap-2.5">
+                                  <img src={match.photo} alt={match.name} className="w-10 h-10 rounded-full object-cover flex-shrink-0" />
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-1.5">
+                                      <span className="font-sans font-semibold text-xs" style={{ color: "#1a1a1a" }}>{match.name}</span>
+                                      {match.isTop && (
+                                        <span className="font-sans text-[8px] font-bold px-1.5 py-0.5 rounded-full" style={{ background: "#d1fae5", color: "#065f46" }}>
+                                          Best Match
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="font-sans text-[10px] text-gray-500 mt-0.5">{match.surgeryHistory}</p>
+                                    <p className="font-sans text-[10px] text-gray-400">{match.distance} away · {match.availability}</p>
+                                  </div>
+                                  <div className="text-center flex-shrink-0">
+                                    <div className="font-sans font-bold text-sm" style={{ color: CTM_GREEN }}>{match.matchScore}%</div>
+                                    <div className="font-sans text-[8px] text-gray-400">match</div>
+                                  </div>
+                                </div>
+                                <div className="flex flex-wrap gap-1 mt-2">
+                                  {match.reasons.map((r) => (
+                                    <span key={r.text} className="font-sans text-[9px] px-2 py-0.5 rounded-full" style={{ background: "#f5f0e3", color: "#555" }}>
+                                      {r.icon} {r.text}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                            {phase === "confirmed" && (
+                              <div className="rounded-xl p-3 mt-1" style={{ background: "#d1fae5" }}>
+                                <p className="font-sans text-xs font-semibold text-center" style={{ color: "#065f46" }}>
+                                  ✓ Robert M. confirmed as your companion!
+                                </p>
+                                <p className="font-sans text-[10px] text-center mt-1" style={{ color: "#047857" }}>
+                                  You&apos;ll meet for coffee before your surgery.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      {/* Home indicator */}
+                      <div className="flex-shrink-0 flex justify-center" style={{ paddingTop: 6, paddingBottom: 8 }}>
+                        <div className="rounded-full" style={{ width: 100, height: 4, background: "rgba(0,0,0,0.18)" }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>

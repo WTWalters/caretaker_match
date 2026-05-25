@@ -85,7 +85,7 @@ function Back({ onClick }: { onClick: () => void }) {
 
 function IPhone({ children, screen }: { children: React.ReactNode; screen: Screen }) {
   const step = typeof screen === "number" ? screen : -1;
-  const progress = step > 0 && step <= 11 ? (step / 11) * 100 : 0;
+  const progress = step > 0 && step <= 10 ? (step / 10) * 100 : 0;
   return (
     <div className="relative mx-auto" style={{ width: 390 }}>
       <div className="absolute rounded-l-sm" style={{ left: -12, top: 100, width: 4, height: 32, background: "#2a2a2a" }} />
@@ -577,26 +577,6 @@ export default function VolunteerOnboarding() {
       case 7: return (
         <div className="px-6 pt-6 pb-4 flex flex-col h-full">
           <Back onClick={back} />
-          <h2 className="text-xl font-bold text-gray-900 mb-1">Your Neighborhood</h2>
-          <p className="text-sm text-gray-500 mb-4">Used only for proximity matching — never shared with patients.</p>
-          <div className="flex-1 flex flex-col gap-4">
-            <div className="rounded-2xl p-4" style={{ background: "#f0fdf9" }}>
-              <div className="flex items-start gap-2">
-                <svg className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: TEAL }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-                <p className="text-xs text-gray-600 leading-relaxed">Your exact address is never shared with patients. It is used only to calculate proximity and find matches within your travel range.</p>
-              </div>
-            </div>
-            <Field label="Home address" value={data.homeAddress} onChange={v => set("homeAddress", v)} placeholder="123 Main St, Denver, CO" />
-          </div>
-          <Btn label="Continue" onClick={next} disabled={!data.homeAddress} />
-        </div>
-      );
-
-      case 8: return (
-        <div className="px-6 pt-6 pb-4 flex flex-col h-full">
-          <Back onClick={back} />
           <h2 className="text-xl font-bold text-gray-900 mb-1">Your Interest</h2>
           <p className="text-sm text-gray-500 mb-4">Help us understand the role that works best for you.</p>
           <div className="flex-1 flex flex-col gap-2">
@@ -614,7 +594,7 @@ export default function VolunteerOnboarding() {
         </div>
       );
 
-      case 9: return (
+      case 8: return (
         <div className="px-6 pt-6 pb-4 flex flex-col h-full">
           <Back onClick={back} />
           <h2 className="text-xl font-bold text-gray-900 mb-1">Before You Sign</h2>
@@ -643,7 +623,7 @@ export default function VolunteerOnboarding() {
         </div>
       );
 
-      case 10: return (
+      case 9: return (
         <div className="px-6 pt-5 pb-4 flex flex-col h-full relative">
           {showWarning && (
             <div className="absolute inset-0 z-10 flex items-end" style={{ background: "rgba(0,0,0,0.5)", borderRadius: 42 }}>
@@ -708,6 +688,47 @@ export default function VolunteerOnboarding() {
             <button onClick={() => setShowWarning(true)} className="text-sm text-gray-400 text-center py-2">
               I don't want to sign
             </button>
+          </div>
+        </div>
+      );
+
+      case 10: return (
+        <div className="px-6 pt-6 pb-4 flex flex-col h-full">
+          <Back onClick={back} />
+          <div className="flex items-center gap-2 mb-1">
+            <h2 className="text-xl font-bold text-gray-900">Your Address</h2>
+            <svg className="w-5 h-5 flex-shrink-0" style={{ color: TEAL }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <p className="text-sm text-gray-500 mb-4">Now that you've signed, we need your address for two things:</p>
+          <div className="flex flex-col gap-3 mb-5">
+            <div className="flex gap-3 p-3 rounded-xl" style={{ background: "#f0fdf9" }}>
+              <span className="text-lg flex-shrink-0">🔍</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Background check</p>
+                <p className="text-xs text-gray-500 mt-0.5">Required to verify your identity and keep everyone safe.</p>
+              </div>
+            </div>
+            <div className="flex gap-3 p-3 rounded-xl" style={{ background: "#f0fdf9" }}>
+              <span className="text-lg flex-shrink-0">📍</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Proximity matching</p>
+                <p className="text-xs text-gray-500 mt-0.5">We match you with patients who live within your travel range.</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1">
+            <Field label="Home address" value={data.homeAddress} onChange={v => set("homeAddress", v)} placeholder="123 Main St, Denver, CO 80202" />
+            <div className="flex items-center gap-1 mt-2">
+              <svg className="w-3 h-3" style={{ color: "#9ca3af" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <p className="text-[11px] text-gray-400">Your exact address is never shared with patients.</p>
+            </div>
+          </div>
+          <div className="mt-4">
+            <Btn label="Complete Registration →" onClick={next} disabled={!data.homeAddress} />
           </div>
         </div>
       );
@@ -811,7 +832,7 @@ export default function VolunteerOnboarding() {
         <p className="text-xs text-gray-400 mt-1">Volunteer Registration — CareTaker Match Demo</p>
       </div>
       <IPhone screen={screen}>{renderScreen()}</IPhone>
-      {typeof screen === "number" && screen > 0 && screen < 11 && (
+      {typeof screen === "number" && screen > 0 && screen <= 10 && (
         <p className="mt-4 text-xs text-gray-400">Screen {screen} of 10</p>
       )}
     </div>

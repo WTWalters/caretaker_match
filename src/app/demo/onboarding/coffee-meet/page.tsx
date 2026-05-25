@@ -98,15 +98,17 @@ export default function CoffeeMeetPage() {
         <AppBar avatar="JW" />
 
         {confirmed ? (
-          /* ── Confirmation screen ── */
-          <div className="px-4 py-6 flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-full flex items-center justify-center text-3xl" style={{ background: "#EAF3DE" }}>☕</div>
-            <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>You&apos;re all set!</h2>
-            <p className="text-sm text-center" style={{ color: "#555" }}>
-              Your coffee meet with <strong>Robert M.</strong> is confirmed. Calendar invites have been sent to both of you.
-            </p>
+          /* ── Patient confirmation screen ── */
+          <div className="px-4 py-6 flex flex-col gap-4">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center text-3xl" style={{ background: "#EAF3DE" }}>☕</div>
+              <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>You&apos;re all set, Jennifer!</h2>
+              <p className="text-sm text-center" style={{ color: "#555" }}>
+                Your coffee meet with <strong>Robert M.</strong> is confirmed. Calendar invites have been sent to both of you.
+              </p>
+            </div>
 
-            <div className="w-full rounded-xl p-4 space-y-3" style={{ background: "white", border: `1px solid #e0d8c8` }}>
+            <div className="w-full rounded-xl p-4 space-y-3" style={{ background: "white", border: "1px solid #e0d8c8" }}>
               <div className="flex items-center gap-3">
                 <span className="text-lg">📅</span>
                 <div>
@@ -123,15 +125,22 @@ export default function CoffeeMeetPage() {
                   </div>
                 </div>
               </div>
+              <div className="flex items-center gap-3">
+                <span className="text-lg">👤</span>
+                <div>
+                  <div className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: CTM_GREEN }}>Your Volunteer</div>
+                  <div className="text-sm font-medium" style={{ color: "#1a1a1a" }}>Robert M. — Right Knee Replacement, 2 yrs ago</div>
+                </div>
+              </div>
             </div>
 
             <div className="w-full rounded-xl p-4" style={{ background: "#EAF3DE" }}>
               <div className="text-[10px] font-semibold uppercase tracking-wide mb-2" style={{ color: CTM_GREEN }}>What to Expect</div>
               {[
                 "30–45 minute casual coffee chat",
-                "Discuss your recovery needs",
-                "Get to know each other before surgery",
-                "Robert will answer questions from experience",
+                "Share your concerns about recovery",
+                "Ask Robert about his experience",
+                "Decide together if the match feels right",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-2 text-sm mb-1.5" style={{ color: "#3a3a3a" }}>
                   <span className="font-bold flex-shrink-0" style={{ color: CTM_GREEN }}>✓</span>
@@ -140,16 +149,31 @@ export default function CoffeeMeetPage() {
               ))}
             </div>
 
+            {/* Privacy note — patient perspective */}
+            <div className="w-full rounded-xl p-3.5 flex items-start gap-2.5" style={{ background: "#EBF4FF" }}>
+              <span className="text-blue-500 flex-shrink-0 mt-0.5 text-sm">🔒</span>
+              <p className="text-xs leading-relaxed" style={{ color: "#1e40af" }}>
+                <span className="font-semibold">Your privacy is protected:</span>{" "}
+                Robert does not have your phone number or home address. All communication goes through a secure proxy until you both consent to share contact info after the coffee meet.
+              </p>
+            </div>
+
             <button className="w-full py-3.5 rounded-xl text-white font-semibold text-sm" style={{ background: CTM_GREEN }}>
               {loc.virtual ? "💻 Join Video Call" : "Get Directions"}
             </button>
             <button className="w-full py-3.5 rounded-xl font-semibold text-sm" style={{ border: `1.5px solid ${CTM_GREEN}`, color: CTM_GREEN, background: "white" }}>
-              Contact Robert
+              Contact Robert (via Secure Proxy)
             </button>
 
-            <Link href="/demo/commonspirit" className="text-sm mt-1 hover:underline" style={{ color: CTM_GREEN }}>
-              ← Back to demo
-            </Link>
+            <div className="flex items-center justify-center gap-3 pt-2 pb-1">
+              <Link href="/demo/onboarding/volunteer-confirmation" className="text-xs hover:underline" style={{ color: CTM_GOLD }}>
+                Volunteer&apos;s View →
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/demo/commonspirit" className="text-xs hover:underline" style={{ color: CTM_GREEN }}>
+                Back to demo
+              </Link>
+            </div>
           </div>
         ) : (
           /* ── Scheduler screen ── */

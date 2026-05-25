@@ -266,7 +266,7 @@ export default function ApprovalDashboard() {
           <img src="/ctm-logo.png" alt="CTM" className="w-9 h-9 object-contain flex-shrink-0" />
           <div>
             <p className="font-sans text-xs font-semibold tracking-widest uppercase" style={{ color: CTM_GOLD }}>CaretakerMatch</p>
-            <h1 className="font-sans text-lg font-bold text-white">Overseer Dashboard</h1>
+            <h1 className="font-sans text-lg font-bold text-white">Trust &amp; Safety Screening</h1>
           </div>
         </div>
         <div className="flex items-center gap-8">

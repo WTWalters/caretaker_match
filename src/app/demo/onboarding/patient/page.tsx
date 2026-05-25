@@ -481,10 +481,9 @@ export default function PatientOnboarding() {
                 ))}
               </div>
             </div>
-            <Field label="Home address" value={data.homeAddress} onChange={v => set("homeAddress", v)} placeholder="123 Main St, Denver, CO" />
           </div>
           <div className="mt-4">
-            <Btn label="Continue" onClick={next} disabled={!data.housingType || !data.entryStairs || !data.interiorLayout || !data.homeAddress} />
+            <Btn label="Continue" onClick={next} disabled={!data.housingType || !data.entryStairs || !data.interiorLayout} />
           </div>
         </div>
       );
@@ -633,6 +632,47 @@ export default function PatientOnboarding() {
       );
 
       case 11: return (
+        <div className="px-6 pt-6 pb-4 flex flex-col h-full">
+          <Back onClick={back} />
+          <div className="flex items-center gap-2 mb-1">
+            <h2 className="text-xl font-bold text-gray-900">Your Address</h2>
+            <svg className="w-5 h-5 flex-shrink-0" style={{ color: TEAL }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <p className="text-sm text-gray-500 mb-4">Now that you've signed, we need your address for two things:</p>
+          <div className="flex flex-col gap-3 mb-5">
+            <div className="flex gap-3 p-3 rounded-xl" style={{ background: "#f0fdf9" }}>
+              <span className="text-lg flex-shrink-0">🔍</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Background check</p>
+                <p className="text-xs text-gray-500 mt-0.5">Required to verify your identity and keep everyone safe.</p>
+              </div>
+            </div>
+            <div className="flex gap-3 p-3 rounded-xl" style={{ background: "#f0fdf9" }}>
+              <span className="text-lg flex-shrink-0">📍</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Proximity matching</p>
+                <p className="text-xs text-gray-500 mt-0.5">We match you with volunteers who live nearby.</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1">
+            <Field label="Home address" value={data.homeAddress} onChange={v => set("homeAddress", v)} placeholder="123 Main St, Denver, CO 80202" />
+            <div className="flex items-center gap-1 mt-2">
+              <svg className="w-3 h-3" style={{ color: "#9ca3af" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <p className="text-[11px] text-gray-400">Your address is encrypted and never shared with volunteers.</p>
+            </div>
+          </div>
+          <div className="mt-4">
+            <Btn label="Complete Enrollment →" onClick={next} disabled={!data.homeAddress} />
+          </div>
+        </div>
+      );
+
+      case 12: return (
         <div className="flex flex-col h-full" style={{ background: "#f8fafc" }}>
           <div className="px-6 pt-6 pb-5 flex flex-col items-center" style={{ background: TEAL }}>
             <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-2">
@@ -712,8 +752,8 @@ export default function PatientOnboarding() {
         <p className="text-xs text-gray-400 mt-1">Patient Enrollment — CareTaker Match Demo</p>
       </div>
       <IPhone screen={screen}>{renderScreen()}</IPhone>
-      {typeof screen === "number" && screen > 0 && screen < 11 && (
-        <p className="mt-4 text-xs text-gray-400">Screen {screen} of 10</p>
+      {typeof screen === "number" && screen > 0 && screen < 12 && (
+        <p className="mt-4 text-xs text-gray-400">Screen {screen} of 11</p>
       )}
     </div>
   );

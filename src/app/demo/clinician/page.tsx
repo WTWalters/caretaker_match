@@ -45,7 +45,7 @@ const mockPatients: Patient[] = [
   },
   {
     id: "P002",
-    name: "Robert Johnson",
+    name: "David Harris",
     age: 58,
     surgery: "Hip Replacement",
     surgeryDate: "2026-03-20",
@@ -391,7 +391,7 @@ export default function ClinicianDemo() {
               step: 5,
             },
             {
-              patient: "Robert Johnson",
+              patient: "David Harris",
               caretaker: "Sarah Thompson",
               surgery: "Hip Replacement",
               daysSinceSurgery: 2,
@@ -461,7 +461,7 @@ export default function ClinicianDemo() {
         <div>
           <p className="text-sm font-medium text-amber-800">Communication details are Overseer-only</p>
           <p className="text-xs text-amber-700 mt-1">
-            All patient-caretaker messages route through Twilio anonymous proxy. The Overseer monitors for AI-flagged toxicity. If a flag is raised, contact the Overseer to review.
+            All patient-caretaker messages route through Twilio anonymous proxy. The Overseer monitors for safety-flagged communications. If a flag is raised, contact the Overseer to review.
           </p>
         </div>
       </div>
@@ -537,7 +537,7 @@ export default function ClinicianDemo() {
         <h4 className="font-semibold text-gray-900 mb-4">Match History</h4>
         <div className="space-y-3">
           <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
-            <span className="text-sm">Robert Johnson ↔ Michael Rodriguez</span>
+            <span className="text-sm">David Harris ↔ Michael Rodriguez</span>
             <span className="text-xs text-green-600 font-medium">Active - Day 5 of 30</span>
           </div>
           <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">

@@ -32,6 +32,8 @@ function SafetySvg({ d }: { d: string }) {
 
 // Fixed height for the mockup frame + "Open demo" link beneath = consistent item height across both rows
 const ITEM_HEIGHT = 192;
+// Shared grid template so patient row and volunteer row columns align vertically
+const GRID_COLUMNS = "80px 82px auto 138px auto 138px auto 82px auto 82px auto 138px auto 82px";
 
 function Arrow() {
   return (
@@ -135,7 +137,7 @@ const patientSteps: Step[] = [
   },
   {
     number: "03",
-    label: "Patient Volunteer Selection",
+    label: "Personalized Match",
     href: "/demo/onboarding/matching",
     isLive: true,
     isWebPortal: true,
@@ -143,11 +145,32 @@ const patientSteps: Step[] = [
   },
   {
     number: "04",
+    label: "Coffee Meet",
+    href: "/demo/onboarding/coffee-meet",
+    isLive: true,
+    iconD: "M15.75 6a3.75 3.75 0 11-7.5 0 3.375 3.375 0 010 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z",
+  },
+  {
+    number: "05",
+    label: "Mutual Consent",
+    href: "/demo/onboarding/patient-consent",
+    isLive: true,
+    iconD: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.955 11.955 0 003 10c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.249-8.25-3.286z",
+  },
+  {
+    number: "06",
     label: "Recovery & Monitoring",
     href: "/demo/overseer",
     isLive: true,
     isWebPortal: true,
     iconD: "M3 12h4l2.5-7 4 14 2.5-7H20",
+  },
+  {
+    number: "07",
+    label: "Patient Review",
+    href: "/demo/onboarding/patient-wrapup",
+    isLive: true,
+    iconD: "M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z",
   },
 ];
 
@@ -158,6 +181,22 @@ const volunteerEnrollStep: Step = {
   href: "/demo/onboarding/volunteer",
   isLive: true,
   iconD: "M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z",
+};
+
+const volunteerConsentStep: Step = {
+  number: "V2",
+  label: "Volunteer Consent",
+  href: "/demo/onboarding/volunteer-consent",
+  isLive: true,
+  iconD: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.955 11.955 0 003 10c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.249-8.25-3.286z",
+};
+
+const volunteerReviewStep: Step = {
+  number: "V3",
+  label: "Volunteer Review",
+  href: "/demo/onboarding/volunteer-wrapup",
+  isLive: true,
+  iconD: "M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z",
 };
 
 const ctmlDatabaseStep: Step = {
@@ -280,28 +319,31 @@ export default function CommonSpiritDemo() {
             </div>
 
             {/* ── Patient Journey row ── */}
-            <div className="px-5 py-5 flex items-start gap-3" style={{ background: "rgba(255,255,255,0.55)" }}>
-              {/* Track label — fixed height to align with mockups */}
-              <div className="flex-shrink-0 w-20 text-center" style={{ height: ITEM_HEIGHT, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div className="px-5 py-5" style={{ display: "grid", gridTemplateColumns: GRID_COLUMNS, gap: "0 12px", alignItems: "start", background: "rgba(255,255,255,0.55)" }}>
+              <div className="text-center" style={{ height: ITEM_HEIGHT, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div className="text-[10px] font-sans font-bold uppercase tracking-wider" style={{ color: CTM_GREEN }}>Patient<br />Journey</div>
                 <div className="mt-1 w-full h-px" style={{ background: CTM_GREEN, opacity: 0.3 }} />
               </div>
-
               <IphoneMockup step={patientSteps[0]} />
               <Arrow />
               <WebPortalMockup step={patientSteps[1]} />
               <Arrow />
-              {/* Patient Volunteer Selection — convergence point, badge sits inside fixed-height wrapper */}
               <WebPortalMockup step={patientSteps[2]} highlight badge="↑ Vol. Network" />
               <Arrow />
-              <WebPortalMockup step={patientSteps[3]} />
+              <IphoneMockup step={patientSteps[3]} />
+              <Arrow />
+              <IphoneMockup step={patientSteps[4]} />
+              <Arrow />
+              <WebPortalMockup step={patientSteps[5]} />
+              <Arrow />
+              <IphoneMockup step={patientSteps[6]} />
             </div>
 
             {/* ── Volunteer Network band ── */}
-            <div className="flex items-start gap-3 px-5 py-5" style={{ background: "#e8f4ee", borderTop: "1.5px dashed #b0cfc0" }}>
+            <div className="px-5 py-5" style={{ display: "grid", gridTemplateColumns: GRID_COLUMNS, gap: "0 12px", alignItems: "start", background: "#e8f4ee", borderTop: "1.5px dashed #b0cfc0" }}>
 
-              {/* Network label + partners — fixed height */}
-              <div className="flex-shrink-0 w-20" style={{ height: ITEM_HEIGHT, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              {/* Network label + partners */}
+              <div style={{ height: ITEM_HEIGHT, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div className="text-[10px] font-sans font-bold uppercase tracking-wider leading-tight mb-2" style={{ color: CTM_GREEN }}>
                   CTM<br />Volunteer<br />Network
                 </div>
@@ -315,16 +357,24 @@ export default function CommonSpiritDemo() {
                 </div>
               </div>
 
-              <Arrow />
               <IphoneMockup step={volunteerEnrollStep} />
               <Arrow />
               <WebPortalMockup step={ctmlDatabaseStep} />
 
-              {/* Upward connector — fixed height so it aligns with mockup tops */}
-              <div className="flex-shrink-0 flex flex-col items-center justify-center ml-2" style={{ height: ITEM_HEIGHT }}>
+              {/* Upward connector — spans cols 5-9 to bridge gap */}
+              <div className="flex flex-col items-center justify-center" style={{ gridColumn: "5 / 10", height: ITEM_HEIGHT }}>
                 <span className="text-xl font-bold" style={{ color: CTM_GREEN }}>↑</span>
-                <span className="text-[8px] font-sans text-center leading-tight" style={{ color: CTM_GREEN }}>feeds into<br />Patient Vol.<br />Selection</span>
+                <span className="text-[8px] font-sans text-center leading-tight" style={{ color: CTM_GREEN }}>feeds into<br />Personalized<br />Match</span>
               </div>
+
+              {/* V2 — auto-placed at col 10, aligns with Step 05 Mutual Consent */}
+              <IphoneMockup step={volunteerConsentStep} />
+              {/* Arrow spanning cols 11-13 (no volunteer equivalent of Recovery & Monitoring) */}
+              <div className="flex items-center justify-center" style={{ gridColumn: "11 / 14", height: ITEM_HEIGHT }}>
+                <span className="text-gray-400 text-base">→</span>
+              </div>
+              {/* V3 — auto-placed at col 14, aligns with Step 07 Patient Review */}
+              <IphoneMockup step={volunteerReviewStep} />
             </div>
 
           </div>
