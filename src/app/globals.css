@@ -72,6 +72,18 @@
   --color-coral-800: #991b1b;
   --color-coral-900: #7f1d1d;
 
+  /* Warm Cream Palette (redesign) */
+  --color-warm-cream: #faf6f0;
+  --color-warm-cream-dark: #f0e8dc;
+  --color-border-warm: #e0d8cc;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+
+  /* Updated brand colors for redesign */
+  --color-redesign-navy: #1a3a4a;
+  --color-redesign-teal: #2d8c7b;
+  --color-redesign-coral: #c87d5a;
+
   /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Georgia', ui-serif, serif;
