@@ -32,9 +32,9 @@ const FUNNEL_STEPS = [
 
 const TOP_MATCHES: VolunteerMatch[] = [
   {
-    id: 1, name: "Robert M.", age: 71, location: "Oak Park, IL", distance: "8 miles",
+    id: 1, name: "Susan M.", age: 71, location: "Oak Park, IL", distance: "8 miles",
     surgeryHistory: "Right Knee Replacement — 2 yrs ago", availability: "Mon – Fri",
-    matchScore: 94, isTop: true, photo: "/profiles/robert.jpg",
+    matchScore: 94, isTop: true, photo: "/profiles/susan.jpg",
     reasons: [
       { icon: "🦵", text: "Same joint: right knee" },
       { icon: "📍", text: "8 miles away" },
@@ -52,9 +52,9 @@ const TOP_MATCHES: VolunteerMatch[] = [
     ],
   },
   {
-    id: 3, name: "Thomas R.", age: 63, location: "Berwyn, IL", distance: "10 miles",
+    id: 3, name: "Barbara R.", age: 63, location: "Berwyn, IL", distance: "10 miles",
     surgeryHistory: "Left Knee Replacement — 18 mo ago", availability: "Wkends + some weekdays",
-    matchScore: 81, photo: "/profiles/thomas.jpg",
+    matchScore: 81, photo: "/profiles/barbara.jpg",
     reasons: [
       { icon: "🦵", text: "Similar joint: left knee" },
       { icon: "📍", text: "10 miles away" },
@@ -74,10 +74,10 @@ const CAROL_P: VolunteerMatch = {
   ],
 };
 
-// Round 2: Robert removed, Linda promoted to Top, Carol fills 3rd slot
+// Round 2: Susan removed, Linda promoted to Top, Carol fills 3rd slot
 const REMATCH_POOL: VolunteerMatch[] = [
   { ...TOP_MATCHES[1], isTop: true, matchScore: 91 },   // Linda K. → promoted to Top Match
-  { ...TOP_MATCHES[2], matchScore: 84 },                  // Thomas R. → bumped up
+  { ...TOP_MATCHES[2], matchScore: 84 },                  // Barbara R. → bumped up
   CAROL_P,                                                 // Carol P. → new #3
 ];
 
@@ -255,7 +255,7 @@ function IphoneNotification({ visible, onDismiss }: { visible: boolean; onDismis
                     <p className="font-sans text-[10px] text-gray-400">now</p>
                   </div>
                   <p className="font-sans text-xs text-gray-700 mt-0.5 leading-snug">
-                    Great news, Jennifer! We&apos;ve found your CaretakerMatch volunteer. Robert M. will be your caregiver for your knee surgery on Jun 18.
+                    Great news, Jennifer! We&apos;ve found your CaretakerMatch volunteer. Susan M. will be your caregiver for your knee surgery on Jun 18.
                   </p>
                 </div>
               </div>
@@ -267,7 +267,7 @@ function IphoneNotification({ visible, onDismiss }: { visible: boolean; onDismis
                 </svg>
               </div>
               <p className="font-sans text-white/20 text-[10px] tracking-widest uppercase text-center">Jennifer W.&apos;s iPhone</p>
-              <p className="font-sans text-white/30 text-[9px] text-center">Robert M. also notified simultaneously</p>
+              <p className="font-sans text-white/30 text-[9px] text-center">Susan M. also notified simultaneously</p>
             </div>
             <div className="flex justify-center pb-3">
               <div className="w-28 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.25)" }} />
@@ -353,7 +353,7 @@ export default function VolunteerSelectionPage() {
   // Auto-select top match when cards appear
   useEffect(() => {
     if (phase === "matched") {
-      setTimeout(() => setSelectedMatch(1), 800);   // Robert (id=1)
+      setTimeout(() => setSelectedMatch(1), 800);   // Susan (id=1)
     } else if (phase === "rematched") {
       setTimeout(() => setSelectedMatch(2), 800);    // Linda (id=2) is now top
     }
@@ -483,7 +483,7 @@ export default function VolunteerSelectionPage() {
             {phase === "rematched" && (
               <div className="flex flex-col gap-2">
                 <div className="rounded-lg p-2.5 text-center" style={{ background: "#FEF3C7" }}>
-                  <p className="font-sans text-[10px] font-semibold" style={{ color: "#92400e" }}>Round 2 — Robert M. removed from pool</p>
+                  <p className="font-sans text-[10px] font-semibold" style={{ color: "#92400e" }}>Round 2 — Susan M. removed from pool</p>
                 </div>
                 <button
                   onClick={runMatching}
@@ -529,7 +529,7 @@ export default function VolunteerSelectionPage() {
                         Re-matching — Round 2
                       </p>
                       <p className="font-sans text-[11px] mt-0.5" style={{ color: "#a16207" }}>
-                        Robert M. removed from pool after unsuccessful coffee meet. Recalculating top matches from remaining volunteers.
+                        Susan M. removed from pool after unsuccessful coffee meet. Recalculating top matches from remaining volunteers.
                       </p>
                     </div>
                   </div>
@@ -636,7 +636,7 @@ export default function VolunteerSelectionPage() {
                             {matchRound === 2 && (
                               <div className="rounded-lg p-2 mb-1" style={{ background: "#FEF3C7" }}>
                                 <p className="font-sans text-[10px] font-semibold text-center" style={{ color: "#92400e" }}>
-                                  🔄 Updated matches — Robert M. removed
+                                  🔄 Updated matches — Susan M. removed
                                 </p>
                               </div>
                             )}
@@ -684,7 +684,7 @@ export default function VolunteerSelectionPage() {
                             {phase === "confirmed" && (
                               <div className="rounded-xl p-3 mt-1" style={{ background: "#d1fae5" }}>
                                 <p className="font-sans text-xs font-semibold text-center" style={{ color: "#065f46" }}>
-                                  ✓ Robert M. confirmed as your companion!
+                                  ✓ Susan M. confirmed as your companion!
                                 </p>
                                 <p className="font-sans text-[10px] text-center mt-1" style={{ color: "#047857" }}>
                                   You&apos;ll meet for coffee before your surgery.

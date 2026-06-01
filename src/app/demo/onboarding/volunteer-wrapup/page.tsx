@@ -137,14 +137,14 @@ export default function VolunteerWrapupPage() {
             </div>
           </div>
           <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-            <img src="/profiles/robert.jpg" alt="Robert M." className="w-full h-full object-cover" />
+            <img src="/profiles/susan.jpg" alt="Susan M." className="w-full h-full object-cover" />
           </div>
         </div>
 
         {submitted ? (
           <div className="px-5 py-10 flex flex-col items-center gap-4">
             <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl" style={{ background: "#EAF3DE" }}>🏅</div>
-            <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>Thank You, Robert!</h2>
+            <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>Thank You, Susan!</h2>
             <p className="text-sm text-center leading-relaxed" style={{ color: "#555" }}>
               Your support made a real difference in Jennifer&apos;s recovery. You&apos;re making healthcare more human.
             </p>

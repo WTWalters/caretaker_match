@@ -52,7 +52,7 @@ export default function VolunteerConfirmationPage() {
       </div>
 
       <IPhone>
-        {/* App bar — Robert's view */}
+        {/* App bar — Susan's view */}
         <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: CTM_GREEN }}>
           <div className="flex items-center gap-2">
             <img src="/ctm-logo.png" alt="CTM" className="w-7 h-7 object-contain rounded-full" />
@@ -62,7 +62,7 @@ export default function VolunteerConfirmationPage() {
             </div>
           </div>
           <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-            <img src="/profiles/robert.jpg" alt="Robert M." className="w-full h-full object-cover" />
+            <img src="/profiles/susan.jpg" alt="Susan M." className="w-full h-full object-cover" />
           </div>
         </div>
 

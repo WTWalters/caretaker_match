@@ -56,7 +56,7 @@ export default function VolunteerConsentPage() {
       </div>
 
       <IPhone>
-        {/* App bar — Robert's view */}
+        {/* App bar — Susan's view */}
         <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: CTM_GREEN }}>
           <div className="flex items-center gap-2">
             <img src="/ctm-logo.png" alt="CTM" className="w-7 h-7 object-contain rounded-full" />
@@ -66,7 +66,7 @@ export default function VolunteerConsentPage() {
             </div>
           </div>
           <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-            <img src="/profiles/robert.jpg" alt="Robert M." className="w-full h-full object-cover" />
+            <img src="/profiles/susan.jpg" alt="Susan M." className="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -75,7 +75,7 @@ export default function VolunteerConsentPage() {
             {decision === "continue" ? (
               <>
                 <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl" style={{ background: "#EAF3DE" }}>💚</div>
-                <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>Thank You, Robert!</h2>
+                <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>Thank You, Susan!</h2>
                 <p className="text-sm text-center leading-relaxed" style={{ color: "#555" }}>
                   Jennifer has also agreed to move forward. You&apos;re officially matched! You&apos;ll be her CareTaker during recovery.
                 </p>
@@ -122,7 +122,7 @@ export default function VolunteerConsentPage() {
             ) : (
               <>
                 <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl" style={{ background: "#FEF3C7" }}>🙏</div>
-                <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>We Understand, Robert</h2>
+                <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>We Understand, Susan</h2>
                 <p className="text-sm text-center leading-relaxed" style={{ color: "#555" }}>
                   Thank you for meeting Jennifer. Not every match is the right fit, and that&apos;s okay. We appreciate your willingness to volunteer.
                 </p>

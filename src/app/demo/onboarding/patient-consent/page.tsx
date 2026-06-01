@@ -77,16 +77,16 @@ export default function PatientConsentPage() {
                 <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl" style={{ background: "#EAF3DE" }}>🤝</div>
                 <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>You&apos;re Matched!</h2>
                 <p className="text-sm text-center leading-relaxed" style={{ color: "#555" }}>
-                  Robert M. has also agreed to move forward. You&apos;re officially matched! He&apos;ll be your CareTaker during recovery.
+                  Susan M. has also agreed to move forward. You&apos;re officially matched! She&apos;ll be your CareTaker during recovery.
                 </p>
 
                 <div className="w-full rounded-xl p-4" style={{ background: CTM_GREEN }}>
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                      <img src="/profiles/robert.jpg" alt="Robert M." className="w-full h-full object-cover" />
+                      <img src="/profiles/susan.jpg" alt="Susan M." className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <div className="text-white font-bold text-sm">Robert M. — Your CareTaker</div>
+                      <div className="text-white font-bold text-sm">Susan M. — Your CareTaker</div>
                       <div className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>Right Knee Replacement · 2 yrs ago</div>
                       <div className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>94% match score</div>
                     </div>
@@ -96,8 +96,8 @@ export default function PatientConsentPage() {
                 <div className="w-full rounded-xl p-4" style={{ background: "#EAF3DE" }}>
                   <div className="text-[10px] font-semibold uppercase tracking-wide mb-2" style={{ color: CTM_GREEN }}>What Happens Next</div>
                   {[
-                    "Contact info shared securely between you and Robert",
-                    "Robert will check in the day before your surgery",
+                    "Contact info shared securely between you and Susan",
+                    "Susan will check in the day before your surgery",
                     "3-day post-op visit schedule begins Jun 18",
                     "All communication monitored for your safety",
                   ].map((item) => (
@@ -148,16 +148,16 @@ export default function PatientConsentPage() {
             {/* Header */}
             <div className="text-center">
               <h2 className="text-lg font-bold" style={{ color: CTM_GREEN }}>How Was Your Coffee Meet?</h2>
-              <p className="text-xs mt-1" style={{ color: "#73726c" }}>Your meet with Robert M. is complete</p>
+              <p className="text-xs mt-1" style={{ color: "#73726c" }}>Your meet with Susan M. is complete</p>
             </div>
 
-            {/* Robert summary card */}
+            {/* Susan summary card */}
             <div className="rounded-xl p-3 flex items-center gap-3" style={{ background: "white", border: "1px solid #e0d8c8" }}>
               <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                <img src="/profiles/robert.jpg" alt="Robert M." className="w-full h-full object-cover" />
+                <img src="/profiles/susan.jpg" alt="Susan M." className="w-full h-full object-cover" />
               </div>
               <div>
-                <div className="font-bold text-sm" style={{ color: "#1a1a1a" }}>Robert M.</div>
+                <div className="font-bold text-sm" style={{ color: "#1a1a1a" }}>Susan M.</div>
                 <div className="text-xs" style={{ color: "#73726c" }}>Right Knee Replacement · 2 yrs ago</div>
                 <div className="text-xs" style={{ color: "#73726c" }}>94% match · Oak Park, IL</div>
               </div>
@@ -165,8 +165,8 @@ export default function PatientConsentPage() {
 
             {/* Decision question */}
             <div className="text-center">
-              <p className="text-sm font-semibold" style={{ color: CTM_GREEN }}>Would you like Robert as your CareTaker?</p>
-              <p className="text-xs mt-1" style={{ color: "#73726c" }}>Both you and Robert must agree to move forward</p>
+              <p className="text-sm font-semibold" style={{ color: CTM_GREEN }}>Would you like Susan as your CareTaker?</p>
+              <p className="text-xs mt-1" style={{ color: "#73726c" }}>Both you and Susan must agree to move forward</p>
             </div>
 
             {/* Continue option */}
@@ -183,7 +183,7 @@ export default function PatientConsentPage() {
               </div>
               <div>
                 <div className="font-semibold text-sm" style={{ color: decision === "continue" ? "white" : "#1a1a1a" }}>
-                  Yes, I&apos;d like Robert as my CareTaker
+                  Yes, I&apos;d like Susan as my CareTaker
                 </div>
                 <div className="text-xs mt-0.5" style={{ color: decision === "continue" ? "rgba(255,255,255,0.75)" : "#73726c" }}>
                   I felt comfortable and want to move forward
@@ -220,7 +220,7 @@ export default function PatientConsentPage() {
               <span className="text-blue-500 flex-shrink-0 mt-0.5 text-sm">🔒</span>
               <p className="text-xs leading-relaxed" style={{ color: "#1e40af" }}>
                 <span className="font-semibold">Your choice is private.</span>{" "}
-                Robert won&apos;t know your decision until both of you have responded. If either person opts out, the match ends gracefully.
+                Susan won&apos;t know your decision until both of you have responded. If either person opts out, the match ends gracefully.
               </p>
             </div>
 

@@ -152,7 +152,7 @@ export default function PatientWrapupPage() {
                 <span className="text-lg">🤝</span>
                 <div>
                   <div className="text-sm font-semibold" style={{ color: CTM_GREEN }}>You&apos;re staying connected!</div>
-                  <div className="text-xs mt-0.5" style={{ color: "#555" }}>Robert M. can continue to check in during your recovery.</div>
+                  <div className="text-xs mt-0.5" style={{ color: "#555" }}>Susan M. can continue to check in during your recovery.</div>
                 </div>
               </div>
             )}
@@ -171,16 +171,16 @@ export default function PatientWrapupPage() {
             {/* Header */}
             <div className="text-center">
               <h2 className="text-lg font-bold" style={{ color: CTM_GREEN }}>How Was Your Experience?</h2>
-              <p className="text-xs mt-1" style={{ color: "#73726c" }}>Your encounter with Robert M. is complete</p>
+              <p className="text-xs mt-1" style={{ color: "#73726c" }}>Your encounter with Susan M. is complete</p>
             </div>
 
             {/* Encounter summary */}
             <div className="rounded-xl p-3 flex items-center gap-3" style={{ background: "white", border: "1px solid #e0d8c8" }}>
               <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                <img src="/profiles/robert.jpg" alt="Robert M." className="w-full h-full object-cover" />
+                <img src="/profiles/susan.jpg" alt="Susan M." className="w-full h-full object-cover" />
               </div>
               <div>
-                <div className="font-bold text-sm" style={{ color: "#1a1a1a" }}>Robert M.</div>
+                <div className="font-bold text-sm" style={{ color: "#1a1a1a" }}>Susan M.</div>
                 <div className="text-xs" style={{ color: "#73726c" }}>Volunteer · 3 visits over 2 weeks</div>
                 <div className="text-xs" style={{ color: "#73726c" }}>Right Knee Replacement veteran</div>
               </div>
@@ -188,7 +188,7 @@ export default function PatientWrapupPage() {
 
             {/* Star rating: person */}
             <div className="rounded-xl p-4" style={{ background: "white", border: "1px solid #e0d8c8" }}>
-              <StarRating value={personRating} onChange={setPersonRating} label="Rate Robert as a Caretaker" />
+              <StarRating value={personRating} onChange={setPersonRating} label="Rate Susan as a Caretaker" />
             </div>
 
             {/* Star rating: care */}
@@ -226,9 +226,9 @@ export default function PatientWrapupPage() {
                 {stayConnected && <span className="text-white text-sm">✓</span>}
               </button>
               <div>
-                <div className="text-sm font-semibold" style={{ color: CTM_GREEN }}>Stay connected with Robert</div>
+                <div className="text-sm font-semibold" style={{ color: CTM_GREEN }}>Stay connected with Susan</div>
                 <div className="text-xs mt-0.5" style={{ color: "#555" }}>
-                  Allow Robert to check in during your recovery. You can opt out anytime.
+                  Allow Susan to check in during your recovery. You can opt out anytime.
                 </div>
               </div>
             </div>

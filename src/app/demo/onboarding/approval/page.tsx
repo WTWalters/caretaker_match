@@ -29,11 +29,11 @@ const DEMO_VOL_ID = 1;
 const PATIENTS: Patient[] = [
   { id: 1, name: "Jennifer W.", procedure: "Total Knee Replacement", surgeryDate: "Jun 18, 2026", submitted: "Today, 9:41 AM", status: "pending", ctmScore: 7, isDemo: true },
   { id: 2, name: "Margaret H.", procedure: "Hip Replacement", surgeryDate: "May 28, 2026", submitted: "May 7, 2026", status: "approved", ctmScore: 8 },
-  { id: 3, name: "James R.", procedure: "Total Knee Replacement", surgeryDate: "Jun 3, 2026", submitted: "May 6, 2026", status: "failed", ctmScore: 3, failedCheck: "Criminal history" },
+  { id: 3, name: "Patricia R.", procedure: "Total Knee Replacement", surgeryDate: "Jun 3, 2026", submitted: "May 6, 2026", status: "failed", ctmScore: 3, failedCheck: "Criminal history" },
 ];
 
 const VOLUNTEERS: VolunteerRecord[] = [
-  { id: 1, name: "Robert M.", surgeryHistory: "Knee Replacement — 2 yrs ago", submitted: "Today, 10:15 AM", status: "pending", readinessScore: 8, isDemo: true },
+  { id: 1, name: "Susan M.", surgeryHistory: "Knee Replacement — 2 yrs ago", submitted: "Today, 10:15 AM", status: "pending", readinessScore: 8, isDemo: true },
   { id: 2, name: "Linda K.", surgeryHistory: "Hip Replacement — 3 yrs ago", submitted: "May 8, 2026", status: "approved", readinessScore: 9 },
   { id: 3, name: "David P.", surgeryHistory: "Shoulder Replacement — 1 yr ago", submitted: "May 7, 2026", status: "failed", readinessScore: 2, failedCheck: "Criminal history" },
 ];
@@ -511,7 +511,7 @@ export default function ApprovalDashboard() {
               )}
               {selectedVol.id === DEMO_VOL_ID && volPhase === "sent" && (
                 <div className="w-full py-3.5 rounded-xl text-center font-sans text-sm font-semibold text-emerald-700" style={{ background: "#d1fae5" }}>
-                  ✓ Approval notification sent to Robert
+                  ✓ Approval notification sent to Susan
                 </div>
               )}
               {selectedVol.id !== DEMO_VOL_ID && selectedVol.status === "failed" && (
@@ -536,8 +536,8 @@ export default function ApprovalDashboard() {
         <IphoneNotification
           visible={volNotifVisible}
           onDismiss={() => { setVolNotifVisible(false); setTimeout(() => setShowVolNotif(false), 350); }}
-          recipientName="Robert"
-          message="Welcome aboard, Robert! Your background check cleared. You're approved as a CareTaker Match volunteer."
+          recipientName="Susan"
+          message="Welcome aboard, Susan! Your background check cleared. You're approved as a CareTaker Match volunteer."
         />
       )}
     </div>

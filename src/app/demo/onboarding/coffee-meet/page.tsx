@@ -104,7 +104,7 @@ export default function CoffeeMeetPage() {
               <div className="w-16 h-16 rounded-full flex items-center justify-center text-3xl" style={{ background: "#EAF3DE" }}>☕</div>
               <h2 className="text-xl font-bold text-center" style={{ color: CTM_GREEN }}>You&apos;re all set, Jennifer!</h2>
               <p className="text-sm text-center" style={{ color: "#555" }}>
-                Your coffee meet with <strong>Robert M.</strong> is confirmed. Calendar invites have been sent to both of you.
+                Your coffee meet with <strong>Susan M.</strong> is confirmed. Calendar invites have been sent to both of you.
               </p>
             </div>
 
@@ -129,7 +129,7 @@ export default function CoffeeMeetPage() {
                 <span className="text-lg">👤</span>
                 <div>
                   <div className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: CTM_GREEN }}>Your Volunteer</div>
-                  <div className="text-sm font-medium" style={{ color: "#1a1a1a" }}>Robert M. — Right Knee Replacement, 2 yrs ago</div>
+                  <div className="text-sm font-medium" style={{ color: "#1a1a1a" }}>Susan M. — Right Knee Replacement, 2 yrs ago</div>
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@ export default function CoffeeMeetPage() {
               {[
                 "30–45 minute casual coffee chat",
                 "Share your concerns about recovery",
-                "Ask Robert about his experience",
+                "Ask Susan about her experience",
                 "Decide together if the match feels right",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-2 text-sm mb-1.5" style={{ color: "#3a3a3a" }}>
@@ -154,7 +154,7 @@ export default function CoffeeMeetPage() {
               <span className="text-blue-500 flex-shrink-0 mt-0.5 text-sm">🔒</span>
               <p className="text-xs leading-relaxed" style={{ color: "#1e40af" }}>
                 <span className="font-semibold">Your privacy is protected:</span>{" "}
-                Robert does not have your phone number or home address. All communication goes through a secure proxy until you both consent to share contact info after the coffee meet.
+                Susan does not have your phone number or home address. All communication goes through a secure proxy until you both consent to share contact info after the coffee meet.
               </p>
             </div>
 
@@ -162,7 +162,7 @@ export default function CoffeeMeetPage() {
               {loc.virtual ? "💻 Join Video Call" : "Get Directions"}
             </button>
             <button className="w-full py-3.5 rounded-xl font-semibold text-sm" style={{ border: `1.5px solid ${CTM_GREEN}`, color: CTM_GREEN, background: "white" }}>
-              Contact Robert (via Secure Proxy)
+              Contact Susan (via Secure Proxy)
             </button>
 
             <div className="flex items-center justify-center gap-3 pt-2 pb-1">
@@ -186,15 +186,15 @@ export default function CoffeeMeetPage() {
                 <span className="text-white font-bold text-base">Great News!</span>
               </div>
               <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.90)" }}>
-                Robert M. has accepted your request! Let&apos;s schedule a coffee meet before your surgery.
+                Susan M. has accepted your request! Let&apos;s schedule a coffee meet before your surgery.
               </p>
             </div>
 
-            {/* Robert summary card */}
+            {/* Susan summary card */}
             <div className="rounded-xl p-3 flex items-center gap-3 bg-white" style={{ border: "1px solid #e0d8c8" }}>
               <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0" style={{ background: CTM_GREEN }}>RM</div>
               <div>
-                <div className="font-bold text-sm" style={{ color: "#1a1a1a" }}>Robert M.</div>
+                <div className="font-bold text-sm" style={{ color: "#1a1a1a" }}>Susan M.</div>
                 <div className="text-xs" style={{ color: "#73726c" }}>94% Match • 8 mi away</div>
                 <div className="text-xs" style={{ color: "#73726c" }}>Right Knee Replacement — 2 yrs ago</div>
                 <div className="text-xs" style={{ color: "#73726c" }}>Oak Park, IL • Mon–Fri available</div>
@@ -204,7 +204,7 @@ export default function CoffeeMeetPage() {
             {/* Step 1: Time */}
             <div>
               <div className="text-sm font-bold mb-0.5" style={{ color: "#1a1a1a" }}>Step 1: Pick a Time</div>
-              <div className="text-xs mb-2" style={{ color: "#73726c" }}>Robert proposed these times. Choose what works best:</div>
+              <div className="text-xs mb-2" style={{ color: "#73726c" }}>Susan proposed these times. Choose what works best:</div>
               <div className="flex flex-col gap-2">
                 {TIME_SLOTS.map((slot) => {
                   const active = selectedTime === slot.id;
