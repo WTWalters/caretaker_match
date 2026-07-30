@@ -28,7 +28,11 @@ export default function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                aria-current={pathname === link.href ? "page" : undefined}
+                aria-current={
+                  "match" in link && link.match === pathname
+                    ? "page"
+                    : undefined
+                }
               >
                 {link.label}
               </Link>

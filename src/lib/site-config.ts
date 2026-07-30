@@ -28,12 +28,25 @@ export const FORMSPREE_PARTNER =
 
 export const SITE_URL = "https://caretakermatch.com";
 
+/**
+ * `match` is the pathname that should mark the link as the current page.
+ * Section anchors on the homepage deliberately have no match — only the
+ * "Home" link represents `/` as a destination, so it alone carries it.
+ */
 export const NAV_LINKS = [
-  { href: "/#hero", label: "Home" },
+  { href: "/#hero", label: "Home", match: "/" },
   { href: "/#how", label: "How It Works" },
   { href: "/#story", label: "Our Story" },
   { href: "/#value", label: "Partners" },
-  { href: "/health-systems", label: "Health Systems" },
-  { href: "/community-care-partner", label: "Community Care Partners" },
+  { href: "/health-systems", label: "Health Systems", match: "/health-systems" },
+  {
+    href: "/community-care-partner",
+    label: "Community Care Partners",
+    match: "/community-care-partner",
+  },
   { href: "/#contact", label: "Contact" },
-] as const;
+] as const satisfies ReadonlyArray<{
+  href: string;
+  label: string;
+  match?: string;
+}>;
