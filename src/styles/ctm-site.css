@@ -1,0 +1,198 @@
+/* CaretakerMatch — shared marketing-site base.
+   Everything here is scoped under .ctm-site so it cannot leak into
+   /demo, /team, or /updatedCTM, which still use Tailwind + globals.css.
+
+   Page-specific styles live in ctm-home.css, ctm-ccp.css, ctm-hs.css and are
+   ported verbatim from the static HTML Hamid supplied. This file only adds
+   what the static pages were missing: a consistent header across all three
+   pages and a working mobile navigation. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.ctm-site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f6f0;
+}
+
+.ctm-site > main {
+  flex: 1;
+}
+
+/* Skip link — the static pages had no keyboard bypass for the sticky nav. */
+.ctm-site .skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  background: #164430;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 0 0 10px 0;
+  text-decoration: none;
+}
+.ctm-site .skip-link:focus {
+  left: 0;
+}
+
+/* ---- Header nav -------------------------------------------------------
+   The .ctm-nav / .ctm-nav-toggle classes carry extra specificity so these
+   rules win regardless of stylesheet load order. */
+
+.ctm-site nav.links.ctm-nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-left: 32px;
+}
+
+.ctm-site nav.links.ctm-nav a {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #5b6459;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ctm-site nav.links.ctm-nav a:hover,
+.ctm-site nav.links.ctm-nav a[aria-current="page"] {
+  color: #164430;
+}
+
+.ctm-site .ctm-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid #dedacc;
+  background: #fff;
+  color: #1b241e;
+  cursor: pointer;
+}
+
+.ctm-site .ctm-nav-toggle:focus-visible {
+  outline: 3px solid #e7cfa0;
+  outline-offset: 2px;
+}
+
+.ctm-site .ctm-nav-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.ctm-site .ctm-mobile-panel {
+  display: none;
+  border-bottom: 1px solid #dedacc;
+  background: #f7f6f0;
+}
+
+.ctm-site .ctm-mobile-panel nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 18px;
+}
+
+.ctm-site .ctm-mobile-panel nav a {
+  padding: 12px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1b241e;
+  text-decoration: none;
+  border-bottom: 1px solid #dedacc;
+}
+
+.ctm-site .ctm-mobile-panel nav a:last-of-type {
+  border-bottom: none;
+}
+
+.ctm-site .ctm-mobile-panel .btn {
+  margin-top: 14px;
+  align-self: flex-start;
+}
+
+@media (max-width: 1060px) {
+  .ctm-site nav.links.ctm-nav {
+    display: none;
+  }
+  .ctm-site .ctm-nav-toggle {
+    display: inline-flex;
+  }
+  .ctm-site .ctm-mobile-panel.is-open {
+    display: block;
+  }
+  /* The desktop CTA lives in the panel on small screens. */
+  .ctm-site #topnav .ctm-header-cta {
+    display: none;
+  }
+}
+
+/* ---- Footer -----------------------------------------------------------
+   The CCP and Health Systems stylesheets were missing these two rules, which
+   only existed on the homepage. Now that all three share a footer component
+   they need to be available everywhere. */
+
+.ctm-site .tagline .sub2 {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+}
+
+.ctm-site .foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0 4px;
+}
+
+.ctm-site .foot-links a:hover {
+  color: #fff;
+}
+
+/* ---- Form status ------------------------------------------------------
+   The static pages hid #formStatus with display:none and revealed it via
+   inline style. React drives it with a class instead. */
+
+.ctm-site .form-status {
+  display: none;
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.ctm-site .form-status.is-visible {
+  display: block;
+}
+
+.ctm-site .form-status.is-error {
+  color: #9a3412;
+}
+
+.ctm-site .form-status.is-success {
+  color: #164430;
+}
+
+.ctm-site button[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}

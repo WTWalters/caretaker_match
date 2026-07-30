@@ -1,0 +1,61 @@
+/* CaretakerMatch — Health Systems page styles
+   Scoped under .ctm-hs so it cannot leak into /demo, /team, or /updatedCTM.
+   Ported verbatim from the static HTML supplied by Hamid. */
+
+.ctm-hs {--paper:#F7F6F0; --paper-deep:#EEEBDE; --ink:#1B241E; --ink-soft:#5B6459;
+    --navy:#14344F; --forest:#1F5C3E; --forest-deep:#164430;
+    --gold:#B9862E; --gold-soft:#E7CFA0; --line:#DEDACC; --white:#FFFFFF; --maxw:1020px;}
+.ctm-hs * {box-sizing:border-box;}
+.ctm-hs {margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.ctm-hs h1,
+.ctm-hs h2,
+.ctm-hs h3 {font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;font-weight:560;letter-spacing:-.01em;}
+.ctm-hs p {margin:0 0 1em;}
+.ctm-hs a {color:inherit;}
+.ctm-hs .wrap {max-width:var(--maxw);margin:0 auto;padding:0 26px;}
+.ctm-hs section {padding:76px 0;}
+.ctm-hs .icon {width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block;}
+.ctm-hs .eyebrow {font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:.13em;font-size:12px;font-weight:600;color:var(--forest-deep);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.ctm-hs .center {text-align:center;}
+.ctm-hs .center .eyebrow {justify-content:center;}
+.ctm-hs .divider {height:1px;background:var(--line);width:100%;}
+.ctm-hs #topnav {position:sticky;top:0;z-index:50;background:rgba(247,246,240,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.ctm-hs #topnav .wrap {display:flex;align-items:center;justify-content:space-between;height:74px;}
+.ctm-hs .brand {display:flex;align-items:center;gap:11px;text-decoration:none;}
+.ctm-hs .brand img {width:32px;height:32px;display:block;}
+.ctm-hs .brand span {font-family:'Fraunces',serif;font-weight:650;font-size:19px;color:var(--ink);}
+.ctm-hs nav.links {display:flex;gap:18px;align-items:center;margin-left:32px;}
+.ctm-hs nav.links a {font-size:13.5px;font-weight:500;color:var(--ink-soft);text-decoration:none;white-space:nowrap;}
+.ctm-hs .btn {display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-size:14.5px;font-weight:600;text-decoration:none;border:1px solid transparent;transition:transform .15s ease, box-shadow .15s ease;cursor:pointer;}
+.ctm-hs .btn-primary {background:var(--forest-deep);color:var(--white);}
+.ctm-hs .btn-primary:hover {transform:translateY(-1px);box-shadow:0 8px 18px rgba(22,68,48,.22);}
+.ctm-hs #hero {padding:88px 0 40px;text-align:center;}
+.ctm-hs #hero h1 {font-size:clamp(32px,5vw,50px);max-width:16ch;margin:0 auto .45em;line-height:1.12;}
+.ctm-hs #hero .sub {font-size:17px;color:var(--ink-soft);max-width:52ch;margin:0 auto 28px;}
+.ctm-hs .stat-row {display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
+.ctm-hs .stat-row .stat {text-align:center;max-width:190px;}
+.ctm-hs .stat-row .num {font-family:'Fraunces',serif;font-weight:650;font-size:30px;color:var(--forest-deep);display:block;}
+.ctm-hs .stat-row .lbl {font-size:13px;color:var(--ink-soft);}
+.ctm-hs #why {background:var(--paper-deep);}
+.ctm-hs .why-list {max-width:640px;margin:36px auto 0;}
+.ctm-hs .why-list li {font-size:15.5px;color:var(--ink-soft);margin-bottom:14px;padding-left:22px;position:relative;}
+.ctm-hs .why-list li::before {content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--gold);}
+.ctm-hs #team-model {text-align:center;}
+.ctm-hs #team-model .callout {max-width:680px;margin:36px auto 0;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:30px 32px;text-align:left;}
+.ctm-hs #team-model .callout h3 {font-size:19px;margin-bottom:10px;}
+.ctm-hs #team-model .callout p {font-size:15px;color:var(--ink-soft);margin-bottom:0;}
+.ctm-hs #cta {background:var(--forest-deep);color:#fff;text-align:center;}
+.ctm-hs #cta h2 {color:#fff;}
+.ctm-hs #cta p {color:rgba(255,255,255,.82);max-width:520px;margin:0 auto 22px;font-size:15.5px;}
+.ctm-hs footer {padding:42px 0 30px;background:var(--ink);color:rgba(255,255,255,.68);}
+.ctm-hs .foot-grid {display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+.ctm-hs .foot-brand {display:flex;align-items:center;gap:11px;}
+.ctm-hs .foot-brand img {width:26px;height:26px;}
+.ctm-hs .foot-brand span {font-family:'Fraunces',serif;color:#fff;font-size:16px;font-weight:650;}
+.ctm-hs .tagline {font-family:'Fraunces',serif;font-style:italic;color:var(--gold-soft);font-size:15px;}
+.ctm-hs .foot-copy {font-size:11.5px;color:rgba(255,255,255,.42);margin-top:14px;}
+.ctm-hs .foot-links a {color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;margin-left:18px;}
+@media (max-width:900px) {
+.ctm-hs nav.links {display:none;}
+.ctm-hs .stat-row {gap:26px;}
+}
