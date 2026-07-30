@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   description:
     "How CaretakerMatch helps health systems and payers improve care transitions, activate community resources, and support value-based care.",
   alternates: { canonical: "/health-systems" },
+  openGraph: {
+    title: "For Health Systems & Payers — CaretakerMatch",
+    description:
+      "Why appropriate discharge placement is both a clinical and financial priority for health systems today.",
+    type: "website",
+    images: [{ url: "/site/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image", images: ["/site/og-image.png"] },
 };
 
 export default function HealthSystemsPage() {

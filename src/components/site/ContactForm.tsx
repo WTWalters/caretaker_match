@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { CONTACT_EMAIL, FORMSPREE_CONTACT } from "@/lib/site-config";
+import { useEffect, useState } from "react";
+import { submitForm } from "@/lib/submit-form";
 
-type Status = { kind: "idle" | "success" | "error"; text: string };
+type Status = {
+  kind: "idle" | "success" | "error";
+  text: string;
+  mailto?: string;
+};
 
 const AUDIENCES = [
   "Health System / Physician",
@@ -17,7 +21,6 @@ export default function ContactForm() {
   const [iam, setIam] = useState(AUDIENCES[0]);
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
-  const formRef = useRef<HTMLFormElement>(null);
 
   /* Preserves the original behaviour: any "Explore a Pilot" / "Learn More" /
      "Become a Community Partner" button preselects the matching audience. */
@@ -34,64 +37,47 @@ export default function ContactForm() {
       nodes.forEach((node) => node.removeEventListener("click", handler));
   }, []);
 
-  function mailtoFallback(data: Record<string, string>) {
-    const subject = encodeURIComponent(
-      `CaretakerMatch inquiry — ${data.iam ?? ""}`,
-    );
-    const body = encodeURIComponent(
-      `Name: ${data.name ?? ""}\nOrganization: ${data.org ?? ""}\nEmail: ${
-        data.email ?? ""
-      }\nI am a: ${data.iam ?? ""}\n\nMessage:\n${data.message ?? ""}`,
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus({
-      kind: "success",
-      text: "Opening your email app to send this to us…",
-    });
-  }
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const data = Object.fromEntries(
-      new FormData(form).entries(),
-    ) as Record<string, string>;
-
-    if (!FORMSPREE_CONTACT) {
-      mailtoFallback(data);
-      return;
-    }
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<
+      string,
+      string
+    >;
 
     setSending(true);
     setStatus({ kind: "idle", text: "" });
 
-    try {
-      const response = await fetch(FORMSPREE_CONTACT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      });
+    const result = await submitForm("contact", data);
+    setSending(false);
 
-      if (!response.ok) throw new Error(String(response.status));
-
+    if (result.ok) {
       form.reset();
       setIam(AUDIENCES[0]);
       setStatus({
         kind: "success",
         text: "Thank you — we've received your message and will follow up within a few business days.",
       });
-    } catch {
-      setStatus({
-        kind: "error",
-        text: `Something went wrong sending that. Please email us directly at ${CONTACT_EMAIL}.`,
-      });
-    } finally {
-      setSending(false);
+      return;
     }
+
+    setStatus({ kind: "error", text: result.message, mailto: result.mailto });
   }
 
   return (
-    <form className="signup" ref={formRef} onSubmit={handleSubmit}>
+    <form className="signup" onSubmit={handleSubmit}>
+      {/* Honeypot: hidden from people, irresistible to bots. */}
+      <div className="hp-field" aria-hidden="true">
+        <label htmlFor="company_website">Company website</label>
+        <input
+          type="text"
+          id="company_website"
+          name="company_website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="form-row">
         <div>
           <label htmlFor="name">Name</label>
@@ -158,6 +144,12 @@ export default function ContactForm() {
         aria-live="polite"
       >
         {status.text}
+        {status.mailto && (
+          <>
+            {" "}
+            <a href={status.mailto}>Open this in your email app</a>.
+          </>
+        )}
       </div>
     </form>
   );

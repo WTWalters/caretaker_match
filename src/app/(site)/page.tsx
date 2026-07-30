@@ -13,7 +13,12 @@ export const metadata: Metadata = {
     description:
       "Digital infrastructure and a community ecosystem that help more patients recover safely at home after surgery.",
     type: "website",
-    url: "https://caretakermatch.com",
+    url: "/",
+    images: [{ url: "/site/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/site/og-image.png"],
   },
 };
 

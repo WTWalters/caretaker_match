@@ -1,75 +1,58 @@
 "use client";
 
 import { useState } from "react";
-import { CONTACT_EMAIL, FORMSPREE_PARTNER } from "@/lib/site-config";
+import { submitForm } from "@/lib/submit-form";
 
-type Status = { kind: "idle" | "success" | "error"; text: string };
+type Status = {
+  kind: "idle" | "success" | "error";
+  text: string;
+  mailto?: string;
+};
 
 export default function PartnerSignupForm() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
 
-  function mailtoFallback(data: Record<string, string>) {
-    const subject = encodeURIComponent(
-      `Community Care Partner sign-up — ${data.name ?? ""}`,
-    );
-    const body = encodeURIComponent(
-      `Name: ${data.name ?? ""}\nEmail: ${data.email ?? ""}\nPhone: ${
-        data.phone ?? ""
-      }\nCity/Region: ${data.city ?? ""}\nAffiliated organization: ${
-        data.org ?? ""
-      }\nAvailability: ${data.availability ?? ""}\n\nMessage:\n${
-        data.message ?? ""
-      }`,
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus({
-      kind: "success",
-      text: "Opening your email app to send this to us…",
-    });
-  }
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const data = Object.fromEntries(
-      new FormData(form).entries(),
-    ) as Record<string, string>;
-
-    if (!FORMSPREE_PARTNER) {
-      mailtoFallback(data);
-      return;
-    }
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<
+      string,
+      string
+    >;
 
     setSending(true);
     setStatus({ kind: "idle", text: "" });
 
-    try {
-      const response = await fetch(FORMSPREE_PARTNER, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      });
+    const result = await submitForm("partner", data);
+    setSending(false);
 
-      if (!response.ok) throw new Error(String(response.status));
-
+    if (result.ok) {
       form.reset();
       setStatus({
         kind: "success",
         text: "Thank you for signing up — we'll follow up with background check and training details within a few business days.",
       });
-    } catch {
-      setStatus({
-        kind: "error",
-        text: `Something went wrong sending that. Please email us directly at ${CONTACT_EMAIL}.`,
-      });
-    } finally {
-      setSending(false);
+      return;
     }
+
+    setStatus({ kind: "error", text: result.message, mailto: result.mailto });
   }
 
   return (
     <form className="signup" onSubmit={handleSubmit}>
+      {/* Honeypot: hidden from people, irresistible to bots. */}
+      <div className="hp-field" aria-hidden="true">
+        <label htmlFor="company_website">Company website</label>
+        <input
+          type="text"
+          id="company_website"
+          name="company_website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="form-row">
         <div>
           <label htmlFor="name">Name</label>
@@ -150,6 +133,12 @@ export default function PartnerSignupForm() {
         aria-live="polite"
       >
         {status.text}
+        {status.mailto && (
+          <>
+            {" "}
+            <a href={status.mailto}>Open this in your email app</a>.
+          </>
+        )}
       </div>
     </form>
   );

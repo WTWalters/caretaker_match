@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   description:
     "Sign up to become a Community Care Partner and help patients recover safely at home after surgery.",
   alternates: { canonical: "/community-care-partner" },
+  openGraph: {
+    title: "Become a Community Care Partner — CaretakerMatch",
+    description:
+      "Help someone in your community heal at home. No medical experience needed.",
+    type: "website",
+    images: [{ url: "/site/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image", images: ["/site/og-image.png"] },
 };
 
 export default function CommunityCarePartnerPage() {

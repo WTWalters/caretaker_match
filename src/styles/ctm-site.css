@@ -375,6 +375,22 @@ html:has(.ctm-site) {
   color: #164430;
 }
 
+/* Honeypot. Kept in the DOM and focusable only to bots — moved off-screen
+   rather than display:none, since some bots skip hidden inputs. */
+
+.ctm-site .hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.ctm-site .form-status a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .ctm-site button[disabled] {
   opacity: 0.6;
   cursor: progress;
