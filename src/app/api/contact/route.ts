@@ -169,7 +169,7 @@ export async function POST(request: Request) {
   }
 
   // No provider configured. Log it so the lead is at least recoverable from
-  // the Vercel runtime logs, and tell the caller honestly.
+  // the runtime logs, and tell the caller honestly.
   console.warn(
     `[contact] NO DELIVERY PROVIDER CONFIGURED — submission logged only\n${subject}\n${body}`,
   );
